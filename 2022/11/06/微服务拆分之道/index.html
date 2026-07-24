@@ -4,21 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="微服务拆分之道-2024新赛季, 后端,Java,架构,分布式">
-    <meta name="description" content="记一次服务拆分的复盘流程,也只记录思路，不详细分析
-抛出问题
-顶层的业务服务之间依赖严重,互相依赖,需要重新分层
+    <meta name="keywords" content="微服务拆分之道, 后端,Java,架构,分布式">
+    <meta name="description" content="记一次服务拆分流程,这里只是记录思路,不讨论细节
+一、拆分理论基础
+二、核心业务流程-服务划分
+问题点：
 
-统计需求在线服务做
+如何鉴权：所有服务都集成鉴权 sdk，需要的时候添加注解
 
-管理接口&amp;#x2F;C端接口没拆分
-
-如何明确核心服务
-
-如何明确核心业务链路
-
-如何明确服务的边界
-">
+所有服务可以对外提供服务吗？所有服务都可以对外提供接口，提供admin&amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -30,7 +24,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>微服务拆分之道-2024新赛季 | Hugo&#39;s Blog</title>
+    <title>微服务拆分之道 | Hugo&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -347,12 +341,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">微服务拆分之道-2024新赛季</h1>
+                    <h1 class="description center-align post-title">微服务拆分之道</h1>
                 </div>
             </div>
         </div>
@@ -413,7 +407,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-12-01
+                    2022-11-07
                 </div>
                 
 
@@ -434,92 +428,48 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>记一次服务拆分的复盘流程,也只记录思路，不详细分析</p>
-<h1 id="抛出问题"><a href="#抛出问题" class="headerlink" title="抛出问题"></a>抛出问题</h1><ul>
-<li><p>顶层的业务服务之间依赖严重,互相依赖,需要重新分层</p>
-</li>
-<li><p>统计需求在线服务做</p>
-</li>
-<li><p>管理接口&#x2F;C端接口没拆分</p>
-</li>
-<li><p>如何明确核心服务</p>
-</li>
-<li><p>如何明确核心业务链路</p>
-</li>
-<li><p>如何明确服务的边界</p>
-</li>
-<li><p>核心链路如何保障</p>
-</li>
-<li><p>每个服务的未来方向</p>
-</li>
-</ul>
-<h1 id="架构优化方向"><a href="#架构优化方向" class="headerlink" title="架构优化方向"></a>架构优化方向</h1><ul>
-<li><p>循环依赖（应用分层）</p>
-</li>
-<li><p>减少调用链路深度（调用层级）</p>
-</li>
-<li><p>提高数据复用性（缓存）</p>
-</li>
-<li><p>流量治理（减低流量水位，在线、离线隔离）</p>
-</li>
-</ul>
-<p>消除重复调用</p>
+                <p>记一次服务拆分流程,这里只是记录思路,不讨论细节</p>
+<h1 id="一、拆分理论基础"><a href="#一、拆分理论基础" class="headerlink" title="一、拆分理论基础"></a>一、拆分理论基础</h1><p><img src="/img/20221107_microservice_decomposition_diagram.png" alt="图片"></p>
+<h1 id="二、核心业务流程-服务划分"><a href="#二、核心业务流程-服务划分" class="headerlink" title="二、核心业务流程-服务划分"></a>二、核心业务流程-服务划分</h1><p><img src="/img/20221107_microservice_decomposition_biz.jpg" alt="图片"></p>
+<p>问题点：</p>
 <ul>
-<li><p>合并小接口，消除峰值调用</p>
+<li><p>如何鉴权：所有服务都集成鉴权 sdk，需要的时候添加注解</p>
 </li>
-<li><p>隔离在线系统、job、sop、管理后台系统</p>
+<li><p>所有服务可以对外提供服务吗？所有服务都可以对外提供接口，提供admin&#x2F;api&#x2F;rest&#x2F;rpc接口</p>
 </li>
-</ul>
-<p>说到 服务之间依赖严重,互相依赖</p>
-<p>每个人都会说：说明你的服务边界没有想清楚</p>
-<p>但是,如何找到系统合适的边界，却没有一个好方法，或好的解决方案</p>
-<p>如何划分我们的服务</p>
-<h3 id="循环依赖原因"><a href="#循环依赖原因" class="headerlink" title="循环依赖原因"></a>循环依赖原因</h3><ul>
-<li><p>数据过度冗余</p>
+<li><p>上课端单独一个上课服务，保证上课链路不受其他模块影响</p>
 </li>
-<li><p>缺失业务概念</p>
-</li>
-<li><p>滥用同步调用</p>
+<li><p>admin和api如何隔离</p>
 </li>
 </ul>
-<h3 id="如何解决循环依赖？"><a href="#如何解决循环依赖？" class="headerlink" title="如何解决循环依赖？"></a>如何解决循环依赖？</h3><ul>
-<li>定义出上下游服务，下游可以依赖上游，不能反过来依赖</li>
-</ul>
-<p>下游需要了解上游的领域知识实现业务,<strong>上游服务不受下游服务的业务能力和可用性影响，反之则相反</strong></p>
+<p>安全方面用登录态隔离</p>
 <ul>
-<li>衡量耦合级别</li>
-</ul>
-<p><strong>Level4</strong>: 领域知识互为上下游，业务可用性互为上下游</p>
-<ul>
-<li><p><strong>Level3</strong>: 领域知识互为上下游, 业务可用性为单向上下游</p>
+<li><p>可用性要求高的服务通过域名路由到不同部署实例隔离</p>
 </li>
-<li><p><strong>Level2</strong>: 领域知识为单向上下游，业务可用性互为上下游</p>
+<li><p>暂时不要聚合查询服务，页面查询分散到招生和教务模块</p>
 </li>
-<li><p><strong>Level1</strong>: 领域知识为单向上下游，业务可用性为单向上下游</p>
+<li><p>面向渠道&#x2F;官网&#x2F;通用配置&#x2F;落地页不需要单独划分系统，如果请求量高的情况下，对应服务进行横向扩容</p>
 </li>
-<li><p>上游服务的变更需要对下游服务产生影响时，通过事件的方式来实现（异步消息、回调）</p>
+<li><p>课节状态的维护，由哪个服务负责，课节状态由课程服务维护</p>
 </li>
-<li><p>服务间只通过数据id进行关联，不做过多数据冗余</p>
+<li><p>如何合理隔离声网的接口（依赖）</p>
 </li>
-<li><p>一旦出现上游服务需要感知下游服务的执行情况时，考虑清楚上游服务是否缺少业务概念</p>
+<li><p>课堂答题&#x2F;互动的相关依赖接口，是否需要单独拆分，单独拆分</p>
 </li>
-<li><p>满足前端逻辑的服务间交互逻辑放到 BFF 中，而不是新增服务间调用</p>
+<li><p>跨服务的数据信息填充,究竟在哪里填充?填充逻辑和聚合逻辑在一起,在哪里聚合就在哪里填充</p>
 </li>
 </ul>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><img src="/img/20231201_microservice_decomposition_diagram.png" alt="图片"></p>
-<p>架构设计</p>
-<ul>
-<li><p>让我们的组件划分尽量靠近变化的原点，对于互联网来说就是用户和业务，这样的划分能够让我们将变化“隔离”在一定的范围（组件）内，从而帮助我们有效减少改变点。</p>
+<h1 id="三、拆分步骤"><a href="#三、拆分步骤" class="headerlink" title="三、拆分步骤"></a>三、拆分步骤</h1><ul>
+<li><p>独立的服务可以单独拆分</p>
 </li>
-<li><p>组件之间能够互相调用，但彼此之间不应该有强依赖，即各自完成的业务是相对独立的，不会因为一方掉线而牵连另外一方，比如新闻网站挂掉了，聊天网站应该继续正常提供服务，可能提示用户暂时无法提供新闻信息而已。</p>
+<li><p>先定好服务边界，同一个进程内，按定好服务划分，把服务调用关系规范起来，把进程间接口定义清楚</p>
 </li>
-<li><p>组件在业务上是鼓励复用的，正是这样的复用才成就了今天的互联网，我们不会每个网站都去实现一个强大的搜索引擎。而被“复用”最多的网站显然会受到追捧，成为明星业务。当然架构上这样的网站必然是健壮的。</p>
+<li><p>梳理出服务依赖关系，确定服务改造顺序</p>
+</li>
+<li><p>制定：战略决心</p>
 </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/AAdGpdfB5bc9jucK3K8BbA">一文读懂DDD</a></p>
-<p><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/microservices-bad-smell-circular-dependency/">https://insights.thoughtworks.cn/microservices-bad-smell-circular-dependency/</a></p>
-<p><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/how-to-use-upstream-downstream-thinking-to-system-decoupling/">https://insights.thoughtworks.cn/how-to-use-upstream-downstream-thinking-to-system-decoupling/</a></p>
-<p><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/ddd-architecture-design/">https://insights.thoughtworks.cn/ddd-architecture-design/</a></p>
+<h1 id="四、部署架构-新旧架构兼容-流量路由"><a href="#四、部署架构-新旧架构兼容-流量路由" class="headerlink" title="四、部署架构&#x2F;新旧架构兼容&#x2F;流量路由"></a>四、部署架构&#x2F;新旧架构兼容&#x2F;流量路由</h1><p><img src="/img/20221107_microservice_decomposition_services.jpg" alt="图片"></p>
 
                 
             </div>
@@ -546,7 +496,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hugoxh.github.io/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/">https://hugoxh.github.io/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/</a>
+                    <a href="https://hugoxh.github.io/2022/11/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/">https://hugoxh.github.io/2022/11/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -680,13 +630,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/">
+                <a href="/2022/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="记录一次接口优化过程">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="程序员修炼之道">
                         
-                        <span class="card-title">记录一次接口优化过程</span>
+                        <span class="card-title">程序员修炼之道</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -697,14 +647,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-01-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-26
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/" class="post-category">
-                                    排查实战
+                            <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
                                 </a>
                             
                             
@@ -714,12 +664,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%BC%82%E5%B8%B8/">
-                        <span class="chip bg-color">异常</span>
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
                     </a>
                     
                 </div>
@@ -733,13 +679,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">
+                <a href="/2022/10/15/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="记录一次 Java 程序异常重启排查过程">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="记一次 java.lang.NoSuchMethodError 错误">
                         
-                        <span class="card-title">记录一次 Java 程序异常重启排查过程</span>
+                        <span class="card-title">记一次 java.lang.NoSuchMethodError 错误</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -750,7 +696,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-16
                             </span>
                         <span class="publish-author">
                             
@@ -771,12 +717,12 @@
                         <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
+                    <a href="/tags/Error/">
+                        <span class="chip bg-color">Error</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/">
-                        <span class="chip bg-color">故障管理</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
                     </a>
                     
                 </div>
