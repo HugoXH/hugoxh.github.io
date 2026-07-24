@@ -1,1342 +1,1564 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hugo&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hugo&#39;s Blog">
-<meta property="og:url" content="https://hugoxh.github.io/index.html">
-<meta property="og:site_name" content="Hugo&#39;s Blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="HugoXH">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hugo's Blog" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    <meta charset="utf-8">
+    <meta name="keywords" content="后端,Java,架构,分布式">
+    <meta name="description" content="Hugo 的个人博客 - 后端工程师,记录架构、排查与思考">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
-  
+
+    <title>Hugo&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+    <!-- index cover -->
+    <!-- <link rel="stylesheet preload" type="text/css" href="/css/indexcover.css"> -->
+    <style>
+        .carousel-control {
+            width: 45px;
+            height: 45px;
+            line-height: 55px;
+            border-radius: 45px;
+            background: transparent;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        #prev-cover {
+            position: absolute;
+            top: 48%;
+            left: 8px;
+        }
+        
+        #next-cover {
+            position: absolute;
+            top: 48%;
+            right: 8px;;
+        }
+        
+        #prev-cover i {
+            margin-right: 3px;
+        }
+        
+        #next-cover i {
+            margin-left: 3px;
+        }
+        
+        .carousel-control:hover {
+            background-color: rgba(0, 0, 0, .4);
+        }
+        
+        .carousel-control i {
+            color: #fff;
+            font-size: 2.4rem;
+        }
+    </style>
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
 <meta name="generator" content="Hexo 8.1.1"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hugo&#39;s Blog</a>
-      </h1>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hugo&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
       
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hugo&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Hugo 的个人博客 - 后端工程师,记录架构、排查与思考
+            
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+
+    <ul class="menu-list mobile-menu-list">
         
-          <a class="main-nav-link" href="/">Home</a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
         
-      </nav>
-      <nav id="sub-nav">
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
         
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hugoxh.github.io"></form>
-      </div>
-    </div>
-  </div>
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
 </header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/07/24/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-07-24T09:41:00.735Z" itemprop="datePublished">2026-07-24</time>
-</a>
     
-  </div>
-  <div class="article-inner">
+
+
+<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
     
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/07/24/hello-world/">Hello World</a>
-    </h1>
-  
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <div class="carousel-item  white-text bg-cover about-cover">
+        <div class="container">
+            <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                从来没有真正的绝境,只有绝望的人
+                
+            </div>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
+            <div class="description center-align">
+                
+                <span id="subtitle"></span>
+                <script src="/libs/typed/typed.js"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: [ 
+                            
+                                "从来没有真正的绝境, 只有心灵的迷途",
+                            
+                                "Never really desperate, only the lost of the soul",
+                            
+                        ],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
+                
+            </div>
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2026/07/24/hello-world/" data-id="cuidg1A0x0GOSaNhiL6zaImAF" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
+</div>
 
 
-
-  
-    <article id="post-信令系统的架构实践" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/" class="article-date">
-  <time class="dt-published" datetime="2024-11-02T00:57:58.000Z" itemprop="datePublished">2024-11-02</time>
-</a>
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+</script>
+<script>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
+      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 24) + '.jpg';
     
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">信令系统的架构实践</a>
-    </h1>
-  
+    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="系统架构的介绍"><a href="#系统架构的介绍" class="headerlink" title="系统架构的介绍"></a>系统架构的介绍</h2><p>我会按照信令的系统架构上的分布或子系统的层级关系来展开</p>
-<p>首先，信令是一个通用的消息系统，主要是为了解决实时场景下信令的低延迟和高并发问题</p>
-<p>我们目前的业务形态是不同大区数据隔离，所以我们是分国家大区部署的，没做跨国数据传输</p>
-<p>每个大区都有两个子系统分别是：h3p 系统，他代表了用户侧的接入，还有频道系统，他代表了频道房间管理</p>
-<h4 id="h3p-系统"><a href="#h3p-系统" class="headerlink" title="h3p 系统"></a>h3p 系统</h4><p>首先是 h3p，他有两个服务，ap 和 h3proxy</p>
-<p><strong>ap</strong> 负责用户的接入点就近选择，也用来实现灰度和灾备切换</p>
-<p><strong>h3proxy</strong> 负责用户长链接保持和用户房间关系维护，并基于序列号的补偿机制来保证消息不重不丢，h3proxy 基于serverless 部署，同一个房间可以分布在 N 多个 h3proxy 节点中，具有非常大的扩展性</p>
-<p>这些的服务都是无状态分布式的，没有一个单点或者中心式的情况，因此可以保证高可用，并且性能方面可以支持高吞吐量和低延迟，只支持基本核心的功能，剩下的都要放在其它子系统</p>
-<p>对外提供以下核心功能： 单播消息、频道广播消息，一般消息和可靠消息，进出频道以及事件</p>
-<p>他有几个优势特性：</p>
-<ul>
-<li><p>消息可靠，不丢失，不乱序</p>
-</li>
-<li><p>消息低延时节点</p>
-</li>
-<li><p>可水平扩展</p>
-</li>
-<li><p>万人同频道</p>
-</li>
-</ul>
-<p>以频道广播消息为例，和大家分享一下消息下发的流程。</p>
-<p>首先用户登录时，会先访问 ap 服务，携带业务信息，如事先分配好的频道号和 uid</p>
-<p>ap 知道所有的 h3proxy 地址，会根据当前的客户端的地理分布，包括节点的负载&#x2F;灰度情况来给用户返回一组地址，我们经常在这里控制用户路由到不同的 h3proxy 部署，如 k8s 集群或者 serverless 集群，用户在拿到地址之后，可以连接 h3proxy 节点</p>
-<p>h3proxy 和用户保持长链接后，会在实例内维护用户和频道的关系，维护用户的最近可靠消息列表</p>
-<p>当有频道广播消息下行时，消息会先进入频道消息发送队列，然后根据用户频道关系找出所有的用户列表，如果消息是不可丢失的可靠消息，则维护用户级的可靠消息列表</p>
-<p>当用户接收消息的过程中，根据消息序号发现存在消息丢失时，则会主动过来服务端拉取补偿，从而保证不丢失</p>
-<p>可拓展设计是我们基于 serverless 部署，每个部署我们设置了链接上限，当函数超过连接上限时会主动拉起新实例，从而能做到数万人同频道</p>
-<h4 id="频道系统"><a href="#频道系统" class="headerlink" title="频道系统"></a>频道系统</h4><p>频道系统有四个服务: channel&#x2F;gateway&#x2F;online 和 stat</p>
-<p>channel 第一个功能是频道流量转发，第二个功能是负责频道状态属性和用户属性的维护，并且产生对应的同步事件下发到各端</p>
-<p>gateway 负责 channel 实例的发现和路由维护，对外提供 http 接口</p>
-<p>online 负责频道在线用户维护，并且产生事件</p>
-<p>stat 则是统计相关，并且负责事件的持久化</p>
-<p>这里除了 channel 是有状态服务，其他都是可弹性拓展</p>
-<h4 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h4><p><img src="/img/h3p/diagram-0.png" alt="图片"></p>
-<h2 id="架构的难点"><a href="#架构的难点" class="headerlink" title="架构的难点"></a>架构的难点</h2><p>架构的难点: 流量路由如何设计</p>
-<blockquote>
-<p>信令系统运行时，channel 和 h3proxy 都是多实例部署，当一个频道消息下发时，究竟是走哪一个channel，去到哪个 h3proxy 呢，我们设计了两个方案：</p>
-</blockquote>
-<p>静态路由</p>
-<ul>
-<li><p>channel 每一个实例都拥有自己的 Headless Service</p>
-</li>
-<li><p>频道一定会根据算法固定到某一个 channel 实例上</p>
-</li>
-<li><p>h3proxy 和 bizSrv 程序启动时，会预热对所有 channel 实例的长连接</p>
-</li>
-<li><p>当有 用户进入频道时，h3proxy 和 bizSrv 会把根据算法把本实例注册到某一个 channel 的路由表上</p>
-</li>
-<li><p>channel 在做消息的上下行投递时，就会根据路由表进行投递</p>
-</li>
-<li><p>优点是实现简单，缺点是 channel 伸缩时有配置工作量，房间算法需要检查</p>
-</li>
-</ul>
-<p>集群路由</p>
-<ul>
-<li><p>所有 channel 实例组成集群，对外提供一个 Headless Service</p>
-</li>
-<li><p>channel 集群节点之间互相感知，并且共同维护一个路由表</p>
-</li>
-<li><p>h3proxy 和 bizsrv 程序启动时，预热的长连接会随机到 channel 的某几个实例上，分散压力</p>
-</li>
-<li><p>当有 用户进入频道时，h3proxy 和 bizSrv 直接把本实例注册到某一个 channel 实例上，会同步到路由表</p>
-</li>
-<li><p>channel 在做消息的上下行投递时，就会根据路由表进行投递，会在 channel 节点之间进行转发</p>
-</li>
-<li><p>优点是简化接入端的步骤，提高集群的性能和拓展能力，缺点是 channel 实现复杂</p>
-</li>
-</ul>
-<p>集群版转发流量路由<br><img src="/img/h3p/diagram.png" alt="图片"></p>
-<p>房间管理逻辑路由<br><img src="/img/h3p/diagram-1.png" alt="图片"></p>
-<h4 id="架构的难点-直播间属性抽象，并且保证保证多端状态一致"><a href="#架构的难点-直播间属性抽象，并且保证保证多端状态一致" class="headerlink" title="架构的难点: 直播间属性抽象，并且保证保证多端状态一致"></a>架构的难点: 直播间属性抽象，并且保证保证多端状态一致</h4><blockquote>
-<p>直播间会有不同的配置&#x2F;状态&#x2F;挂件&#x2F;互动应用，如何保证在老师端切换状态，发起互动时，所有的端都能实时准确的同步这些变更，有以下的情况</p>
-</blockquote>
-<ul>
-<li><p>如何保证准确的同步这些变更</p>
-</li>
-<li><p>直播间功能根据重要程度进行分级，如何直播间核心状态能够正常</p>
-</li>
-<li><p>某一些互动消息允许丢失，某一些互动状态不允许出错</p>
-</li>
-<li><p>某一些互动只需要通知到老师</p>
-</li>
-</ul>
-<p>我们的方案是：</p>
-<ul>
-<li><p>channel 维护房间属性快照，每一次变更时比较比较出差异，形成属性变更消息同步给各个端，用户端进入房间时，全量同步房间属性快照，课中变更，采用增量消息下发</p>
-</li>
-<li><p>房间属性进行分级，分为核心属性和互动属性，核心属性消息每次都全量更新，保证只要接收到最后的消息就能做到房间最终状态</p>
-</li>
-<li><p>和 h3proxy 设计联动，允许丢失属性变更使用一般消息，不允许出错互动采用可靠消息</p>
-</li>
-<li><p>和 h3proxy 设计联动，使用频道广播和频道单播</p>
-</li>
-</ul>
-<p>直播间属性结构<br><img src="/img/h3p/diagram-2.png" alt="图片"></p>
-<p>事件结构</p>
-<p><img src="/img/h3p/diagram-3.png" alt="图片"></p>
-<h2 id="实践过程中遇到的问题"><a href="#实践过程中遇到的问题" class="headerlink" title="实践过程中遇到的问题"></a>实践过程中遇到的问题</h2><ul>
-<li>grpc 长链接，在 K8s 环境中，1分钟会断链一次，需要在 ingress nginx 开启<a target="_blank" rel="noopener" href="https://i4t.com/22417.html">超时配置</a></li>
-</ul>
-<p>[表格见原文]</p>
-<ul>
-<li><p>压测时，channel 到 h3proxy 的消息大批量丢失，原因是 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/75001424/grpc-streaming-and-thread-safety">streamObserver 非线程安全</a>。导致发送的消息错乱，h3proxy 读取失败会报 failed to unmarshal the received message proto: cannot parse invalid wire-format data，streamObserver 使用时需要加锁串行</p>
-</li>
-<li><p>channel grpc stream 双向流，转发数据时直接左手倒右手，上下游的发送速率会互相影响，导致吞吐性能不高，需要先进发送队列，再送出去，屏蔽两端的速度差</p>
-</li>
-<li><p>长时间运行后 channel 线程泄漏</p>
-</li>
-</ul>
-<p>[表格见原文]</p>
-<ul>
-<li><p>h3proxy 性能上不去，CPU 异常高，pprof 发现是协程泄漏，原因是第三方消费队列实现有问题，某一些客户端慢连接，送不出去消息时会阻塞住，需替换为无锁队列</p>
-</li>
-<li><p>h3proxy 和 channel 上下行包体过大时，吞吐性能上不去，解决方案：预热连接池，上行时根据路由分组，用多个连接发送数据</p>
-</li>
-<li><p>压测时 nginx 网关带宽过高，高负载影响吞吐，方案：不同模块隔离网关，条件允许时直连，去除不必要中间组件</p>
-</li>
-<li><p>h3proxy 全局锁优化，链接资源提前初始化，用户登录逻辑异步化</p>
-</li>
-</ul>
-<h2 id="如何解决的"><a href="#如何解决的" class="headerlink" title="如何解决的"></a>如何解决的</h2><ul>
-<li><p>消息投递链路埋点，分析消息数量和时延，快速诊断问题点在哪个环节</p>
-</li>
-<li><p>压测平台建设，业务数据模拟，客户端加压，流量复制，通过压测暴露高并发情况下的架构问题和细节问题</p>
-</li>
-</ul>
+</script>
 
-      
+
+
+            <div class="cover-btns">
+                <a href="#indexCard" class="waves-effect waves-light btn">
+                    <i class="fa fa-angle-double-down"></i>开始阅读
+                </a>
+
+                
+                    <a href="https://github.com/HugoXH" class="waves-effect waves-light btn" target="_blank">
+                        <i class="fab fa-github-alt"></i>Github
+                    </a>
+                
+            </div>
+            <div class="cover-social-link">
+    <a href="https://github.com/HugoXH" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:xiehang00@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/" data-id="cuidlcEdb1D0wTyr38-BxUcgi" data-title="信令系统的架构实践" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" rel="tag">长连接</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="tag">高并发</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-记录一次接口优化过程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/" class="article-date">
-  <time class="dt-published" datetime="2024-01-12T06:38:07.000Z" itemprop="datePublished">2024-01-12</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
-  </div>
+</div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+<script>
+    $(function () {
+        let coverSlider = $('.carousel');
+
+        //用户触摸轮播自动 restartPlay 是否生效
+        let initUserPressedOrDraggedActive = false
+
+        //用户触摸轮播自动 restartPlay
+        function initUserPressedOrDragged(instance) {
+            setInterval(() => {
+                if (instance.pressed || instance.dragged) {
+                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
+                    restartPlay()
+                }
+            }, 1000)
+        }
+
+        coverSlider.carousel({
+            duration: Number('120'),
+            fullWidth: true,
+            indicators: 'true' === 'true',
+            onCycleTo() {
+                if (!initUserPressedOrDraggedActive) {
+                    // console.log('initUserPressedOrDraggedActive')
+                    initUserPressedOrDragged(this)
+                    initUserPressedOrDraggedActive = true
+                }
+            },
+        })
+
+        let carouselIntervalId;
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/">记录一次接口优化过程</a>
-    </h1>
-  
+        // Loop to call the next cover article picture.
+        let autoCarousel = function () {
+            carouselIntervalId = setInterval(function () {
+                coverSlider.carousel('next');
+            }, 5000);
+        };
+        autoCarousel();
+        
 
-      </header>
+        function restartPlay() {
+            
+            clearInterval(carouselIntervalId);
+            autoCarousel();
+            
+        };
+
+        
+        // prev and next cover post.
+        $('#prev-cover').click(function () {
+            coverSlider.carousel('prev');
+            restartPlay();
+        });
+        $('#next-cover').click(function () {
+            coverSlider.carousel('next');
+            restartPlay();
+        });
+        
+    });
+</script>
+
+
+
+<main class="content">
+
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="记录一次接口优化过程"><a href="#记录一次接口优化过程" class="headerlink" title="记录一次接口优化过程"></a>记录一次接口优化过程</h1><pre><code>    [
+    <div id="indexCard" class="index-card">
+        <div class="container ">
+            <div class="card">
+                <div class="card-content">
+                    
+                        <div class="dream">
+    
+    <div class="title center-align">
+        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的梦想
+    </div>
+    
+    <div class="row">
+        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
+            不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
+        </div>
+    </div>
+</div>
+
+                    
+
+                    
+
+                    
+
+                    
+                    <div id="recommend-sections" class="recommend">
+                        
+
+
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+    <!-- 所有文章卡片 -->
+    <article id="articles" class="container articles">
+        <div class="row article-row">
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2026/07/24/hello-world/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                            
+                            <span class="card-title">Hello World</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
+
+More info: Writing
+Run server1$ hexo server
+
+More info:
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-07-24
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                HugoXH
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="信令系统的架构实践">
+                            
+                            <span class="card-title">信令系统的架构实践</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                系统架构的介绍我会按照信令的系统架构上的分布或子系统的层级关系来展开
+首先，信令是一个通用的消息系统，主要是为了解决实时场景下信令的低延迟和高并发问题
+我们目前的业务形态是不同大区数据隔离，所以我们是分国家大区部署的，没做跨国数据传输
+每个
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%80%BB%E7%BB%93/">
+                            <span class="chip bg-color">总结</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                            <span class="chip bg-color">架构</span>
+                        </a>
+                        
+                        <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                            <span class="chip bg-color">高并发</span>
+                        </a>
+                        
+                        <a href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/">
+                            <span class="chip bg-color">长连接</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="记录一次接口优化过程">
+                            
+                            <span class="card-title">记录一次接口优化过程</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                记录一次接口优化过程    [
 	**2024-01-12
-</code></pre>
-<p>](&#x2F;2024&#x2F;01&#x2F;12&#x2F;20240112_optimize_api&#x2F;)</p>
-<pre><code>    记录线上一次慢接口的优化过程
-</code></pre>
-<p>优化前 Trace 情况:可以看到耗时部分是在 RPC 接口查询之后产生的</p>
-<p><img src="/img/optimize_api/image.png" alt="图片"></p>
-<p>原代码:</p>
-<p><img src="/img/optimize_api/image-8.png" alt="图片"></p>
-<p>怀疑 BeanCopy 工具有问题,调整代码,去除 BeanCopy:</p>
-<p><img src="/img/optimize_api/image-6.png" alt="图片"></p>
-<p>优化后 Trace 情况:</p>
-<p><img src="/img/optimize_api/img_v3_0278_b03a91f6-79f1-4632-b501-c252c2e2112g.jpg" alt="图片"></p>
-<h3 id="优化分析"><a href="#优化分析" class="headerlink" title="优化分析"></a>优化分析</h3><p>初步猜测</p>
-<ul>
-<li><p>重载方法的推导 (对于proto的兼容,如enum和date,我们会新增额外的重载方法,简化代码)</p>
-</li>
-<li><p>入参不同类型的推导(此次结构定义,有一些对象Vo是long,proto是int)</p>
-</li>
-<li><p>缺少参数的查找(此次结构定义,存在参数不对应的情况)</p>
-</li>
-</ul>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>验证代码<br><img src="/img/optimize_api/image-7.png" alt="图片"></p>
-<p>运行结果</p>
-<p>new time:3</p>
-<p>old time:48701</p>
-<p><img src="/img/optimize_api/image-1.png" alt="图片"></p>
-<p>主要时间在预热和旧代码</p>
-<p><img src="/img/optimize_api/image-2.png" alt="图片"></p>
-<p>Hutool 循环 loadClass</p>
-<p><img src="/img/optimize_api/image-3.png" alt="图片"></p>
-<p>问题代码:</p>
-<p><img src="/img/optimize_api/image-4.png" alt="图片"></p>
-<p>新代码已经修复</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/dromara/hutool/commit/200c098b293d5af4a350d11d5f97b9d2c2bdabfc">https://github.com/dromara/hutool/commit/200c098b293d5af4a350d11d5f97b9d2c2bdabfc</a></p>
-<h3 id="升级-Hutool版本-调整后效果"><a href="#升级-Hutool版本-调整后效果" class="headerlink" title="升级 Hutool版本,调整后效果"></a>升级 Hutool版本,调整后效果</h3><p>new time:7</p>
-<p>old time:373</p>
-<p><img src="/img/optimize_api/image-5.png" alt="图片"></p>
-<p>最大时间为for循环拷贝</p>
-<p><img src="/img/optimize_api/image-9.png" alt="图片"></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/" data-id="cuidDmV5zMqXQ6xOe6AJ9tUBS" data-title="记录一次接口优化过程" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li></ul>
+](&#x2F;2024&#x2F;01&#x2F;12&#x2F;20240112_optimize_api&#x2F;)
+    记录线上一次慢接口的优化过程
 
-    </footer>
-  </div>
-  
-</article>
+优化前 Tr
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-12
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/" class="post-category">
+                                    排查实战
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%BC%82%E5%B8%B8/">
+                            <span class="chip bg-color">异常</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="微服务拆分之道-2024新赛季">
+                            
+                            <span class="card-title">微服务拆分之道-2024新赛季</span>
+                        </div>
+                    </a>
 
-
-  
-    <article id="post-微服务拆分之道-2024新赛季" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/" class="article-date">
-  <time class="dt-published" datetime="2023-11-30T18:43:13.000Z" itemprop="datePublished">2023-12-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/">微服务拆分之道-2024新赛季</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="微服务拆分之道-2024新赛季"><a href="#微服务拆分之道-2024新赛季" class="headerlink" title="微服务拆分之道-2024新赛季"></a>微服务拆分之道-2024新赛季</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                微服务拆分之道-2024新赛季    [
 	**2023-12-01
-</code></pre>
-<p>](&#x2F;2023&#x2F;12&#x2F;01&#x2F;20231201_microservice_decomposition_2024_new_season&#x2F;)</p>
-<pre><code>    记一次服务拆分的复盘流程,也只记录思路，不详细分析
-</code></pre>
-<h1 id="抛出问题"><a href="#抛出问题" class="headerlink" title="抛出问题"></a>抛出问题</h1><ul>
-<li><p>顶层的业务服务之间依赖严重,互相依赖,需要重新分层</p>
-</li>
-<li><p>统计需求在线服务做</p>
-</li>
-<li><p>管理接口&#x2F;C端接口没拆分</p>
-</li>
-<li><p>如何明确核心服务</p>
-</li>
-<li><p>如何明确核心业务链路</p>
-</li>
-<li><p>如何明确服务的边界</p>
-</li>
-<li><p>核心链路如何保障</p>
-</li>
-<li><p>每个服务的未来方向</p>
-</li>
-</ul>
-<h1 id="架构优化方向"><a href="#架构优化方向" class="headerlink" title="架构优化方向"></a>架构优化方向</h1><ul>
-<li><p>循环依赖（应用分层）</p>
-</li>
-<li><p>减少调用链路深度（调用层级）</p>
-</li>
-<li><p>提高数据复用性（缓存）</p>
-</li>
-<li><p>流量治理（减低流量水位，在线、离线隔离）</p>
-</li>
-</ul>
-<p>消除重复调用</p>
-<ul>
-<li><p>合并小接口，消除峰值调用</p>
-</li>
-<li><p>隔离在线系统、job、sop、管理后台系统</p>
-</li>
-</ul>
-<p>说到 服务之间依赖严重,互相依赖</p>
-<p>每个人都会说：说明你的服务边界没有想清楚</p>
-<p>但是,如何找到系统合适的边界，却没有一个好方法，或好的解决方案</p>
-<p>如何划分我们的服务</p>
-<h3 id="循环依赖原因"><a href="#循环依赖原因" class="headerlink" title="循环依赖原因"></a>循环依赖原因</h3><ul>
-<li><p>数据过度冗余</p>
-</li>
-<li><p>缺失业务概念</p>
-</li>
-<li><p>滥用同步调用</p>
-</li>
-</ul>
-<h3 id="如何解决循环依赖？"><a href="#如何解决循环依赖？" class="headerlink" title="如何解决循环依赖？"></a>如何解决循环依赖？</h3><ul>
-<li>定义出上下游服务，下游可以依赖上游，不能反过来依赖</li>
-</ul>
-<p>下游需要了解上游的领域知识实现业务,<strong>上游服务不受下游服务的业务能力和可用性影响，反之则相反</strong></p>
-<ul>
-<li>衡量耦合级别</li>
-</ul>
-<p><strong>Level4</strong>: 领域知识互为上下游，业务可用性互为上下游</p>
-<ul>
-<li><p><strong>Level3</strong>: 领域知识互为上下游, 业务可用性为单向上下游</p>
-</li>
-<li><p><strong>Level2</strong>: 领域知识为单向上下游，业务可用性互为上下游</p>
-</li>
-<li><p><strong>Level1</strong>: 领域知识为单向上下游，业务可用性为单向上下游</p>
-</li>
-<li><p>上游服务的变更需要对下游服务产生影响时，通过事件的方式来实现（异步消息、回调）</p>
-</li>
-<li><p>服务间只通过数据id进行关联，不做过多数据冗余</p>
-</li>
-<li><p>一旦出现上游服务需要感知下游服务的执行情况时，考虑清楚上游服务是否缺少业务概念</p>
-</li>
-<li><p>满足前端逻辑的服务间交互逻辑放到 BFF 中，而不是新增服务间调用</p>
-</li>
-</ul>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p><img src="/img/20231201_microservice_decomposition_diagram.png" alt="图片"></p>
-<p>架构设计</p>
-<ul>
-<li><p>让我们的组件划分尽量靠近变化的原点，对于互联网来说就是用户和业务，这样的划分能够让我们将变化“隔离”在一定的范围（组件）内，从而帮助我们有效减少改变点。</p>
-</li>
-<li><p>组件之间能够互相调用，但彼此之间不应该有强依赖，即各自完成的业务是相对独立的，不会因为一方掉线而牵连另外一方，比如新闻网站挂掉了，聊天网站应该继续正常提供服务，可能提示用户暂时无法提供新闻信息而已。</p>
-</li>
-<li><p>组件在业务上是鼓励复用的，正是这样的复用才成就了今天的互联网，我们不会每个网站都去实现一个强大的搜索引擎。而被“复用”最多的网站显然会受到追捧，成为明星业务。当然架构上这样的网站必然是健壮的。</p>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/AAdGpdfB5bc9jucK3K8BbA">一文读懂DDD</a></p>
-<p><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/microservices-bad-smell-circular-dependency/">https://insights.thoughtworks.cn/microservices-bad-smell-circular-dependency/</a></p>
-<p><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/how-to-use-upstream-downstream-thinking-to-system-decoupling/">https://insights.thoughtworks.cn/how-to-use-upstream-downstream-thinking-to-system-decoupling/</a></p>
-<p><a target="_blank" rel="noopener" href="https://insights.thoughtworks.cn/ddd-architecture-design/">https://insights.thoughtworks.cn/ddd-architecture-design/</a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/" data-id="cuid7r7ll-yf9a_baOW6T7B7X" data-title="微服务拆分之道-2024新赛季" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" rel="tag">服务拆分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li></ul>
+](&#x2F;2023&#x2F;12&#x2F;01&#x2F;20231201_microservice_decomposition_2024_new_seaso
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-01
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%80%BB%E7%BB%93/">
+                            <span class="chip bg-color">总结</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+                            <span class="chip bg-color">微服务</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/">
+                            <span class="chip bg-color">服务拆分</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                            <span class="chip bg-color">架构</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="记录一次 Java 程序异常重启排查过程">
+                            
+                            <span class="card-title">记录一次 Java 程序异常重启排查过程</span>
+                        </div>
+                    </a>
 
-
-
-  
-    <article id="post-记录一次_Java_程序异常重启排查过程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/" class="article-date">
-  <time class="dt-published" datetime="2023-04-27T12:11:04.000Z" itemprop="datePublished">2023-04-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">记录一次 Java 程序异常重启排查过程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="记录一次-Java-程序异常重启排查过程"><a href="#记录一次-Java-程序异常重启排查过程" class="headerlink" title="记录一次 Java 程序异常重启排查过程"></a>记录一次 Java 程序异常重启排查过程</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                记录一次 Java 程序异常重启排查过程    [
 	**2023-04-28
-</code></pre>
-<p>](&#x2F;2023&#x2F;04&#x2F;28&#x2F;20230428_oom&#x2F;)</p>
-<pre><code>    压测过程中,程序内存溢出并重启,原因排查
-</code></pre>
-<p>首先排查进程运行情况,因为进程所在 Pod 已经重启</p>
-<p>通过 K8s Pod 监控可以看到服务在 12：40 后，CPU 飙升, CPU 飙升往往是持续 GC 导致的</p>
-<p><img src="/img/oom/img_v2_da5cd96f-7139-46c4-bfe4-f6ef57c02cag.jpg" alt="图片"></p>
-<p>下一步排查数据库情况,虽然数据库 CPU 存在 100% 情况，但是只是一瞬间，没有持续，说明瓶颈是在应用程序，压力没有持续传导到数据库，应用程序本身已经崩溃了</p>
-<p><img src="/img/oom/img_v2_f19a349b-36cc-4eae-af2a-8675b0e7186g.jpg" alt="图片"><br>细看数据库引擎情况,分析 CPU 100% 原因,发现没有慢 SQL 等其他异常, 更新和扫描行数也正常,通过 TPS 分析发现 SQL 执行次数飙升</p>
-<p><img src="/img/oom/img_v2_3583a8c4-0b0c-4b45-bf7c-d6a0e442493g.jpg" alt="图片"></p>
-<p>下一步是排查应用程序本身的 Trace 情况,通过 Trace 只能分析到程序运行的表象,即:请求量暴增后,进程无响应,日志&#x2F;Trace 等无法上报,并且被 K8s 驱逐</p>
-<p><img src="/img/oom/image-2.png" alt="图片"></p>
-<p>因为我们的 gc 日志和应用日志都会实时采集到阿里云日志平台,所以直接查询服务 gc 日志进行分析，显示此时存在非常高频的 GC，导致CPU持续100%</p>
-<p><img src="/img/oom/image-1.png" alt="图片"></p>
-<p>把 GC 日志通过 gceasy 进行分析,提示严重的 GC 问题,但是,此时我们只是明确了程序 CPU 高的原因,还不能排查出为什么程序 GC 由什么原因引起</p>
-<p><a href="/img/oom/BrilliantGCGraphsMetricsAndKPIs.pdf">Brilliant GC graphs, metrics and KPIs.pdf</a></p>
-<p>截取故障前后的应用日志，可看到 GC 频繁，和接口请求情况，其中 Total 3k 的日志嫌疑最大</p>
-<p><img src="/img/oom/img_3.png" alt="图片"></p>
-<p>排查到此，已经锁定了嫌疑的业务逻辑,但是还是没办法实锤,可能会导致优化方向错误</p>
-<p>我们 JVM 配置了内存溢出时 dump 堆栈信息,并且外挂目录 Volumes 可用,从中找到了故障时的 dump 文件, 下载 dump 文件进行分析</p>
-<p><img src="/img/oom/image.png" alt="图片"></p>
-<p>锁定了明确的内存溢出对象</p>
-<p>主因有两个,两个接口没实现缓存和其他优化,在大并发情况下占用内存过多,通过调整实现和层层缓存的方式解决</p>
-<p>2023-04-27 12:38:56,780 INFO [4d7081320642116bc8a08b4ebeec8ea6 9b0b4f9a7a2ee351 01] [rtri-protocol-12390-thread-188] c.r.h.d.f.ProviderTraceFilter:48 - [] enter provide,ApiClassLessonStatService.listByClassLessonIdsAndUids|called:10.133.208.76:53836|params:[[8136,8137,8358,8359,8382],[2013000081453,2013000085861,2013000085863,800个元素…]]</p>
-<p>2023-04-27 12:39:02,177 INFO [665479416c6231df15caa14e73b19296 ab8926e54d10690f 01] [rtri-protocol-12390-thread-288] c.r.h.d.f.ProviderTraceFilter:48 - [] enter provide,ApiClassLessonEventService.list|called:10.133.208.54:55352|params:[8383,null,[“stu_connect”]]</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/" data-id="cuidM75cVxnglM2NX1NpseDjd" data-title="记录一次 Java 程序异常重启排查过程" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" rel="tag">故障管理</a></li></ul>
+](&#x2F;2023&#x2F;04&#x2F;28&#x2F;20230428_oom&#x2F;)
+    压测过程中,程序内存溢出并重启,原因排查
 
-    </footer>
-  </div>
-  
-</article>
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-27
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/" class="post-category">
+                                    排查实战
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/JVM/">
+                            <span class="chip bg-color">JVM</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/">
+                            <span class="chip bg-color">故障管理</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="微服务拆分之道">
+                            
+                            <span class="card-title">微服务拆分之道</span>
+                        </div>
+                    </a>
 
-
-  
-    <article id="post-微服务拆分之道" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/" class="article-date">
-  <time class="dt-published" datetime="2022-11-06T19:33:12.000Z" itemprop="datePublished">2022-11-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/">微服务拆分之道</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="微服务拆分之道"><a href="#微服务拆分之道" class="headerlink" title="微服务拆分之道"></a>微服务拆分之道</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                微服务拆分之道    [
 	**2022-11-07
-</code></pre>
-<p>](&#x2F;2022&#x2F;11&#x2F;07&#x2F;20221107_microservice_decomposition&#x2F;)</p>
-<pre><code>    记一次服务拆分流程,这里只是记录思路,不讨论细节
-</code></pre>
-<h1 id="一、拆分理论基础"><a href="#一、拆分理论基础" class="headerlink" title="一、拆分理论基础"></a>一、拆分理论基础</h1><p><img src="/img/20221107_microservice_decomposition_diagram.png" alt="图片"></p>
-<h1 id="二、核心业务流程-服务划分"><a href="#二、核心业务流程-服务划分" class="headerlink" title="二、核心业务流程-服务划分"></a>二、核心业务流程-服务划分</h1><p><img src="/img/20221107_microservice_decomposition_biz.jpg" alt="图片"></p>
-<p>问题点：</p>
-<ul>
-<li><p>如何鉴权：所有服务都集成鉴权 sdk，需要的时候添加注解</p>
-</li>
-<li><p>所有服务可以对外提供服务吗？所有服务都可以对外提供接口，提供admin&#x2F;api&#x2F;rest&#x2F;rpc接口</p>
-</li>
-<li><p>上课端单独一个上课服务，保证上课链路不受其他模块影响</p>
-</li>
-<li><p>admin和api如何隔离</p>
-</li>
-</ul>
-<p>安全方面用登录态隔离</p>
-<ul>
-<li><p>可用性要求高的服务通过域名路由到不同部署实例隔离</p>
-</li>
-<li><p>暂时不要聚合查询服务，页面查询分散到招生和教务模块</p>
-</li>
-<li><p>面向渠道&#x2F;官网&#x2F;通用配置&#x2F;落地页不需要单独划分系统，如果请求量高的情况下，对应服务进行横向扩容</p>
-</li>
-<li><p>课节状态的维护，由哪个服务负责，课节状态由课程服务维护</p>
-</li>
-<li><p>如何合理隔离声网的接口（依赖）</p>
-</li>
-<li><p>课堂答题&#x2F;互动的相关依赖接口，是否需要单独拆分，单独拆分</p>
-</li>
-<li><p>跨服务的数据信息填充,究竟在哪里填充?填充逻辑和聚合逻辑在一起,在哪里聚合就在哪里填充</p>
-</li>
-</ul>
-<h1 id="三、拆分步骤"><a href="#三、拆分步骤" class="headerlink" title="三、拆分步骤"></a>三、拆分步骤</h1><ul>
-<li><p>独立的服务可以单独拆分</p>
-</li>
-<li><p>先定好服务边界，同一个进程内，按定好服务划分，把服务调用关系规范起来，把进程间接口定义清楚</p>
-</li>
-<li><p>梳理出服务依赖关系，确定服务改造顺序</p>
-</li>
-<li><p>制定：战略决心</p>
-</li>
-</ul>
-<h1 id="四、部署架构-新旧架构兼容-流量路由"><a href="#四、部署架构-新旧架构兼容-流量路由" class="headerlink" title="四、部署架构&#x2F;新旧架构兼容&#x2F;流量路由"></a>四、部署架构&#x2F;新旧架构兼容&#x2F;流量路由</h1><p><img src="/img/20221107_microservice_decomposition_services.jpg" alt="图片"></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/" data-id="cuide5R1PInrtXcJ_bDVOn7c2" data-title="微服务拆分之道" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" rel="tag">服务拆分</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li></ul>
+](&#x2F;2022&#x2F;11&#x2F;07&#x2F;20221107_microservice_decomposition&#x2F;)
+    记一次服务拆分流程,这
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E6%80%BB%E7%BB%93/">
+                            <span class="chip bg-color">总结</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+                            <span class="chip bg-color">微服务</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/">
+                            <span class="chip bg-color">服务拆分</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                            <span class="chip bg-color">架构</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2022/09/05/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%95%B4%E5%90%88-RPC/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="微服务架构整合-RPC">
+                            
+                            <span class="card-title">微服务架构整合-RPC</span>
+                        </div>
+                    </a>
 
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                技术需求
+向 云原生 靠拢,简化运维模型
 
+基于 Kubernetes 生态,但是避免深度依赖 Kubernetes API，避免依赖厂商特性
 
-  
-    <article id="post-微服务架构整合-RPC" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/09/05/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%95%B4%E5%90%88-RPC/" class="article-date">
-  <time class="dt-published" datetime="2022-09-04T20:03:22.000Z" itemprop="datePublished">2022-09-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
-  </div>
+不额外维护注册中心
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/09/05/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%95%B4%E5%90%88-RPC/">微服务架构整合-RPC</a>
-    </h1>
-  
+不额外维护配置中心
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="技术需求"><a href="#技术需求" class="headerlink" title="技术需求"></a>技术需求</h2><ul>
-<li>向 <a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/dotnet/architecture/cloud-native/definition">云原生</a> 靠拢,简化运维模型</li>
-</ul>
-<p>基于 Kubernetes 生态,但是避免深度依赖 Kubernetes API，避免依赖厂商特性</p>
-<ul>
-<li><p>不额外维护注册中心</p>
-</li>
-<li><p>不额外维护配置中心</p>
-</li>
-<li><p>不额外维护微服务网关</p>
-</li>
-<li><p>兼容现有协议,支持 gRPC &#x2F; HTTP, Java 和 Go 通讯,避免重构成本</p>
-</li>
-</ul>
-<p>支持 Protocol Buffers 对旧技术栈&#x2F;跨团队服务进行兼容</p>
-<ul>
-<li><p>也需要支持脱离 Protocol Buffers 进行内部调用的快速开发</p>
-</li>
-<li><p>解决方案足够完整,开发模式足够简单,避免繁琐的模版代码和基础架构封装</p>
-</li>
-</ul>
-<p><strong>统一异常</strong></p>
-<ul>
-<li><p><strong>参数校验</strong></p>
-</li>
-<li><p>服务发现</p>
-</li>
-<li><p>负载均衡</p>
-</li>
-<li><p><em>服务降级</em></p>
-</li>
-<li><p><em>性能</em></p>
-</li>
-<li><p>快速开发</p>
-</li>
-</ul>
-<h2 id="拆分原则"><a href="#拆分原则" class="headerlink" title="拆分原则"></a>拆分原则</h2><ul>
-<li><p>微服务本身具备功能完整性,功能性明确,不需要和其他服务联动</p>
-</li>
-<li><p>某一个微服务支持使用的不同的语言开发</p>
-</li>
-<li><p>微服务需要有自治性，能独立开发，独立测试，独立部署，独立上线，独立升级</p>
-</li>
-</ul>
-<h1 id="候选方案"><a href="#候选方案" class="headerlink" title="候选方案"></a>候选方案</h1><h2 id="1-gRPC-Java-原生接入"><a href="#1-gRPC-Java-原生接入" class="headerlink" title="1. gRPC-Java   原生接入"></a>1. <a target="_blank" rel="noopener" href="https://grpc.io/docs/languages/Java/quickstart/">gRPC-Java</a>   原生接入</h2><p>目前 UDB 接入方案</p>
-<p>优点: 可用</p>
-<p>缺点: 繁琐</p>
-<p>性能:<br>[表格见原文]</p>
-<h2 id="2-grpc-spring-boot-starter-spring-boot-集成接入"><a href="#2-grpc-spring-boot-starter-spring-boot-集成接入" class="headerlink" title="2. grpc-spring-boot-starter  spring boot 集成接入"></a>2. <a target="_blank" rel="noopener" href="https://yidongnan.github.io/gRPC-spring-boot-starter/zh-CN/server/getting-started.html">grpc-spring-boot-starter</a>  spring boot 集成接入</h2><p>优点: 配置简单,原生 gRPC 协议</p>
-<p>缺点: 还是 gRPC 写法</p>
-<p>性能:<br>[表格见原文]</p>
-<h2 id="3-Dubbo"><a href="#3-Dubbo" class="headerlink" title="3. Dubbo"></a>3. <a target="_blank" rel="noopener" href="https://dubbo.apache.org/zh/">Dubbo</a></h2><p>优点: 有服务治理,简洁</p>
-<p>缺点: 架构复杂,可能有坑</p>
-<p>特点: 兼容 gRPC，简化了 Java 写法</p>
-<p>性能:<br>[表格见原文]</p>
-<h2 id="4-spring-cloud-gRPC-spring-boot-starter"><a href="#4-spring-cloud-gRPC-spring-boot-starter" class="headerlink" title="4. spring-cloud+gRPC-spring-boot-starter"></a>4. <a target="_blank" rel="noopener" href="https://github.com/spring-cloud/spring-cloud-kubernetes">spring-cloud</a>+<a target="_blank" rel="noopener" href="https://yidongnan.github.io/gRPC-spring-boot-starter/zh-CN/server/getting-started.html">gRPC-spring-boot-starter</a></h2><p>&#x2F;&#x2F; 需要和 K8s 深度绑定,配合 K8s 权限,暂不考虑</p>
-<h2 id="5-spring-cloud-kubernetes"><a href="#5-spring-cloud-kubernetes" class="headerlink" title="5. spring-cloud-kubernetes"></a>5. <a target="_blank" rel="noopener" href="https://github.com/spring-cloud/spring-cloud-kubernetes">spring-cloud-kubernetes</a></h2><p>&#x2F;&#x2F; 需要和 K8s 深度绑定,配合 K8s 权限,暂不考虑</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="6-Dubbo-定制-jProtobuf"><a href="#6-Dubbo-定制-jProtobuf" class="headerlink" title="6. Dubbo 定制 jProtobuf"></a>6. Dubbo 定制 jProtobuf</h2><p>优点: 支持 Dubbo 现有功能,实现无 IDL 定义快速开发,服务兼容 gRPC 协议,第三方接入时无需重构</p>
-<p>缺点: 对 pojo 定义有约束,可能有坑,可能翻车</p>
-<p>特点: 使用简单,性能和原生 Dubbo 差不多</p>
-<p>性能:<br>[表格见原文]</p>
-<h1 id="定制内容"><a href="#定制内容" class="headerlink" title="定制内容"></a>定制内容</h1><p>采用 Dubbo 定制 jProtobuf 方案</p>
-<ul>
-<li><p>Dubbo Triple 协议,直接对 C 端提供 gRPC 接口</p>
-</li>
-<li><p>拓展 Triple 协议,集成 jProtobuf ,Java 体系内服务间调用基于 Java 接口方式定义,跨系统调用时基于 IDL</p>
-</li>
-<li><p>定制实现 Dubbo DNS 服务发现,使用 K8s Service 作为注册中心,省略额外的注册中心部署</p>
-</li>
-<li><p>定制 Dubbo 统一异常,服务间异常传递</p>
-</li>
-<li><p>定制 opentelemetry-java-instrumentation，制定上报 Trace</p>
-</li>
-</ul>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://learnku.com/articles/60779">HTTPs://learnku.com/articles/60779</a></p>
-</blockquote>
+不额外维护微服务网关
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2022/09/05/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%95%B4%E5%90%88-RPC/" data-id="cuidibrBubcUtnYFV_grZU7jX" data-title="微服务架构整合-RPC" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dubbo/" rel="tag">Dubbo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RPC/" rel="tag">RPC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gRPC/" rel="tag">gRPC</a></li></ul>
+兼容现有协议,支持 gRP
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/RPC/">
+                            <span class="chip bg-color">RPC</span>
+                        </a>
+                        
+                        <a href="/tags/Dubbo/">
+                            <span class="chip bg-color">Dubbo</span>
+                        </a>
+                        
+                        <a href="/tags/Spring-Cloud/">
+                            <span class="chip bg-color">Spring Cloud</span>
+                        </a>
+                        
+                        <a href="/tags/gRPC/">
+                            <span class="chip bg-color">gRPC</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2022/07/19/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%9B%A2%E9%98%9F%E7%9A%84_SRE_%E8%BF%90%E7%BB%B4%E5%88%B6%E5%BA%A6/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="后端服务团队的 SRE 运维制度">
+                            
+                            <span class="card-title">后端服务团队的 SRE 运维制度</span>
+                        </div>
+                    </a>
 
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                职责：
+发现问题
 
+关注用户主动反馈群——–用户反馈问题
 
-  
-    <article id="post-后端服务团队的_SRE_运维制度" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/07/19/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%9B%A2%E9%98%9F%E7%9A%84_SRE_%E8%BF%90%E7%BB%B4%E5%88%B6%E5%BA%A6/" class="article-date">
-  <time class="dt-published" datetime="2022-07-19T00:03:22.000Z" itemprop="datePublished">2022-07-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
-  </div>
+关注后端技术指标报表波动  —–请求量波动、错误率波动、时延波动
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/07/19/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%9B%A2%E9%98%9F%E7%9A%84_SRE_%E8%BF%90%E7%BB%B4%E5%88%B6%E5%BA%A6/">后端服务团队的 SRE 运维制度</a>
-    </h1>
-  
+关注后端日志错误告警群  ——关注程序运行中意想不到的分支
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="职责："><a href="#职责：" class="headerlink" title="职责："></a>职责：</h2><ul>
-<li>发现问题</li>
-</ul>
-<p>关注用户主动反馈群——–用户反馈问题</p>
-<ul>
-<li><p>关注后端技术指标报表波动  —–请求量波动、错误率波动、时延波动</p>
-</li>
-<li><p>关注后端日志错误告警群  ——关注程序运行中意想不到的分支</p>
-</li>
-<li><p>关注服务组件状态 —– 线程状态、进程状态、机器负载、CPU、内存、文件IO、网络、数据库负载</p>
-</li>
-<li><p>关注业务状态 —–  注册人数、登录人数、订单数量、账本变动数</p>
-</li>
-<li><p>甄别问题优先级</p>
-</li>
-<li><p>在值班记录表(飞书表格)中记录值班期间发生的问题，跟进推进问题解决</p>
-</li>
-<li><p><strong>紧急问题、非紧急2小时没有找到原因的问题，上报上级，做出预警</strong></p>
-</li>
-<li><p>组内站会时，介绍出现问题的调查过程及问题原因，加强监控措施并<strong>优化处理时长</strong></p>
-</li>
-</ul>
-<h2 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h2><ul>
-<li><p>值班人按天进行排班，时间为周一到周日，早上9:30-23:00,周任务安排时，会预留余量，用于处理值班事务</p>
-</li>
-<li><p>根据值班表，值班人当天，在飞书接收各告警群的问题反馈，并且检查线上服务组件状态</p>
-</li>
-</ul>
-<p>业务反馈群</p>
-<ul>
-<li><p>技术告警群</p>
-</li>
-<li><p>当收到告警、报障，在飞书上创建问题，生成问题单，跟踪问题进展</p>
-</li>
-<li><p>定位并解决问题、及时反馈业务，对于无法单独处理的问题要及时上报</p>
-</li>
-<li><p>问题解决完成后，在飞书上记录问题单信息，标记解决</p>
-</li>
-</ul>
-<h1 id="常用查障手段"><a href="#常用查障手段" class="headerlink" title="常用查障手段"></a>常用查障手段</h1><h2 id="了解系统对外提供了什么"><a href="#了解系统对外提供了什么" class="headerlink" title="了解系统对外提供了什么"></a>了解系统对外提供了什么</h2><ul>
-<li><p>系统承载了哪些业务? 业务A&#x2F;业务B</p>
-</li>
-<li><p>系统由哪些模块组成?  订单&#x2F;注册</p>
-</li>
-<li><p>系统以什么方式对外提供服务？用户设备直接请求？业务后台转发？HTTP 接口？gRPC 接口？MQ？</p>
-</li>
-</ul>
-<h2 id="了解系统部署架构"><a href="#了解系统部署架构" class="headerlink" title="了解系统部署架构"></a>了解系统部署架构</h2><ul>
-<li><p>系统有多少个进程组成？各个进程的职能是什么</p>
-</li>
-<li><p>系统部署的IDC、K8s集群、云日志位置、Trace日志的位置</p>
-</li>
-<li><p>系统对外暴露的 Service、路由、域名</p>
-</li>
-</ul>
-<h2 id="了解系统依赖了什么"><a href="#了解系统依赖了什么" class="headerlink" title="了解系统依赖了什么"></a>了解系统依赖了什么</h2><ul>
-<li>系统依赖的存储组件有哪一些？以及使用方式和重要级别？</li>
-</ul>
-<p>数据库？数据存储类型？日志？配置？业务数据？</p>
-<ul>
-<li><p>Redis？作用？分布式锁？业务逻辑依赖？缓存？</p>
-</li>
-<li><p>消息队列？生产者和发送时机、消费者和消费逻辑、Topic的重要级别和消息量</p>
-</li>
-<li><p>注册中心、配置中心？</p>
-</li>
-<li><p>系统依赖的第三方组件</p>
-</li>
-</ul>
-<p>第三方组件的功能，重要级别，调用方式，调用频率，重试机制</p>
-<h2 id="了解系统什么情况是正常的"><a href="#了解系统什么情况是正常的" class="headerlink" title="了解系统什么情况是正常的"></a>了解系统什么情况是正常的</h2><ul>
-<li><p>从业务流程验证，如每天会下一笔单验证下单流程没问题</p>
-</li>
-<li><p>业务数据维度验证，下单量、注册量</p>
-</li>
-<li><p>接口请求情况验证，请求量、时延、成功率</p>
-</li>
-<li><p>日志维度，查看请求日志正常</p>
-</li>
-</ul>
-<h2 id="了解目前系统的问题范围"><a href="#了解目前系统的问题范围" class="headerlink" title="了解目前系统的问题范围"></a>了解目前系统的问题范围</h2><ul>
-<li><p>全系统故障</p>
-</li>
-<li><p>模块故障</p>
-</li>
-<li><p>偶发故障</p>
-</li>
-<li><p>某个用户故障</p>
-</li>
-</ul>
-<h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><ul>
-<li>全系统故障</li>
-</ul>
-<p>最严重故障，需要全员介入，各个维度排查</p>
-<ul>
-<li><p>确定是客户端故障，还是服务端故障？</p>
-</li>
-<li><p>域名解析问题？dns故障？证书问题？</p>
-</li>
-<li><p>网络故障？客户端网络故障？服务端机房网络故障？</p>
-</li>
-<li><p>接入层故障？接入ip可达性？接入层Ingress故障？运营商流量黑名单？</p>
-</li>
-<li><p>后端服务部署故障？服务进程崩溃？服务进程负载过高？</p>
-</li>
-<li><p>服务内部逻辑错误？配置错误？数据库连接故障？线程池故障？业务数据错误？</p>
-</li>
-<li><p>内部依赖故障？数据库故障？redis故障</p>
-</li>
-<li><p>第三方依赖故障？</p>
-</li>
-<li><p>后端进程所在机器故障？磁盘？CPU？内存？网络</p>
-</li>
-<li><p>模块故障&#x2F;偶发故障</p>
-</li>
-</ul>
-<p>一般是模块内部错误，可先快速查看模块日志，尝试快速定位</p>
-<ul>
-<li><p>如果未能快速定位，则需要寻找规律，按全网故障的排查手段，比较没故障和故障的组件之间的差异，网络不同？数据库不同等，偶发故障需要寻找规律，看出是时间规律还是请求量规律</p>
-</li>
-<li><p>某个用户故障</p>
-</li>
-</ul>
-<p>一般情况下是用户数据异常，导致触发异常分支</p>
-<h2 id="止损"><a href="#止损" class="headerlink" title="止损"></a>止损</h2><p>止损前提是明确了影响范围和故障模块，已经定位出了故障原因，已经有稳妥的修复方案，并且经过讨论Review，排除掉风险点，考虑了修复，回滚范围后才进行操作，避免以下操作：</p>
-<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><ul>
-<li><p>健壮性原则：例如，在 B 依赖 A 的状态下，被依赖方 A 出现问题，但是能够快速恢复，而依赖方 B无法快速恢复，导致故障蔓延。这时，承担主要责任的是依赖方 B，而不是被依赖方 A</p>
-</li>
-<li><p>第三方默认无责：这一条是上一条的延伸，如果使用到了第三方的服务，如公有云的各类服务，包括 IaaS、PaaS、CDN 以及视频等等，我们的原则就是默认第三方无责</p>
-</li>
-</ul>
-<p><em>监控：确保发布质量的监控项</em></p>
-<ul>
-<li><p><em>核心质量数据</em></p>
-</li>
-<li><p><em>日志（确保功能跑到并正常）</em></p>
-</li>
-<li><p><em>监控机器人</em></p>
-</li>
-</ul>
-<h2 id="排查定位大图"><a href="#排查定位大图" class="headerlink" title="排查定位大图"></a>排查定位大图</h2><h4 id="系统资源问题定位"><a href="#系统资源问题定位" class="headerlink" title="系统资源问题定位"></a>系统资源问题定位</h4><p><img src="/img/sre-host-stat.png" alt="图片"></p>
-<h4 id="接口响应慢问题定位"><a href="#接口响应慢问题定位" class="headerlink" title="接口响应慢问题定位"></a>接口响应慢问题定位</h4><p><img src="/img/sre-service-timeout.png" alt="图片"></p>
-<h4 id="JVM内存溢出问题定位"><a href="#JVM内存溢出问题定位" class="headerlink" title="JVM内存溢出问题定位"></a>JVM内存溢出问题定位</h4><p><img src="/img/sre-jvm-oom.png" alt="图片"></p>
-<blockquote>
-<p>- </p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.51cto.com/wenyule/2977046">03 | SRE切入点:选择SLI，设定SLO_Yule的技术博客_51CTO博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://sre.google/workbook/how-sre-relates/">https://sre.google/workbook/how-sre-relates/</a></p>
+关注服务组件状态 —– 线程状态、进程状态、机器负
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2022/07/19/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%9B%A2%E9%98%9F%E7%9A%84_SRE_%E8%BF%90%E7%BB%B4%E5%88%B6%E5%BA%A6/" data-id="cuidKHuJvTP5ORQKV01vgEG0a" data-title="后端服务团队的 SRE 运维制度" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SRE/" rel="tag">SRE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" rel="tag">故障响应流程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" rel="tag">故障管理</a></li></ul>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/SRE/">
+                            <span class="chip bg-color">SRE</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/">
+                            <span class="chip bg-color">故障响应流程</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/">
+                            <span class="chip bg-color">故障管理</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/09/26/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%BC%82%E5%B8%B8%E5%B1%82%E6%AC%A1/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="一个简单的异常层次">
+                            
+                            <span class="card-title">一个简单的异常层次</span>
+                        </div>
+                    </a>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-一个简单的异常层次" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/26/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%BC%82%E5%B8%B8%E5%B1%82%E6%AC%A1/" class="article-date">
-  <time class="dt-published" datetime="2021-09-26T04:14:52.000Z" itemprop="datePublished">2021-09-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/26/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%BC%82%E5%B8%B8%E5%B1%82%E6%AC%A1/">一个简单的异常层次</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="一个简单的异常层次"><a href="#一个简单的异常层次" class="headerlink" title="一个简单的异常层次"></a>一个简单的异常层次</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一个简单的异常层次    [
 	**2021-09-26
-</code></pre>
-<p>](&#x2F;2021&#x2F;09&#x2F;26&#x2F;20210926_SimpleExceptionLayering&#x2F;)</p>
-<pre><code>    异常的定义主要考虑以下几个方面
-</code></pre>
-<ul>
-<li><p>通过异常,能快速知道是哪一个部分出现问题</p>
-</li>
-<li><p>通过异常,能快速知道,异常的严重程度</p>
-</li>
-<li><p>通过异常,能快速知道应该怎么处理,谁来处理</p>
-</li>
-<li><p>异常要和下游系统联动,和监控告警系统联动起来</p>
-</li>
-</ul>
-<p><img src="/img/ResourceException.png" alt="图片"></p>
-<p>BizException<br>作用:统一捕获</p>
-<p>NoCheckException:<br>定义: 用户输入异常.</p>
-<p>用户有可能会从这种分支进来,但是不能得到预期结果</p>
-<ul>
-<li><p>用户输错密码.</p>
-</li>
-<li><p>用户填错信息.</p>
-</li>
-<li><p>用户没填信息.</p>
-</li>
-</ul>
-<p>处理:</p>
-<ul>
-<li><p>前端:提示友好错误提示,由用户自行处理.</p>
-</li>
-<li><p>告警:不需要告警.</p>
-</li>
-<li><p>运维:无需介入,只需要记录,用于后续统计,如登陆成功率,输入错误率.</p>
-</li>
-</ul>
-<p>BusinessException<br>定义: 业务异常.</p>
-<p>业务上的校验&#x2F;处理异常,用户处理不了的情况,如:</p>
-<ul>
-<li><p>appid 等联调参数为空,用户处理不了</p>
-</li>
-<li><p>前端bug导致入参错误</p>
-</li>
-<li><p>配置错误</p>
-</li>
-</ul>
-<p>处理:</p>
-<ul>
-<li><p>前端:提示参数错误,这个错误需要app&#x2F;前端&#x2F;运营&#x2F;产品处理</p>
-</li>
-<li><p>告警:需要需要告警</p>
-</li>
-<li><p>运维:并且需要联系对接人修复处理</p>
-</li>
-</ul>
-<p>ResourceException<br>定义: 依赖资源异常</p>
-<ul>
-<li><p>第三方服务请求相关异常.</p>
-</li>
-<li><p>第三方服务网络不通.</p>
-</li>
-<li><p>第三方服务远程调用超时.</p>
-</li>
-</ul>
-<p>处理:</p>
-<ul>
-<li><p>前端:提示系统错误,这个错误需要后端处理.</p>
-</li>
-<li><p>告警:需要紧急告警.</p>
-</li>
-<li><p>运维:需要立即修复.</p>
-</li>
-</ul>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2021/09/26/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%BC%82%E5%B8%B8%E5%B1%82%E6%AC%A1/" data-id="cuidzWK1EFCdD-alPO33Y8cyc" data-title="一个简单的异常层次" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exception/" rel="tag">Exception</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li></ul>
+](&#x2F;2021&#x2F;09&#x2F;26&#x2F;20210926_SimpleExceptionLayering&#x2F;)
+    异常的定义主要考虑以下几
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/" class="post-category">
+                                    排查实战
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Exception/">
+                            <span class="chip bg-color">Exception</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%BC%82%E5%B8%B8/">
+                            <span class="chip bg-color">异常</span>
+                        </a>
+                        
+                        <a href="/tags/Error/">
+                            <span class="chip bg-color">Error</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/09/10/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E7%9A%84%E4%B8%80%E7%82%B9%E4%B8%AA%E4%BA%BA%E6%80%9D%E8%80%83/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="技术选型的一点个人思考">
+                            
+                            <span class="card-title">技术选型的一点个人思考</span>
+                        </div>
+                    </a>
 
-
-
-  
-    <article id="post-技术选型的一点个人思考" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/09/10/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E7%9A%84%E4%B8%80%E7%82%B9%E4%B8%AA%E4%BA%BA%E6%80%9D%E8%80%83/" class="article-date">
-  <time class="dt-published" datetime="2021-09-10T05:52:40.000Z" itemprop="datePublished">2021-09-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/09/10/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E7%9A%84%E4%B8%80%E7%82%B9%E4%B8%AA%E4%BA%BA%E6%80%9D%E8%80%83/">技术选型的一点个人思考</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="技术选型的一点个人思考"><a href="#技术选型的一点个人思考" class="headerlink" title="技术选型的一点个人思考"></a>技术选型的一点个人思考</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                技术选型的一点个人思考    [
 	**2021-09-10
-</code></pre>
-<p>](&#x2F;2021&#x2F;09&#x2F;10&#x2F;technology_selection&#x2F;)</p>
-<pre><code>    原文连接： https://cnblogs.com/eryuan/p/15223921.html
-</code></pre>
-<h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h3><p>这个题目有点大。工作也有些年头，从开始入行的被动接受，什么流行就学什么;到有一些想法，会去思考为什么使用这种技术;再到主动去学习一些前沿框架。从开始的不理解，事不关已高高挂起，不在其位不谋其政；到也成为了团队中的中坚力量，去据理力争应该使用某些技术，把觉得好的技术安利给同事，试图引入到团队中；有成功有失败；也有迫于种种因素使用一些所谓“过时的技术”，有时候有在想，这种“被迫”或”过时”是“为了技术而技术”吗？</p>
-<p>本人从事的是JAVA后端开发，从业七八年，时间不长，但也经历了不少。从需要使用juqery,easyui等各种前端技术，到前后端分离成为主流；<br>从一开始的hibernate+structs&#x2F;structs2框架大行其道，到后来几乎消声匿迹；<br>从最初的redis&#x2F;memcache两者之间还能一较长短，到redis一统江湖。<br>从spring mvc 到言必谈spring boot,微服务。不来两句服务化,降级限流熔断，高并发你都不好意思出门。</p>
-<p>后来转战“大数据”领域。那时mapreduce已是明日黄花，strom以及阿里巴巴主导的汉化版jstorm也是江河日下。而spark正当其时，如日中天。遂入坑。<br>到flink异军突起，阿里巴巴再出汉化版blink,与spark分庭抗礼，直至略占上风。后来者只知flink，而鄙视spark之风气，怪异而可爱。</p>
-<p>从传统关系型数据库到非关系型数据库，NOSql,NewSql,到数据湖，再到兼顾OLAP,OLTP的各种分布式数据库如雨后春笋般出现。<br>这时期的数据库已无法像传统关系型数据库那样三足鼎立（o+m+else）（java位面下），而是春秋时期百家争鸣的局面，各家大厂根据自身的业务需求订制化了许多产品，包括不限于Fusion，mariadb，OceanBase,TiDB,ClickHouse,greenplum，dorisdb，kudu等等。<br>对于普通开发者，这是好事？坏事？<br>对于技术团队，这是好事？坏事？<br>有了更多的选择权？要学的东西更多了？</p>
-<p>怎么选择一种技术框架，从是否开源，是否KPI开源，开源社区是否活跃&#x2F;持续&#x2F;稳定（我没有说阿里，别乱说），是否有国内大厂使用，社区（特别是问答社区）是否活跃，中文资料是否够多，都是影响普通开发者&#x2F;团队选择某种技术的原因。</p>
-<p>下面将从效率（技术本身），环境（开源，社区），团队（负责人&#x2F;骨干的技术水平和技术偏好）三个方面来谈谈我的看法。</p>
-<p>为避免说教的意思，以及倚老卖老（并不老）的嫌疑，首先声明，以上以下只代表个人观点。</p>
-<h3 id="2-效率"><a href="#2-效率" class="headerlink" title="2.效率"></a>2.效率</h3><h4 id="2-1没有绝对的效率"><a href="#2-1没有绝对的效率" class="headerlink" title="2.1没有绝对的效率"></a>2.1没有绝对的效率</h4><p>我有点害怕技术讨论会上，上来就说据XX公司&#x2F;官网测试，XX比XX效率高出5%（8%or10%…）.</p>
-<p>这就有点像面试中上来就问QPS多少。不才曾经做过一个广告竞价平台，日均访问量几千万，听起来好像很牛逼的样子，但该系统是纯内存计算，严格限制单次访问时间，这种系统谈QPS根本不具备任何横向参考意义。</p>
-<p>或者像面试中多次被问到spark&#x2F;hadoop集群多少个节点的问题。我一般会回答一个大概的数字，然后补充一下集群cpu cores&#x2F;内存&#x2F;存储空间总数,必要时补充集群任务数，单日&#x2F;总处理数据量。如果只是性能空间并不太好的有限物理机，用容器虚拟成上千个节点，那就达到了大厂的集群规模了吗？</p>
-<p><strong>只有在控制变量的前提下，谈论单一指标才有意义。</strong></p>
-<p>效率并非不重要。但为那点3%的效率牺牲其它东西，值得吗？这是值得衡量的。说句诛心的话，那点性能优势对于绝大多数公司，我觉得可能是你自己想多了。还不如好好优化一下那堆shit山。</p>
-<h4 id="2-2效率是否绝对重要"><a href="#2-2效率是否绝对重要" class="headerlink" title="2.2效率是否绝对重要"></a>2.2效率是否绝对重要</h4><p>在RocketMq(阿里牛逼！)没有开源前，消息队列一般有三种选择RabbitMQ,ActiveMq,ZeroMq。<br>三者控制变量的前提下， <a target="_blank" rel="noopener" href="http://blog.x-aeon.com/2013/04/10/a-quick-message-queue-benchmark-activemq-rabbitmq-hornetq-qpid-apollo/">TPS测试结果 </a>表明ZeroMq效率最高。但那些年我所待过的公司，我了解到的情况（同事，网络），消息队列基本都在RabbitMQ,ActiveMq两者之间选择，鲜少使用ZeroMq.</p>
-<p>这个例子可能并没有很强的说服力。但大概就是这么个意思。</p>
-<h3 id="3环境"><a href="#3环境" class="headerlink" title="3环境"></a>3环境</h3><h4 id="3-1国内开发大环境"><a href="#3-1国内开发大环境" class="headerlink" title="3.1国内开发大环境"></a>3.1国内开发大环境</h4><p>最典型的例子就是mybatis vs hibernate.<br>除了银行之类的老项目，现在有新项目在使用hibernate吗？就算有，hibernate在国内也早就远离了主流。<br>可是，在国外，hibernate依然是绝对的主流。<br>在stackoverflow上的tags数量，看对比图，hibernate热度碾压mybatis,两者根据不是一个数量级.</p>
-<p><img src="/img/technology_selection/f5a8f5b343da3fad52a2afebcfca3f5c.png" alt="图片"></p>
-<p><img src="/img/technology_selection/e8efce15133528c4b4a6e6f6c0eae31b.png" alt="图片"></p>
-<p>按google搜索趋势,过去五年，hibernate的搜索量依然碾压mybatis.</p>
-<p><img src="/img/technology_selection/d45fb33c05996dc78f72088bc76d96ee.png" alt="图片"></p>
-<p>同样google搜索趋势，按国家地区划分。全球范围内，mybatis热度胜过hibernate的，只有东亚地区。中日韩东亚三国最喜欢mybatis。迷惑。。。</p>
-<p><img src="/img/technology_selection/48f13bcbb6451e494362d6348e892c25.png" alt="图片"></p>
-<p>为何会有这种地区之间的巨大差异？有人说是阿里巴巴的带动作用。阿里对国内JAVA整体环境的带动和影响是毋庸置疑的，但在mybatis之所以流行这件事情上，完全归于阿里，也无法解释韩国和日本同样流行mybatis这件事。</p>
-<p>不管怎么说，不管公司，团队还是个人，都是一定程度上从众的。既然大环境都在使用mybatis，那么这样用就不会犯大错。公司好招人，个人也好找工作。大家的成本都在最低，皆大欢喜。</p>
-<h4 id="3-2技术社区的影响"><a href="#3-2技术社区的影响" class="headerlink" title="3.2技术社区的影响"></a>3.2技术社区的影响</h4><p>有个笑话，外行人看到程序员在工作，觉得好牛逼，全英文的界面。知乎也常有提问，英语不好，学编程可行吗？<br>底下回答，很多鼓励，英语跟编程没有太大关系云云。</p>
-<p>这句话有毛病吗？<br>这至少透露出来两层意思。</p>
-<ul>
-<li><p>不是说编程方面英语不重要。英语好，优势巨大。</p>
-</li>
-<li><p>国内程序员很多英语不好。以本人常年混迹小公司的经验来说，好多程序员连eclipse或者idea上常用的界面按钮上的单词都认不全。唯手熟尔。不懂就百度。这个很多，是好多，无法统计，但个比例绝对不低。</p>
-</li>
-<li><p>国内IT圈子是一个比较封闭的圈子。虽然，用的技术基本都是发源于国外，但国内的规模保证了资源的足够。比如spark&#x2F;flink不需要去官网阅读一手资料，各个论坛网站上公众号各种二手三手N手的资料满天飞（这其中博客园已经可以算是一股清流了）;比如出现了问题，第一时间打开百度，CSDN虽迟但到，虽然上面都是各种推广广告复制粘贴错误百出答非所问僵尸文章，但一个一个试嘛，多翻几页，总能解决问题嘛。（大雾）</p>
-</li>
-</ul>
-<p>有追求的程序员，或者大厂的大佬觉得嗤之以鼻，遇BUG先必称看源码，再次github issue,stackoverflow,搜索必须google,资料必须原文。对CSDN表示垃圾。</p>
-<p>本垃圾表示CSDN是个好垃圾。就算是一条底裤,一张厕纸,都有它的用处。</p>
-<p>所以英语跟编程没有太大关系，这不是一个疑问，对很多程序员来说，这就是事实。大量分布于各类中小型公司，严重依赖于国内各种社区学习（copy）技术，解(zhi)决(zao)问题，赚钱养家。</p>
-<p>国内头部公司&#x2F;团队用什么，大多数的公司&#x2F;团队&#x2F;个人就用什么。</p>
-<p>这件事情的另一个力证是spring cloud vs apache dubbo,两者隐隐有在国内分庭抗礼之势。但在全球范围呢，我就不放google trend图了。有点欺负人。</p>
-<p>但是因为apache dubbo是阿里巴巴出品，进而影响到了国内整个程序员圈子，社区，所以大家也逐渐愿意去用，虽然被之前的开源社区挺尸行为伤过。就像一个渣男，但他是高富帅啊，自带光环。</p>
-<h3 id="4团队"><a href="#4团队" class="headerlink" title="4团队"></a>4团队</h3><h4 id="4-1-团队负责人及核心骨干的技术积累以及技术偏好"><a href="#4-1-团队负责人及核心骨干的技术积累以及技术偏好" class="headerlink" title="4.1 团队负责人及核心骨干的技术积累以及技术偏好"></a>4.1 团队负责人及核心骨干的技术积累以及技术偏好</h4><p>2017年新公司进行一个流计算项目。当时整个团队都是新组建，尚处于磨合期。当时我个人偏向于spark streaming,用得比较熟，上手快，能够提前排坑，能快速解决线上问题。但当时的技术负责人在召开技术研讨会，听取各方意见后，决定使用jstorm。</p>
-<p>我当然服从决定。<br>当时的jstorm尚有余晖。而且据说那时jstorm在开源社区诈尸了。颇有几分卷土重来的架势。加上当时负责人力排众议，让我觉得很安心，他应该是很懂jstorm这项技术栈的。</p>
-<p>后来项目顺利上线。再后来，不出意外，运行一段时间，遇到棘手线上问题。几次团队沟通后，我得出一个结论，决定使用jstorm的负责人并不了解jstorm,甚至应该不懂java技术栈（客观白描事实，无情绪输出，技术管理者并不一定要懂技术）;所以，整个团队最懂jstorm的好像就是我了。<br>肝吧，骚年。在经历了好几个后半夜，并成功在国庆享受了三倍工资（并没有）后，BUG解决。</p>
-<p>后来回想，如果当时上的是spark streaming就不会出现同样的问题，就算出现这样的问题，凭借对spark streaming的较深入了解，也能够快速解决。</p>
-<p>上述这段经历，我想表达什么？</p>
-<ul>
-<li>一个程序员的竞争力包括什么？不是会用某一种技术，也不是能够快速上手某种新技术。</li>
-</ul>
-<p>学习新技术的欲望，动力，能力;快速上手，保证任务，这些只是基本功。对于新技术，能够利用经验，快速理解原理内幕，预排坑道，又快又好解决线上问题，更为重要。所以，当决定使用某种新技术（哪怕技术并不新，如果团队当中没人使用过，没有深刻了解过）时，并不能仅满足于“能快速上手”。</p>
-<ul>
-<li><p>技术本身没有立场。没有好的坏的，没有国外的国内的。有些技术栈，并没有mybatis和hibernater那么悬殊，如何抉择，很大概率就看技术团队的偏好，类似于spark vs flink,spring cloud vs apache dubbo,不管谁是胜出者，都很隐。</p>
-</li>
-<li><p>除了团队的学习成本，还要考虑其它成本.</p>
-</li>
-</ul>
-<p>比如，运维成本，比如，用scala还是java开发spark.<br>用java的好处是虽臃肿但新手外行上手超快。用scala好处是它是spark开发语言，熟悉scala便于查看spark源码，语法强大，逼格高（我真见过scala开发spark的鄙视使用java的）;坏处是，语法强大，语法糖很爽，但有时天马行空对于团队合作开发真的是灾难。</p>
-<ul>
-<li><p>行政成本比如招人成本。<br>招一个使用scala的程序员不难，基本上会用java的都能快速上手，但要写出没有“java”味儿的scala代码，还真不容易。（scala的java味儿，就是那种，你一看就是java程序员转过来的痕迹，满屏都快溢出来）</p>
-</li>
-<li><p>等等</p>
-</li>
-</ul>
 
-      
+](&#x2F;2021&#x2F;09&#x2F;10&#x2F;technology_selection&#x2F;)
+    原文连接： https://cnblogs.
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-10
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                            <span class="chip bg-color">读书笔记</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                            <span class="chip bg-color">架构</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/">
+                            <span class="chip bg-color">工程师学习</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+        </div>
+    </article>
+
+</main>
+
+
+<div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+            <a class="left btn-floating btn-large disabled">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">1 / 3</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+            <a href="/page/2/"
+               class="right btn-floating btn-large waves-effect waves-light bg-color">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2021/09/10/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E7%9A%84%E4%B8%80%E7%82%B9%E4%B8%AA%E4%BA%BA%E6%80%9D%E8%80%83/" data-id="cuiddEcIu4eG_eLYdD6FWvkdW" data-title="技术选型的一点个人思考" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" rel="tag">工程师学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
+</div>
 
 
 
-  
 
-
-  <nav id="page-nav">
+    <footer class="page-footer bg-color">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
-  </nav>
-
-</section>
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
         
-          <aside id="sidebar">
-  
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></li></ul>
-    </div>
-  </div>
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
 
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
 
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CPU/" rel="tag">CPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cronolog/" rel="tag">Cronolog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dubbo/" rel="tag">Dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/" rel="tag">Exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK-8/" rel="tag">JDK 8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Method-getAnnotations/" rel="tag">Method.getAnnotations()</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/" rel="tag">RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SRE/" rel="tag">SRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/" rel="tag">gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gzip/" rel="tag">gzip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j2/" rel="tag">log4j2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/" rel="tag">logrotate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" rel="tag">工程师学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" rel="tag">故障响应流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" rel="tag">故障管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" rel="tag">服务拆分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" rel="tag">长连接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="tag">高并发</a></li></ul>
-    </div>
-  </div>
-
-
-  
+</style>
+<div class="">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cronolog/" style="font-size: 10px;">Cronolog</a> <a href="/tags/Dubbo/" style="font-size: 10px;">Dubbo</a> <a href="/tags/Error/" style="font-size: 12.5px;">Error</a> <a href="/tags/EventBus/" style="font-size: 10px;">EventBus</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/JDK-8/" style="font-size: 10px;">JDK 8</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Method-getAnnotations/" style="font-size: 10px;">Method.getAnnotations()</a> <a href="/tags/RPC/" style="font-size: 10px;">RPC</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SRE/" style="font-size: 10px;">SRE</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/gRPC/" style="font-size: 10px;">gRPC</a> <a href="/tags/gzip/" style="font-size: 10px;">gzip</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">工程师学习</a> <a href="/tags/%E5%BC%82%E5%B8%B8/" style="font-size: 12.5px;">异常</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 12.5px;">微服务</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 15px;">总结</a> <a href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">故障响应流程</a> <a href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" style="font-size: 12.5px;">故障管理</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" style="font-size: 12.5px;">服务拆分</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 17.5px;">架构</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a> <a href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" style="font-size: 10px;">长连接</a> <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">高并发</a>
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
     </div>
-  </div>
+</div>
 
-  
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
-    </div>
-  </div>
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">HugoXH</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HugoXH" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/07/24/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">信令系统的架构实践</a>
-          </li>
-        
-          <li>
-            <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/">记录一次接口优化过程</a>
-          </li>
-        
-          <li>
-            <a href="/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/">微服务拆分之道-2024新赛季</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">记录一次 Java 程序异常重启排查过程</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 HugoXH<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <a href="mailto:xiehang00@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
     </div>
-  </div>
 </footer>
 
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
     
 
+    
+    
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    <!-- 雪花特效 -->
+    
 
+    <!-- 鼠标星星特效 -->
+    
 
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
 
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
-<script src="/js/script.js"></script>
+    
 
+    
 
+    <!--腾讯兔小巢-->
+    
+    
 
+    
 
+    
 
-  </div>
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
 </body>
+
 </html>

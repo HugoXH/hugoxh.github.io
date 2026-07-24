@@ -1,1267 +1,1339 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hugo&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hugo&#39;s Blog">
-<meta property="og:url" content="https://hugoxh.github.io/page/2/index.html">
-<meta property="og:site_name" content="Hugo&#39;s Blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="HugoXH">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hugo's Blog" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    <meta charset="utf-8">
+    <meta name="keywords" content="后端,Java,架构,分布式">
+    <meta name="description" content="Hugo 的个人博客 - 后端工程师,记录架构、排查与思考">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
 
-  
+
+    <title>Hugo&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
 <meta name="generator" content="Hexo 8.1.1"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hugo&#39;s Blog</a>
-      </h1>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Hugo&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
       
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Hugo&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Hugo 的个人博客 - 后端工程师,记录架构、排查与思考
+            
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+
+    <ul class="menu-list mobile-menu-list">
         
-          <a class="main-nav-link" href="/">Home</a>
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
         
-      </nav>
-      <nav id="sub-nav">
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
         
         
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
         
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hugoxh.github.io"></form>
-      </div>
-    </div>
-  </div>
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
 </header>
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-定位_Guava_EventBus_重复消费" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/" class="article-date">
-  <time class="dt-published" datetime="2018-08-10T22:54:38.000Z" itemprop="datePublished">2018-08-11</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
-  </div>
+    <div class="bg-cover pd-header about-cover">
+    <div class="container">
+    <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                从来没有真正的绝境,只有绝望的人
+                
+            </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/">定位 Guava EventBus 重复消费</a>
-    </h1>
-  
+            <div class="description center-align">
+                
+                <span id="subtitle"></span>
+                <script src="/libs/typed/typed.js"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: [ 
+                            
+                                "从来没有真正的绝境, 只有心灵的迷途",
+                            
+                                "Never really desperate, only the lost of the soul",
+                            
+                        ],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
-      </header>
+
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+</script>
+<script>
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="定位-Guava-EventBus-重复消费"><a href="#定位-Guava-EventBus-重复消费" class="headerlink" title="定位 Guava EventBus 重复消费"></a>定位 Guava EventBus 重复消费</h1><pre><code>    [
+      var bannerUrl = "/medias/featureimages/" + Math.floor(Math.random() * 24) + '.jpg';
+    
+    $('.bg-cover.about-cover').css('background-image', 'url(' + bannerUrl + ')');
+
+</script>
+
+
+    </div>
+</div>
+
+
+<main class="content">
+
+    
+
+    
+
+    <!-- 所有文章卡片 -->
+    <article id="articles" class="container articles">
+        <div class="row article-row">
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="定位 Guava EventBus 重复消费">
+                            
+                            <span class="card-title">定位 Guava EventBus 重复消费</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                定位 Guava EventBus 重复消费    [
 	**2018-08-11
-</code></pre>
-<p>](&#x2F;2018&#x2F;08&#x2F;11&#x2F;fix_guava_eventBus_reprocessing&#x2F;)</p>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>我们在系统中使用 Guava 的 EventBus 进行代码解耦，一直运行良好，但是在某一次发版后，出现了消息重复消费的情况，示例代码如下:</p>
-<p>[表格见原文]</p>
-<p>[表格见原文]</p>
-<p>[表格见原文]</p>
-<p>预期执行情况：<br>[表格见原文]</p>
-<p>实际执行情况：<br>[表格见原文]</p>
-<p>可以看到消费者对事件消费了两次，但是通过检查代码发现并没有相关的改动，机器环境也没有变动。</p>
-<p>经过一番定位后发现是编译机器 JDK 版本升级到 JDK 8，新版 javac 编译后字节码有变动。</p>
-<p>导致相同代码和环境下出现了不同的行为。</p>
-<h3 id="定位过程："><a href="#定位过程：" class="headerlink" title="定位过程："></a>定位过程：</h3><p>对代码调用进行跟踪，先从 EventBus.post 方法看起</p>
-<p>[表格见原文]</p>
-<p>debug 时发现在 JDK 7 环境下，subscribersByType.get(eventType) 只能获取到一个 EventSubscriber 对象，即：onEvent(CallBack event)。</p>
-<p>而在 JDK 8 环境下，subscribersByType.get(eventType) 的确能够获取到两个 EventSubscriber 对象，分别是：onEvent(CallBack event)和onEvent(Object o)，<br>导致 enqueueEvent 了两次</p>
-<p>subscribersByType 对象是一个类似 Map 结构，用于存储 EventSubscriber 对象，初始化数据的位置在 EventBus.register中：</p>
-<p>[表格见原文]</p>
-<p>这里 findAllSubscribers 的实现是在 AnnotatedSubscriberFinder 类中，逻辑比较简单，先调用  getAnnotatedMethods(clazz) 获取类中有 @Subscribe 注解的方法列表，然后实例化成 EventSubscriber 对象，存进 methodsInListener 并返回。</p>
-<p>JDK 7 环境下 getAnnotatedMethods(clazz) 返回了 onEvent(CallBack event) 方法</p>
-<p>JDK 8 环境下 getAnnotatedMethods(clazz) 返回了 onEvent(CallBack event) 方法和 onEvent(Object o) 方法，但是 onEvent(Object o) 不是我们定义的方法，而是 JDK 实现泛型时生成的桥方法，可以看成是在父类中定义的 onEvent(T t) 擦除泛型转换而来，并没有带 @Subscribe</p>
-<p>[表格见原文]</p>
-<p>getAnnotatedMethods(clazz) 方法中使用了 LoadingCache 缓存，最后获取注解的方法是：getAnnotatedMethodsInternal</p>
-<p>[表格见原文]</p>
-<p>这里关键的一句判断是 superClazzMethod.isAnnotationPresent(Subscribe.class)，isAnnotationPresent是 JDK reflect 包中的方法，经过调试，发现在 JDK 7 中，</p>
-<p>[表格见原文]</p>
-<p>而在 JDK 8 中，</p>
-<p>[表格见原文]</p>
-<p>导致返回了 onEvent(CallBack event) 和 onEvent(Object o)，并初始化出两个 EventSubscriber。</p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>对比两个版本 javac 编译出来的字节码</p>
-<p>JDK 7 版本</p>
-<p>[表格见原文]</p>
-<p>第一个方法 onEvent(com.acvrock.guavatest.CallBack) 有一个 <code>#27</code> Subscribe 运行时注解<br>第二个方法 onEvent(java.lang.Object) 没有带 RuntimeVisibleAnnotations</p>
-<p>JDK 8 版本</p>
-<p>[表格见原文]</p>
-<p>两个方法都有 运行时注解  <code>#27()</code>，也就是 <code>Subscribe</code></p>
-<p>在网上 <a target="_blank" rel="noopener" href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8029563">JDK-8029563 : Method.getAnnotations() changed its return value in JDK 8.</a> 这个描述和我们发现的问题是一致的</p>
-<p>导致这一变动的是这个调整<br><a target="_blank" rel="noopener" href="https://bugs.java.com/view_bug.do?bug_id=JDK-6695379">JDK-6695379 : Copy method annotations and parameter annotations to synthetic bridge methods</a>，<br>javac 实现了在编译时，拷贝方法和参数上的注解到桥方法上，也就是 onEvent(java.lang.Object)上，在 JDK 7u80 和 JDK 8b94 后生效</p>
-<h3 id="guava-如何解决"><a href="#guava-如何解决" class="headerlink" title="guava 如何解决"></a>guava 如何解决</h3><p>在 guava 18 中就已经解决了这个问题，代码如下：</p>
-<p>[表格见原文]</p>
-<p>判断了方法有 Subscribe 注解并且不是桥方法才认为是 subscribe 方法,对应的代码提交记录：<br><a target="_blank" rel="noopener" href="https://github.com/google/guava/commit/32d7dc732dfee93c82942e2d776adbbc02bd85ba#diff-e3fca3176dda68793f07e756ca2f412c">Fix EventBus to not include bridge methods when registering subscribe</a></p>
-<p>真是一个摸不着头脑的 bug</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>关于桥方法可以参考<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html">Effects of Type Erasure and Bridge Methods</a></p>
-<p>示例代码<a target="_blank" rel="noopener" href="https://github.com/Acvrock/Exercise-code/tree/master/eventbusTest">Exercise-code&#x2F;eventbusTest</a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/" data-id="cuid9elfw_T-8S-9LjsilKIpf" data-title="定位 Guava EventBus 重复消费" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK-8/" rel="tag">JDK 8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Method-getAnnotations/" rel="tag">Method.getAnnotations()</a></li></ul>
+](&#x2F;2018&#x2F;08&#x2F;11&#x2F;fix_guava_eventBus_reprocessing&#x2F;)
+问题描述
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-08-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/" class="post-category">
+                                    排查实战
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/Method-getAnnotations/">
+                            <span class="chip bg-color">Method.getAnnotations()</span>
+                        </a>
+                        
+                        <a href="/tags/JDK-8/">
+                            <span class="chip bg-color">JDK 8</span>
+                        </a>
+                        
+                        <a href="/tags/EventBus/">
+                            <span class="chip bg-color">EventBus</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="记一次 CPU 忙碌导致的超时">
+                            
+                            <span class="card-title">记一次 CPU 忙碌导致的超时</span>
+                        </div>
+                    </a>
 
-
-
-  
-    <article id="post-记一次_CPU_忙碌导致的超时" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/" class="article-date">
-  <time class="dt-published" datetime="2017-11-20T04:55:01.000Z" itemprop="datePublished">2017-11-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/">记一次 CPU 忙碌导致的超时</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="记一次-CPU-忙碌导致的超时"><a href="#记一次-CPU-忙碌导致的超时" class="headerlink" title="记一次 CPU 忙碌导致的超时"></a>记一次 CPU 忙碌导致的超时</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                记一次 CPU 忙碌导致的超时    [
 	**2017-11-20
-</code></pre>
-<p>](&#x2F;2017&#x2F;11&#x2F;20&#x2F;fix_timeout_due_to_cpu_busy&#x2F;)</p>
-<pre><code>    通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程
-</code></pre>
-<p>首先收集 thrift 代理日志,统计该服务超时情况,结果如下:</p>
-<p>[表格见原文]</p>
-<p>左右端详,可以发现以下特点:具有周期性,而且集中在 152 机器上,都是每个小时的10分钟左右出现</p>
-<p>接下来查看机器运行情况:</p>
-<p><img src="/img/20171020201157.jpg" alt="图片"></p>
-<p>可看到 CPU 也是有规律的升高.</p>
-<p>通过应用部署架构已知该主机上有定时任务 task 类型的应用,所以初步怀疑是某些 task 进程有问题</p>
-<p>接下来进入该 152 机器,使用 <strong>top</strong> 命令观察 CPU,等待下一个周期,等到 11 分钟时,得到以下截图:<br><img src="/img/20171020201826.jpg" alt="图片"><br>得知占用最大的程序为 gzip ,但是查不到 gzip 进行什么操作,无解</p>
-<p>另辟蹊径,咨询运维得知:每小时的第 10 分钟,logrotate 会对日志进行压缩轮转,如下图:<br><img src="/img/20171020202253.jpg" alt="图片"></p>
-<p>所以定位的重点就变成:是否是某些日志设置不当,导致 logrotate 异常</p>
-<p>检查 logrotate 运行状态:</p>
-<p><code>grep 10-20 /var/lib/logrotate/status</code></p>
-<p><img src="/img/logrotatestatus.png" alt="图片"><br>检查 logrotate 操作的文件大小</p>
-<p><code>grep 10-20 /var/lib/logrotate/status |awk -F &#39;&quot;&#39; &#39;{print $2}&#39;|xargs ls -alh</code></p>
-<p><img src="/img/logrotatesfilesize.png" alt="图片"><br>倒数第二行,发现文件大小异常,检查日志文件所属程序,发现是遗留的 kafka 程序</p>
-<p>解决方案:<br>关闭它</p>
-<p>观察日志,没有发现超时,问题解决</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/" data-id="cuidHkGWP5gIt1BgQ2ZDILA6C" data-title="记一次 CPU 忙碌导致的超时" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CPU/" rel="tag">CPU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gzip/" rel="tag">gzip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logrotate/" rel="tag">logrotate</a></li></ul>
+](&#x2F;2017&#x2F;11&#x2F;20&#x2F;fix_timeout_due_to_cpu_busy&#x2F;)
+    通过业务日志发现客户端
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-11-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/" class="post-category">
+                                    排查实战
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/CPU/">
+                            <span class="chip bg-color">CPU</span>
+                        </a>
+                        
+                        <a href="/tags/logrotate/">
+                            <span class="chip bg-color">logrotate</span>
+                        </a>
+                        
+                        <a href="/tags/gzip/">
+                            <span class="chip bg-color">gzip</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/12/10/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Java 中的基本数据类型">
+                            
+                            <span class="card-title">Java 中的基本数据类型</span>
+                        </div>
+                    </a>
 
-
-
-  
-    <article id="post-Java_中的基本数据类型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/12/10/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
-  <time class="dt-published" datetime="2016-12-10T05:44:10.000Z" itemprop="datePublished">2016-12-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/12/10/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Java 中的基本数据类型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-中的基本数据类型"><a href="#Java-中的基本数据类型" class="headerlink" title="Java 中的基本数据类型"></a>Java 中的基本数据类型</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Java 中的基本数据类型    [
 	**2016-12-10
-</code></pre>
-<p>](&#x2F;2016&#x2F;12&#x2F;10&#x2F;java_byte&#x2F;)</p>
-<pre><code>    Java 中数值类型的表示，byte 占用 8 个 bit ，每个 bit 只有 0 和 1 两个值，byte 的值在 bit 中表示就是二进制，所以值为 4 的 byte ，在计算机中表示为二进制的原码：
-</code></pre>
-<p>00000100,如果是负数，则表示为负数正值的补码，如： -4 表示为：11111100，可以看出，如果首位为 1 时，表示负数，首位为 0 时，表示正数。所以 byte 的最大值和最小值分别是 127 、-127</p>
-<ul>
-<li>负数的二进制位表示过程如下：</li>
-</ul>
-<p>-4 取正值：<code>4</code></p>
-<p>正值转换为原码  <code>00000100</code></p>
-<p>原码取反为反码  <code>11111011</code></p>
-<p>反码+1变成补码   <code>11111100</code></p>
-<p>字符类型:char(16)</p>
-<p>布尔类型:boolean</p>
-<p>数值类型:byte(8)\short(16)\int(32)\long(64)\float(32)\double(64)</p>
-<ul>
-<li>位运算<br>左移:<code>&gt;</code> 符号位不变，左边补上符号位</li>
-</ul>
-<p>无符号位右移:<code>&gt;&gt;&gt;</code> 丢弃最低位，0 补最高位</p>
-<p>按位与、按位或、按位取反、按位异或</p>
-<ul>
-<li><p>网络通信、协议解析、高性能编程比较常见</p>
-</li>
-<li><p>位运算是针对整型的，进行位运算时，除了 long 类型外，其他类型会自动转为 int 型</p>
-</li>
-<li><p>如果移动的位数超过了 32 位（long是 64 位），那么编译器会对移动的位数取模，如对 int 型移动 33 位，实际上只移动了 33%32&#x3D;1 位</p>
-</li>
-</ul>
-<p>Java 包装类型内存大小比 基本类型大得多</p>
-<p>BigInteger\BigDecimal 表示大整数和大浮点数</p>
-<ul>
-<li><p>可以精确地表示大整数和小数</p>
-</li>
-<li><p>不可变性，不适合于大量的数学运算</p>
-</li>
-<li><p>如果需要精确计算，使用 String 构造 BigDecimal ，避免使用 double ，因为 doublle 本身就不准确了</p>
-</li>
-<li><p>equals 方法认为 0.1 和 0.1 是相等的，但是 0.10 和 0.1 是不等的。方法 compareTo 认为 0.1 和 0.1 相等， 0.10 和 0.1 是相等的，所以比较 BigDecimal 时，使用 compareTo()</p>
-</li>
-<li><p>有时候运算无法得到精确结果，产生无限循环小数，可以显式地控制舍入</p>
-</li>
-</ul>
-<p>Java 数组是特殊的对象</p>
-<p>如何让对象数组缓存友好？</p>
-<ul>
-<li>程序启动是预先生成数组中引用的对象，增加缓存友好的概率</li>
-</ul>
-<p>For(…){<br>a[i] &#x3D; new ObjectXX()<br>}</p>
-<ul>
-<li><p>unsafe 控制 Java 对象内存位置</p>
-</li>
-<li><p>不使用对象</p>
-</li>
-</ul>
-<p>java.util.Arrays 提供了 Java 数组排序方法，基本类型使用 DualPivotQuickSort 算法</p>
-<p>，Java 对象排序使用 TimSort 算法(JDK7),MergeSort（JDK6）</p>
-<p>Java 数组高级技巧</p>
-<ul>
-<li><p>初始化数组: Arrays.setAll(array,generator);</p>
-</li>
-<li><p>高效复制数组: int[] arr &#x3D; Arrays.copyof(源数组,新数组长度);</p>
-</li>
-<li><p>高效排序: Arrays.sort、并行排序 Arrays.parallelSort</p>
-</li>
-<li><p>高效查询: Arrays.binarySearch</p>
-</li>
-<li><p>输出内容为字符串: Arrays.toString(array)</p>
-</li>
-</ul>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/12/10/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cuid5vo5HlUKNW8bEEfoNRZ_F" data-title="Java 中的基本数据类型" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li></ul>
+](&#x2F;2016&#x2F;12&#x2F;10&#x2F;java_byte&#x2F;)
+    Java 中数值类型的表示，byte 占用 8 个 bit ，
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-12-10
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                            <span class="chip bg-color">读书笔记</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/12/02/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Java 集合框架">
+                            
+                            <span class="card-title">Java 集合框架</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                实践
+定义时使用接口
+
+底层返回集合为空时，返回长度为 0 的集合或者数组，不要返回 null
+
+谨慎对待 hashCode 和 equals
+
+用 Arrays 和 Collections 处理：排序、查找、集合类型转换、集合计算操作
 
 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-12-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-  
-    <article id="post-Java_集合框架" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/12/02/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" class="article-date">
-  <time class="dt-published" datetime="2016-12-02T07:04:30.000Z" itemprop="datePublished">2016-12-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                            <span class="chip bg-color">读书笔记</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Java IO 编码解码">
+                            
+                            <span class="card-title">Java IO 编码解码</span>
+                        </div>
+                    </a>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/12/02/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java 集合框架</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><ul>
-<li><p>定义时使用接口</p>
-</li>
-<li><p>底层返回集合为空时，返回长度为 0 的集合或者数组，不要返回 null</p>
-</li>
-<li><p>谨慎对待 hashCode 和 equals</p>
-</li>
-<li><p>用 Arrays 和 Collections 处理：排序、查找、集合类型转换、集合计算操作</p>
-</li>
-<li><p>如果元素长度固定，优先考虑 Array</p>
-</li>
-<li><p>使用泛型</p>
-</li>
-<li><p>遍历 List 时，考虑使用 ListIterator</p>
-</li>
-<li><p>频繁查找某个元素时，考虑进行排序</p>
-</li>
-<li><p>需要元素有序时，考虑使用 Linked 家族</p>
-</li>
-<li><p>使用 WeakHashMap 维护短暂使用的数据</p>
-</li>
-<li><p>多线程环境下优先使用 concurrent 家族</p>
-</li>
-<li><p>多线程环境下频繁遍历少量修改，考虑 CopyOnWriteArrayList</p>
-</li>
-<li><p>多线程环境下不要强一致性的遍历器，可考虑使用 ConcurrentHashahMap</p>
-</li>
-<li><p>多线程环境下使用 TreeMap ，考虑 ConcurrentSkipListSet 和 ConcurrentSkipListMap</p>
-</li>
-</ul>
-<h2 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h2><p>1 分析Collection接口以及其子接口，很通俗的方式说说，究竟有哪些类型的Collection，各自解决什么样的问题<br>Collection 接口关系如图</p>
-<p><img src="/img/QQ20161219-0@2x.png" alt="图片"></p>
-<p>三个子接口分别是: Queue、Set、List,还有一个抽象类 AbstractCollection,<br>Collection 接口抽象了一组元素的集合，提供了通用的集合操作方法<br><img src="/img/QQ20161219-1@2x.png" alt="图片"></p>
-<ul>
-<li><p>其中 Set 代表无序，不可重复的集合，就像是一个盘子里的小石头，每个都一样是石头，但是每一个形状又都不一样，Set 的 API 和 Collection 完全一样;</p>
-</li>
-<li><p>List 代表有序，可重复的集合，List中的每一个元素都有一个索引；第一个元素的索引值是0，往后的元素的索引值依次+1，对比 Collection，List 拓展了自己的方法，增加了 “添加、删除、获取、修改指定位置的元素”、“获取List中的子队列” 等方法;</p>
-</li>
-</ul>
-<p><img src="/img/QQ20161220-0@2x.png" alt="图片"></p>
-<ul>
-<li><p>Queue 代表一种队列集合，队列的头部保存在队列中存放时间最长的元素，尾部保存存放时间最短的元素。新元素插入到队列的尾部，取出元素会返回队列头部的元素，对比 Collection 接口，Queue 增加了”队尾元素插入”，”获取队头元素” 等方法<br><img src="/img/QQ20161220-1@2x.png" alt="图片"></p>
-</li>
-<li><p>AbstractCollection 是一个抽象类，它实现了 Collection 中除 iterator() 和 size() 之外的函数。<br>AbstractCollection 的主要作用：它实现了 Collection 接口中的大部分函数。从而方便其它类实现Collection，比如ArrayList、LinkedList等，它们这些类想要实现Collection接口，通过继承AbstractCollection就已经实现了大部分的接口了。</p>
-</li>
-</ul>
-<p>2 TreeSet继承了什么Set，与HashSet的区别是？HashSet与HashTable是“一脉相承”的么？<br>TreeSet 和 HashSet 类图如下:<br><img src="/img/set.png" alt="图片"><br>可以看到，TreeSet 和 HashSet 都继承了 AbstractSet，都实现了 Serializable、Cloneable 接口，但是对于 HashSet 来说，TreeSet 实现了 NavigableSet、SortedSet 接口<br>SortedSet 具有排序功能，它支持对 Set 中的元素排序，提供了三大功能，分别是</p>
-<p>[表格见原文]</p>
-<p>NavigableSet  直译成中文就是：可导航的 Set,是 SortedSet 的子接口，有 ConcurrentSkipListSet, TreeSet 两种实现</p>
-<p>增加了返回小于（lower）、小于等于（floor）、大于等于（ceiling）和大于（higher）输入参数的一个元素的方法</p>
-<p>弹出第一个(pollFirst)，最后一个元素(pollLast)、</p>
-<p>以及正向和逆向的迭代器、</p>
-<p>返回更小的元素集合(headSet)，更大的元素集合(tailSet)，区间元素集合(subSet)<br><img src="/img/QQ20161223-0@2x.png" alt="图片"></p>
-<p>HashSet与HashTable 不是是“一脉相承”的，因为 HashSet 实现了 Set 接口，HashTable 实现了 Map 接口</p>
-<p>3 Queue接口增加了哪些方法，这些方法的作用和区别是？</p>
-<p>Queue 本质上是一个操作受限的集合，结构图如下：</p>
-<p><img src="/img/QQ20161223-2@2x.png" alt="图片"></p>
-<p>[表格见原文]</p>
-<p>4 LinkedList也是一种Queue么？是否是双向链表?</p>
-<p>LinkedList 实现了 Queue 接口，所以可以作为队列，作为 FIFO 的队列时，下表的方法等价：</p>
-<p>[表格见原文]<br>LinkedList 是双向链表实现，从下图可以看出，它分别记录了头节点和尾节点，便于双向遍历</p>
-<p><img src="/img/QQ20161224-0@2x.png" alt="图片"></p>
-<p>5 Java数组如何与Collection相互转换</p>
-<ul>
-<li><p>Collection to Array:</p>
-</li>
-<li><p>Bar[] result &#x3D; foos.stream().map(Bar::new).toArray(Bar[]::new);</p>
-</li>
-<li><p>Foo[] foos &#x3D; x.toArray(new Foo[x.size()]);</p>
-</li>
-<li><p>int i &#x3D; 0;</p>
-</li>
-</ul>
-<p>Bar[] bars &#x3D; new Bar[fooCollection.size()];<br>for( Foo foo : fooCollection ) { &#x2F;&#x2F; where fooCollection is Collection<Foo> bars[i++] &#x3D; new Bar(foo);<br>}</p>
-<ul>
-<li><p>Array to Collection:</p>
-</li>
-<li><p>XXX xxx &#x3D; new XXX(Arrays.asList(array));</p>
-</li>
-<li><p>Collections.addAll(list, array);</p>
-</li>
-<li><p>XXX xxx &#x3D; Arrays.stream(array).collect(Collectors.toXXX());</p>
-</li>
-</ul>
-<p>6 Map的一级子接口有哪些种类，分别用作什么目的？</p>
-<p>下图为 Map 实现类和子接口<br><img src="/img/QQ20161224-3@2x.png" alt="图片"></p>
-<p>子接口有：</p>
-<p>Bindings,      不明<br>ConcurrentMap&lt;K,V&gt;,   定义了几个基于 CAS（Compare and Set）操作<br>MessageContext,   不明</p>
-<p>ObservableMap,   允许注册观察者跟踪 Map 值的更改</p>
-<p>SortedMap&lt;K,V&gt;    可进行排序的 Map</p>
-<p>XSNamedMap,      为内部使用的接口，不明</p>
-<p>7 HashSet 与HashMap中放入的自定义对象必须要实现哪些方法，说明原因</p>
-<p>如果要将自定义的对象放入到HashMap或HashSet中，需要@Override hashCode()和equals()方法。hashCode()方法决定了对象会被放到哪个bucket里，当多个对象的哈希值冲突时，equals()方法决定了这些对象是否是“同一个对象”。</p>
-<p>8 TreeSet里的自定义对象必须要实现什么方法，说明原因</p>
-<p>因为 TreeSet 具有排序功能，所以对象集合必须实现Comparable接口,并重写compareTo()方法，通常我们需要保持 compareTo 和 equals 同步，所以最好也实现 equalse 方法</p>
-<p>9 LinkedHashMap使用什么来保存数据，其效率与HashMap相比如何？它又有什么独特特性</p>
-<p>LinkedHashMap 继承了 HashMap ，所以底层使用了数组来保存数据，用 set 来保存 key 集合，但是它又新增了 head 和 tail 实现双向循环链表，下面是开销情况：<br><img src="/img/9Ete5.jpg" alt="图片"></p>
-<p>对比 HashMap Hash的无序性，LinkedHashMap 的元素可以按插入顺序或访问顺序排列</p>
-<p>10 IdentityHashMap 里面如果按照下面的方法放入对象，分别是什么结果，请解释原因</p>
-<p>[表格见原文]</p>
-<p>结果如图:<br><img src="/img/QQ20161224-1@2x.png" alt="图片"></p>
-<p>原因是：是 IdentityHashMap 使用的是&#x3D;&#x3D;比较key的值，调用 Integer.valueOf, 当值小于 127 时，返回的都是 IntegerCache 的值，所以 IdentityHashMap 认为它是同一个 key ，128 开始就返回一个新的 Integer, IdentityHashMap就认为不相等了</p>
-<p>加分题，<br>给出ＪＤＫ　１.８的java 集合框架全图谱（Class类图）， 并标明1.7与1.8里出现的新的类，解释其目的</p>
-<p>下图为集合框架（非并发）<br><img src="/img/collection.png" alt="图片"></p>
-<ul>
-<li><p>Iterator。它是遍历集合的工具，我们经常使用Iterator迭代器来遍历集合。Collection的实现类都要实现iterator()函数，返回一个Iterator对象。</p>
-</li>
-<li><p>Collection是一个interface</p>
-</li>
-</ul>
-<p>Collection有List、Set和Queue三大分支。</p>
-<p>List<E>是一个队列，根据下标索引，第一个元素的下标是0，List的实现类有LinkedList, ArrayList, Vector, Stack。List是有序的队列，List中可以有重复的值。</p>
-<ul>
-<li><p>Set<E>是一个集合，SET中的值是唯一的，我们经常会遇到List去重的问题，把List转为SET就可以快速实现 Set的实现类有HastSet和TreeSet。HashSet。其中TreeSet是有序的。</p>
-</li>
-<li><p>Queue 代表一种队列集合，队列的头部保存在队列中存放时间最长的元素，尾部保存存放时间最短的元素。新元素插入到队列的尾部，取出元素会返回队列头部的元素</p>
-</li>
-<li><p>Map&lt;K,V&gt;是一个interface，即key-value键值对。Map中的每一个元素包含“一个key”和“key对应的value”。</p>
-</li>
-</ul>
-<p>AbstractMap是个抽象类，它实现了Map接口中的大部分API。而HashMap，TreeMap，WeakHashMap都是继承于AbstractMap。</p>
-<ul>
-<li><p>抽象类AbstractCollection、AbstractList、AbstractSet、AbstractMap是抽象类，他们都实现了各自的大部分方法，我们直接继承Abstract类就可以省去重复编码相同的方法</p>
-</li>
-<li><p>List简介</p>
-</li>
-<li><p>List 是一个接口，它继承于Collection的接口。它代表着有序的队列。</p>
-</li>
-<li><p>AbstractList 是一个抽象类，它继承于AbstractCollection。AbstractList实现List接口中除size()、get(int location)之外的函数。</p>
-</li>
-<li><p>AbstractSequentialList 是一个抽象类，它继承于AbstractList。AbstractSequentialList 实现了“链表中，根据index索引值操作链表的全部函数”。</p>
-</li>
-<li><p>ArrayList, LinkedList, Vector, Stack, 是List的4个实现类,RandomAccessSubList是内部类。</p>
-</li>
-<li><p>Map体系</p>
-</li>
-<li><p>Map 是映射接口，Map中存储的内容是键值对(key-value)。</p>
-</li>
-<li><p>AbstractMap 是继承于Map的抽象类，它实现了Map中的大部分API。其它Map的实现类可以通过继承AbstractMap来减少重复编码。</p>
-</li>
-<li><p>SortedMap 是继承于Map的接口。SortedMap中的内容是排序的键值对，排序的方法是通过比较器(Comparator)。</p>
-</li>
-<li><p>NavigableMap 是继承于SortedMap的接口。相比于SortedMap，NavigableMap有一系列的导航方法；如”获取大于&#x2F;等于某对象的键值对”、“获取小于&#x2F;等于某对象的键值对”等等。</p>
-</li>
-<li><p>TreeMap 继承于AbstractMap，且实现了NavigableMap接口；因此，TreeMap中的内容是“有序的键值对”， 它是通过红黑树实现的。它一般用于单线程中存储有序的映射。</p>
-</li>
-<li><p>HashMap 继承于AbstractMap，没实现SortedMap或NavigableMap接口；因此，HashMap的内容是无序的键值对。</p>
-</li>
-<li><p>LinkedHashMap 继承于HashMap，LinkedHashMap 的元素可以按插入顺序或访问顺序排列</p>
-</li>
-<li><p>IdentityHashMap 是 1.4 版本新增的一种特殊的HashMap，还是用key的hashCode来决定entry的槽位，但是不用key的equals方法来决定是否相等了，而是默认使用地址（即使实现了equals，equals也不起作用）来决定是否相等</p>
-</li>
-<li><p>EnumMap 是 1.5 版本新增的一种键为枚举类型的特殊的Map实现。所有的Key也必须是一种枚举类型，EnumMap是使用数组来实现的。</p>
-</li>
-<li><p>Hashtable继承于Dictionary(Dictionary也是键值对的接口)，实现Map接口；因此，Hashtable的内容也是“键值对，是无序的”。 Hashtable是线程安全的。</p>
-</li>
-<li><p>WeakHashMap 继承于AbstractMap。它和HashMap的键类型不同，WeakHashMap的键是“弱键”， 当“弱键”被GC回收时，它对应的键值对也会被从WeakHashMap中删除。JVM提供的弱引用</p>
-</li>
-<li><p>Set简介</p>
-</li>
-<li><p>Set 是继承于Collection的接口。它是一个不允许有重复元素的集AbstractSet 是一个抽象类，它继承于AbstractCollection，AbstractCollection实现了Set中的绝大部分函数，为Set的实现类提供了便利。</p>
-</li>
-<li><p>HashSet 和 TreeSet 是Set的两个实现类。HashSet中的元素是无序的。TreeSet中的元素是有序的，不支持快速随机遍历，只能通过迭代器进行遍历。</p>
-</li>
-<li><p>LinkedHashSet继承于 HashSet ,它以元素插入的顺序来维护集合的链接表，允许以插入的顺序在集合中迭代；</p>
-</li>
-<li><p>EnumSet 是 enum 值的集合。在 Java 中，每个 enum 都映射至一个 int 类型：每个 enum 值映射的 int 都互不相同。这使得 BitSet 之类的集合结构成为可能，每个 bit 都映射到一个不同的 enum 值。此类还存在两种实现——包含单个 long 类型（可存储64个 enum 值，足够覆盖99.9%的用例）的 RegularEnumSet 与包含 long[] 类型的 JumboEnumSet</p>
-</li>
-<li><p>Queues(队列)&#x2F;deques(双队列)</p>
-</li>
-<li><p>AbstractQueue 是继承于Queue的抽象类，它实现了Queue中的大部分API。其它Queue的实现类可以通过继承AbstractQueue来减少重复编码</p>
-</li>
-<li><p>PriorityQueue 继承 AbstractQueue ，是一个基于优先级堆的极大优先级队列。</p>
-</li>
-<li><p>ArrayDeque 基于数组的双端队列</p>
-</li>
-</ul>
-<p>并发的集合有点乱…</p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/skywang12345/p/3308513.html#a4">Java 集合系列02之 Collection架构</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.importnew.com/19892.html">Java HashSet和HashMap源码剖析</a></p>
-<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/2889777/difference-between-hashmap-linkedhashmap-and-treemap">Difference between HashMap, LinkedHashMap and TreeMap</a></p>
-<p><a target="_blank" rel="noopener" href="https://my.oschina.net/oneapmofficial/blog/673984">Java 性能调优指南之 Java 集合概览</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/12/02/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" data-id="cuidZnzq9mMIg-Ruhhhhkb9ho" data-title="Java 集合框架" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java_IO_编码解码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/" class="article-date">
-  <time class="dt-published" datetime="2016-12-01T06:08:30.000Z" itemprop="datePublished">2016-12-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/">Java IO 编码解码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-IO-编码解码"><a href="#Java-IO-编码解码" class="headerlink" title="Java IO 编码解码"></a>Java IO 编码解码</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Java IO 编码解码    [
 	**2016-12-01
-</code></pre>
-<p>](&#x2F;2016&#x2F;12&#x2F;01&#x2F;20161201_java_io&#x2F;)</p>
-<pre><code>    ASCII 数字 0-9 对应的 byte 值为 48-57
-</code></pre>
-<p>Unicode 与 Java</p>
-<p>char 是字符数据类型，是无符号的，占2字节，大小范围是 0-65535，是 16 位二进制的 Unicode 字符，Java 用 char 来表示一个字符</p>
-<p>大部分中文使用三个字节的 UTF-8 方法编码</p>
-<p>IO 传输的两个关键问题：</p>
-<ul>
-<li><p>Encode&#x2F;Decode</p>
-</li>
-<li><p>Big Endian&#x2F;Little Endian</p>
-</li>
-</ul>
-<p>二进制方式读取文件</p>
-<ul>
-<li><p>ByteArrayOutputStream: 可以捕获内存缓冲区的数据，转换成字节数组</p>
-</li>
-<li><p>ByteArrayInputStream: 可以将字节数组转化为输入流</p>
-</li>
-<li><p>字符串的编码&#x2F;解码问题</p>
-</li>
-</ul>
-<p>charset</p>
-<ul>
-<li>多字节数据（short&#x2F;int&#x2F;long&#x2F;double&#x2F;float）的编码&#x2F;解码问题</li>
-</ul>
-<p>ObjectOutputStream  （默认 Big-Endian 顺序）</p>
-<ul>
-<li>Object 对象编码&#x2F;解码问题</li>
-</ul>
-<p>Java Serialize 机制（二进制）以及 java.beans 包里面的 XMLEncoder (文本编码)</p>
-<h3 id="Java-Object-序列化机制"><a href="#Java-Object-序列化机制" class="headerlink" title="Java Object 序列化机制"></a>Java Object 序列化机制</h3><ul>
-<li><p>当父类实现了序列化，子类也自动实现了序列化，不需要显式实现 Serializable 接口</p>
-</li>
-<li><p>反过来一个子类实现了 Serializable 接口，希望父类对象序列化，需要父类也实现Serializable 接口，否则父类对象的成员变量不参与序列化</p>
-</li>
-<li><p>当一个对象的实例变量引用其他对象，序列化该对象时，也会把引用对象也进行序列化</p>
-</li>
-<li><p>某些对象不能序列化，如：安全问题不能远程传输的对象、无法重新还原的对象（socket、thread、Stream）</p>
-</li>
-</ul>
-<p>RandomAccessFile&#x3D;&#x3D;&gt;MappedByteBuffer</p>
-<p>MappedByteBuffer:内存映射文件<br>MapMode 映射模式:</p>
-<ul>
-<li><p>READ_ONLY 只读映射模式</p>
-</li>
-<li><p>READ_WRITE 读写映射模式</p>
-</li>
-<li><p>PRIVATE   通过 put 方法对 MappedByteBuffer 的修改不会修改到磁盘文件，只修改虚拟内存的修改</p>
-</li>
-</ul>
-<p>MappedByteBuffer 在父类 ByteBuffer  的基础上新增了几个方法</p>
-<ul>
-<li><p>fore 缓冲区在   READ_WRITE 模式下，此方法对缓冲区所做的内容更改强制写入文件</p>
-</li>
-<li><p>load 将缓冲区的内容载入物理内存，并返回该缓冲区的引用</p>
-</li>
-<li><p>isLoaded 判断缓冲区的内容是否在物理内存，如果在就返回 true，否则返回 false</p>
-</li>
-</ul>
-<p>Java IO 中应用到了装饰者模式</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/" data-id="cuidFc-v4qWUlgdsnhu_MZg6m" data-title="Java IO 编码解码" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li></ul>
+](&#x2F;2016&#x2F;12&#x2F;01&#x2F;20161201_java_io&#x2F;)
+    ASCII 数字 0-9 对应的 byte 值为 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-12-01
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                            <span class="chip bg-color">读书笔记</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="程序员修炼之道">
+                            
+                            <span class="card-title">程序员修炼之道</span>
+                        </div>
+                    </a>
 
-
-
-  
-    <article id="post-程序员修炼之道" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/" class="article-date">
-  <time class="dt-published" datetime="2016-11-26T07:01:43.000Z" itemprop="datePublished">2016-11-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/">程序员修炼之道</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="程序员修炼之道"><a href="#程序员修炼之道" class="headerlink" title="程序员修炼之道"></a>程序员修炼之道</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                程序员修炼之道    [
 	**2016-11-26
-</code></pre>
-<p>](&#x2F;2016&#x2F;11&#x2F;26&#x2F;the_pragmatic_programmer&#x2F;)</p>
-<pre><code>    Don&#39;t Live with Broken Windows
-</code></pre>
-<p>Be a Catalyst for Change</p>
-<p>Remember the Big Picture</p>
-<p>Make Quality a Requirements Issue</p>
-<p>Invest Regularly in Your Knowledge Portfolio</p>
-<ul>
-<li><p>每年至少学习一种新语言</p>
-</li>
-<li><p>每季度阅读一本技术书籍</p>
-</li>
-<li><p>也要阅读非技术书籍</p>
-</li>
-<li><p>上课</p>
-</li>
-<li><p>参加本地用户组织</p>
-</li>
-<li><p>实验不同的环境</p>
-</li>
-<li><p>跟上潮流</p>
-</li>
-<li><p>上网</p>
-</li>
-</ul>
-<p>Critically Analyze What You Read and Hear</p>
-<p>WISDOM 离合诗</p>
-<ul>
-<li><p>你想让他们学到什么？</p>
-</li>
-<li><p>他们对你讲的什么感兴趣？</p>
-</li>
-<li><p>他们有多富有经验？</p>
-</li>
-<li><p>他们想要什么细节？</p>
-</li>
-<li><p>你先要让谁拥有这些信息？</p>
-</li>
-</ul>
-<p>It’s Both What You Say and the Way You Say It</p>
-<p>DRY - Don’t Repeat Yourself</p>
-<p>重复是如何发生的</p>
-<ul>
-<li><p>强加的重复</p>
-</li>
-<li><p>无意的重复</p>
-</li>
-<li><p>无耐性的重复</p>
-</li>
-<li><p>开发者之间的重复</p>
-</li>
-</ul>
-<p>把低级的知识放在代码中，把注释保留给其他的高级说明</p>
-<p>Make it Easy to Reuse</p>
-<p>Eliminate Effects Between Unrelated Things</p>
-<p>There Are No Final Decisions</p>
-<p>Use Tracer Bullets to Find the Target</p>
-<ul>
-<li><p>用户能够及早看到能工作的东西</p>
-</li>
-<li><p>开发者构建里一个它们能在其中工作的结构</p>
-</li>
-<li><p>你有了一个集成平台</p>
-</li>
-<li><p>你有了可用于演示的东西</p>
-</li>
-<li><p>你见更能够感受到工作进度</p>
-</li>
-</ul>
-<p>语言的界限就是一个人的世界的界限</p>
-<p>Program Close to the Problem domain</p>
-<p>Estimate to Avoid Surprises</p>
-<p>[表格见原文]<br>Iterate the Schedule with the Code</p>
-<p>Keep Knowledge in Plain Text</p>
-<p>Use the Power of Command Shells</p>
-<p>Use a Single Editor Well</p>
-<p>Always Use Source Code Control</p>
-<p>Fix the Problem,Not the Blame</p>
-<p>Don’t Panic</p>
-<p>“Select” Isn’t Broken</p>
-<p>Don’t Assume it - Prove It</p>
-<p>Learn a Text Manipulation Language</p>
-<p>Write Code That Writes Code</p>
-<p>You Can’t Write Perfect Software</p>
-<p>Design with Contracts</p>
-<p>Crash Early</p>
-<p>If it Can’t Happen,Use Assertions to Ensure That it Won’t</p>
-<p>Use Exceptions for Exceptional Problems</p>
-<p>Finish What You Start</p>
-<p>Minimize Coupling Between Modules</p>
-<p>Configure,Don’t Integrate</p>
-<p>Put Abstractions in Code,Details in Metadata</p>
-<p>Analyze Workflow to Improve Concurrency</p>
-<p>Design Using Services</p>
-<p>Always Design for Concurrency</p>
-<p>Separate Views from Models</p>
-<p>Use Blackboards to Coordinate Workflow</p>
-<p>Don’t Program by Coincidence</p>
-<p>怎样深思熟虑地编程</p>
-<ul>
-<li><p>总是意识到你在做什么</p>
-</li>
-<li><p>不要盲目地编程</p>
-</li>
-<li><p>按照计划行事</p>
-</li>
-<li><p>依靠可靠的事物</p>
-</li>
-<li><p>为你的假定建立文档</p>
-</li>
-<li><p>不要只是测试你的代码，还要测试你的假定</p>
-</li>
-<li><p>为你的工作划分优先级</p>
-</li>
-<li><p>不要做历史的奴隶</p>
-</li>
-</ul>
-<p>Estimate the Order of Your Algorithms</p>
-<p>Test Your Estimates</p>
-<p>Refactor  Early,Refactor Often</p>
-<p>Design to Test</p>
-<p>Test Your Software,or Your Users Will</p>
-<p>Don’t Use Wizard Code You Don’t Understand</p>
-<p>完美，不是在没有什么需要增加，而在没有什么需要去掉时达到的</p>
-<p>Don’t Gather Requirements  - Dig for Them</p>
-<p>Work with a User to Think Like a User</p>
-<p>Abstractions Live Longer than Details</p>
-<p>Use a Project Glossary</p>
-<p>Don’t Think Outside the Box - Find the Box</p>
-<p>Listen to Nagging Doubts - Start When You’re Ready</p>
-<p>Some Things Are Better Done than Described</p>
-<p>Don’t Be a Slave to Format Methods</p>
-<p>Expensive Tools Do Not Produce Better Designs</p>
-<p>Organize Around Functionality,Not Job Functions</p>
-<p>Test Early. Test Often. Test Automatically.</p>
-<p>Coding Ain’t Done Til All the Tests Run</p>
-<p>Use Saboteurs to Test Your Testing</p>
-<p>Find Bugs Once</p>
-<p>Treat English as Just Another Programming Language</p>
-<p>Build Documentation In,Don’t Bolt It On</p>
-<p>Gently Exceed Your Users’ Expectaions</p>
-<p>Sign Your Work</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/" data-id="cuidxybaDGtGN8DnW6oFec_cb" data-title="程序员修炼之道" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li></ul>
+](&#x2F;2016&#x2F;11&#x2F;26&#x2F;the_pragmatic_programmer&#x2F;)
+    Don&#39;t Live with Br
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-11-26
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                            <span class="chip bg-color">读书笔记</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/10/16/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="记一次 java.lang.NoSuchMethodError 错误">
+                            
+                            <span class="card-title">记一次 java.lang.NoSuchMethodError 错误</span>
+                        </div>
+                    </a>
 
-
-
-  
-    <article id="post-记一次_java_lang_NoSuchMethodError_错误" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/10/16/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/" class="article-date">
-  <time class="dt-published" datetime="2016-10-15T23:24:01.000Z" itemprop="datePublished">2016-10-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/10/16/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/">记一次 java.lang.NoSuchMethodError 错误</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="记一次-java-lang-NoSuchMethodError-错误"><a href="#记一次-java-lang-NoSuchMethodError-错误" class="headerlink" title="记一次 java.lang.NoSuchMethodError 错误"></a>记一次 java.lang.NoSuchMethodError 错误</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                记一次 java.lang.NoSuchMethodError 错误    [
 	**2016-10-16
-</code></pre>
-<p>](&#x2F;2016&#x2F;10&#x2F;16&#x2F;fix_springaop_nosuchmethoderror&#x2F;)</p>
-<pre><code>    今天在使用 EnableScheduling 测试计划任务时，出现了以下错误：
-</code></pre>
-<p>[表格见原文]</p>
-<p>经过排查后发现是 <code>spring-context</code> 和 <code>spring-aop</code> 版本不兼容导致</p>
-<p>[表格见原文]</p>
-<p>更换 <code>spring-context</code> 和 <code>spring-aop</code> 版本即可解决</p>
-<p>[表格见原文]</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/10/16/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/" data-id="cuid-Pk0pnKjZuuh-f_ulZf-M" data-title="记一次 java.lang.NoSuchMethodError 错误" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+](&#x2F;2016&#x2F;10&#x2F;16&#x2F;fix_springaop_nosuchmethoderror
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-10-16
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/" class="post-category">
+                                    排查实战
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/Error/">
+                            <span class="chip bg-color">Error</span>
+                        </a>
+                        
+                        <a href="/tags/Spring/">
+                            <span class="chip bg-color">Spring</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/08/28/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="在 Linux 下配置 Redis 开机启动">
+                            
+                            <span class="card-title">在 Linux 下配置 Redis 开机启动</span>
+                        </div>
+                    </a>
 
-
-
-  
-    <article id="post-在_Linux_下配置_Redis_开机启动" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/08/28/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" class="article-date">
-  <time class="dt-published" datetime="2016-08-28T07:58:13.000Z" itemprop="datePublished">2016-08-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/08/28/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/">在 Linux 下配置 Redis 开机启动</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="在-Linux-下配置-Redis-开机启动"><a href="#在-Linux-下配置-Redis-开机启动" class="headerlink" title="在 Linux 下配置 Redis 开机启动"></a>在 Linux 下配置 Redis 开机启动</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                在 Linux 下配置 Redis 开机启动    [
 	**2016-08-28
-</code></pre>
-<p>](&#x2F;2016&#x2F;08&#x2F;28&#x2F;redis_auto-start_on_linux&#x2F;)</p>
-<h3 id="在-Linux-下配置-Redis-开机启动，主要步骤如下："><a href="#在-Linux-下配置-Redis-开机启动，主要步骤如下：" class="headerlink" title="在 Linux 下配置 Redis 开机启动，主要步骤如下："></a>在 Linux 下配置 Redis 开机启动，主要步骤如下：</h3><ul>
-<li><p>设置 Redis redis.conf 文件，使之能够以后台模式运行</p>
-</li>
-<li><p>编写 shell 启动 Redis 脚本</p>
-</li>
-<li><p>配置 Linux 开机启动配置</p>
-</li>
-</ul>
-<h3 id="实际操作："><a href="#实际操作：" class="headerlink" title="实际操作："></a>实际操作：</h3><ul>
-<li><p>打开 redis.conf 文件，修改：<code>#daemonize yes</code>为<code>daemonize yes</code></p>
-</li>
-<li><p>编写 shell 脚本，输入<code>vim /etc/init.d/redis</code></p>
-</li>
-</ul>
-<p>下面有两段代码任选一段都可以使用，都是 Centos 可用的启动 Redis 脚本,其中的文件位置需要根据实际情况修改</p>
-<p>[表格见原文]</p>
-<p>[表格见原文]</p>
-<ul>
-<li><p>为 shell 启动 Redis 脚本添加执行权限：<code>chmod +x /etc/init.d/redis</code></p>
-</li>
-<li><p>测试脚本是否可用，可执行 <code>service redis start</code> 进行启动，启动后可连接 Redis 进行测试</p>
-</li>
-<li><p>如果脚本可用，即可将其配置为开机启动项，执行<code>chkconfig redis on</code>即可，设置后可使用<code>chkconfig --list</code>查看是否有 redis 选项，到此，完成配置流程结束</p>
-</li>
-<li><p>这时候，可能在开机时仍然无法自动启动 Redis ，这是因为开机执行启动脚本 &#x2F;etc&#x2F;init.d&#x2F;redis ，是没有输入参数的，所以都会走到脚本中的 <code>*)</code> 这里，所以此时需要修改上面的脚本，如第二个脚本，修改</p>
-</li>
-</ul>
-<p>[表格见原文]</p>
-<p>为</p>
-<p><code>*)  start  ;;</code></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="http://my.oschina.net/indestiny/blog/197272">Centos开机自启动redis</a></p>
-<p><a target="_blank" rel="noopener" href="https://gist.github.com/ddkangfu/afbc8adf7a17fb71cfc4">ddkangfu&#x2F;redis开机启动脚本</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/dkblog/archive/2012/05/15/2501885.html">init.d里chkconfig（linux启动脚本讲解+示例）</a></p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/08/28/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" data-id="cuiddg_bRso7wA_HU7DO8Y9d9" data-title="在 Linux 下配置 Redis 开机启动" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+](&#x2F;2016&#x2F;08&#x2F;28&#x2F;redis_auto-start_on_linux&#x2F;)
+在 Linux 下配
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-08-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-    </footer>
-  </div>
-  
-</article>
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Linux/">
+                            <span class="chip bg-color">Linux</span>
+                        </a>
+                        
+                        <a href="/tags/Redis/">
+                            <span class="chip bg-color">Redis</span>
+                        </a>
+                        
+                        <a href="/tags/Centos/">
+                            <span class="chip bg-color">Centos</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="HotSpot VM 相关参数">
+                            
+                            <span class="card-title">HotSpot VM 相关参数</span>
+                        </div>
+                    </a>
 
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                设置内存空间
+-Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值
 
+-Xms 指定了新生代和老年代空间（Java 堆）大小的初始值和最小值
 
-  
-    <article id="post-HotSpot_VM_相关参数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/" class="article-date">
-  <time class="dt-published" datetime="2016-06-10T01:31:24.000Z" itemprop="datePublished">2016-06-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
+关注吞吐量及延迟的 Java 应用应该将 -Xmx 和 －Xms 设置为同一值，避免 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-06-10
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/">HotSpot VM 相关参数</a>
-    </h1>
-  
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                            <span class="chip bg-color">读书笔记</span>
+                        </a>
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                        <a href="/tags/JVM/">
+                            <span class="chip bg-color">JVM</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2016/05/02/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Java 中的无穷和非数">
+                            
+                            <span class="card-title">Java 中的无穷和非数</span>
+                        </div>
+                    </a>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="设置内存空间"><a href="#设置内存空间" class="headerlink" title="设置内存空间"></a>设置内存空间</h2><ul>
-<li><p>-Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值</p>
-</li>
-<li><p>-Xms 指定了新生代和老年代空间（Java 堆）大小的初始值和最小值</p>
-</li>
-<li><p>关注吞吐量及延迟的 Java 应用应该将 -Xmx 和 －Xms 设置为同一值，避免 Java 堆伸缩带来的 Full GC</p>
-</li>
-<li><p>-XX:NewSize&#x3D;<n>[g|m|k] 新生代空间大小的初始值和最小值，必须和-XX:MaxNewSize配合使用</p>
-</li>
-<li><p>-XX:MaxNewSize&#x3D;<n>[g|m|k] 新生代空间大小的最大值，必须和-XX:NewSize配合使用</p>
-</li>
-<li><p>-Xmn<n>[g|m|k] 一次性设置新生代空间的初始值、最小值、最大值，如果设置了该值，新生代大小会恒定，所以只有 -Xmx 和 －Xms 设置为同一值时才使用 -Xmn 选项</p>
-</li>
-<li><p>老年代空间会根据 Java 堆空间和新生代空间隐性设定，最大为：-Xmx  减去  -XX:NewSize，最小为-Xmx 减去 -XX:MaxNewSize</p>
-</li>
-<li><p>-XX:PermSize&#x3D;<n>[g|m|k] 永久代空间初始值和最小值</p>
-</li>
-<li><p>-XX:MaxPermSize&#x3D;<n>[g|m|k] 永久代空间的最大值</p>
-</li>
-<li><p>关注性能的 Java 应用应该将 -XX:PermSize 和 -XX:MaxPermSize 设置为同一值，避免永久堆大小调整带来的 Full GC</p>
-</li>
-<li><p>如果不显式设置 Java 堆大小，JVM 会根据系统自动选择合适的值</p>
-</li>
-<li><p>JVM 内存调节的计算法则：</p>
-</li>
-</ul>
-<p>[表格见原文]</p>
-<ul>
-<li>调节新生代空间准则:</li>
-</ul>
-<p>老年代空间大小不应该小于活跃数据大小的 1.5 倍</p>
-<ul>
-<li><p>新生代空间至少应为 Java 堆 大小的 10％</p>
-</li>
-<li><p>增大 Java 堆大小时，不能超过 JVM 可用的物理内存数</p>
-</li>
-</ul>
-<h2 id="设置收集器"><a href="#设置收集器" class="headerlink" title="设置收集器"></a>设置收集器</h2><ul>
-<li><p>-XX:+UseParallelOldGC 指定使用 Throughput 收集器</p>
-</li>
-<li><p>-XX:+UseConcM<br>来源于 Java 性能优化权威指南 第七章</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/" data-id="cuidecos4zB-0wh6_FEbRQcPE" data-title="HotSpot VM 相关参数" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Java_中的无穷和非数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/05/02/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/" class="article-date">
-  <time class="dt-published" datetime="2016-05-02T01:58:13.000Z" itemprop="datePublished">2016-05-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/05/02/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/">Java 中的无穷和非数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-中的无穷和非数"><a href="#Java-中的无穷和非数" class="headerlink" title="Java 中的无穷和非数"></a>Java 中的无穷和非数</h1><pre><code>    [
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Java 中的无穷和非数    [
 	**2016-05-02
-</code></pre>
-<p>](&#x2F;2016&#x2F;05&#x2F;02&#x2F;infinity_and_nan&#x2F;)</p>
-<pre><code>    Java 中的正无穷（POSITIVE_INFINITY）负无穷（NEGATIVE_INFINITY）和非数（NaN）
-</code></pre>
-<p>[表格见原文]</p>
-<p>来源于 java.lang.Float 的源码</p>
 
-      
+](&#x2F;2016&#x2F;05&#x2F;02&#x2F;infinity_and_nan&#x2F;)
+    Java 中的正无穷（POSITIVE_INFIN
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2016-05-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Java%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    Java基础
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Java/">
+                            <span class="chip bg-color">Java</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+        </div>
+    </article>
+
+</main>
+
+
+<div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+            <a href="/"
+               class="left btn-floating btn-large waves-effect waves-light bg-color">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">2 / 3</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+            <a href="/page/3/"
+               class="right btn-floating btn-large waves-effect waves-light bg-color">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/05/02/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/" data-id="cuidcYsXdgVEPNxevnsLjalhS" data-title="Java 中的无穷和非数" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
+</div>
 
 
 
-  
 
-
-  <nav id="page-nav">
+    <footer class="page-footer bg-color">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
-  </nav>
-
-</section>
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
         
-          <aside id="sidebar">
-  
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></li></ul>
-    </div>
-  </div>
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
 
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
 
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CPU/" rel="tag">CPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cronolog/" rel="tag">Cronolog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dubbo/" rel="tag">Dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/" rel="tag">Exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK-8/" rel="tag">JDK 8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Method-getAnnotations/" rel="tag">Method.getAnnotations()</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/" rel="tag">RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SRE/" rel="tag">SRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/" rel="tag">gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gzip/" rel="tag">gzip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j2/" rel="tag">log4j2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/" rel="tag">logrotate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" rel="tag">工程师学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" rel="tag">故障响应流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" rel="tag">故障管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" rel="tag">服务拆分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" rel="tag">长连接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="tag">高并发</a></li></ul>
-    </div>
-  </div>
-
-
-  
+</style>
+<div class="">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cronolog/" style="font-size: 10px;">Cronolog</a> <a href="/tags/Dubbo/" style="font-size: 10px;">Dubbo</a> <a href="/tags/Error/" style="font-size: 12.5px;">Error</a> <a href="/tags/EventBus/" style="font-size: 10px;">EventBus</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/JDK-8/" style="font-size: 10px;">JDK 8</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Method-getAnnotations/" style="font-size: 10px;">Method.getAnnotations()</a> <a href="/tags/RPC/" style="font-size: 10px;">RPC</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SRE/" style="font-size: 10px;">SRE</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/gRPC/" style="font-size: 10px;">gRPC</a> <a href="/tags/gzip/" style="font-size: 10px;">gzip</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">工程师学习</a> <a href="/tags/%E5%BC%82%E5%B8%B8/" style="font-size: 12.5px;">异常</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 12.5px;">微服务</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 15px;">总结</a> <a href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">故障响应流程</a> <a href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" style="font-size: 12.5px;">故障管理</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" style="font-size: 12.5px;">服务拆分</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 17.5px;">架构</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a> <a href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" style="font-size: 10px;">长连接</a> <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">高并发</a>
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
     </div>
-  </div>
+</div>
 
-  
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
-    </div>
-  </div>
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2026</span>
+            
+            <a href="/about" target="_blank">HugoXH</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HugoXH" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/07/24/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">信令系统的架构实践</a>
-          </li>
-        
-          <li>
-            <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/">记录一次接口优化过程</a>
-          </li>
-        
-          <li>
-            <a href="/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/">微服务拆分之道-2024新赛季</a>
-          </li>
-        
-          <li>
-            <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">记录一次 Java 程序异常重启排查过程</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 HugoXH<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    <a href="mailto:xiehang00@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
     </div>
-  </div>
 </footer>
 
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
     
 
+    
+    
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    <!-- 雪花特效 -->
+    
 
+    <!-- 鼠标星星特效 -->
+    
 
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <!-- Baidu Analytics -->
 
+    <!-- Baidu Push -->
 
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
 
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
 
-<script src="/js/script.js"></script>
+    
 
+    
 
+    <!--腾讯兔小巢-->
+    
+    
 
+    
 
+    
 
-  </div>
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
 </body>
+
 </html>
