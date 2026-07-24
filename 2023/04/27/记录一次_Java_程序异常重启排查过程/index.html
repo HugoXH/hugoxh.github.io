@@ -5,12 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="记录一次 Java 程序异常重启排查过程, 后端,Java,架构,分布式">
-    <meta name="description" content="记录一次 Java 程序异常重启排查过程    [
-	**2023-04-28
+    <meta name="description" content="压测过程中,程序内存溢出并重启,原因排查
+首先排查进程运行情况,因为进程所在 Pod 已经重启
+通过 K8s Pod 监控可以看到服务在 12：40 后，CPU 飙升, CPU 飙升往往是持续 GC 导致的
 
-](&amp;#x2F;2023&amp;#x2F;04&amp;#x2F;28&amp;#x2F;20230428_oom&amp;#x2F;)
-    压测过程中,程序内存溢出并重启,原因排查
-">
+下一步排查数据库情况,虽然数据">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -422,12 +421,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="记录一次-Java-程序异常重启排查过程"><a href="#记录一次-Java-程序异常重启排查过程" class="headerlink" title="记录一次 Java 程序异常重启排查过程"></a>记录一次 Java 程序异常重启排查过程</h1><pre><code>    [
-	**2023-04-28
-</code></pre>
-<p>](&#x2F;2023&#x2F;04&#x2F;28&#x2F;20230428_oom&#x2F;)</p>
-<pre><code>    压测过程中,程序内存溢出并重启,原因排查
-</code></pre>
+                <p>压测过程中,程序内存溢出并重启,原因排查</p>
 <p>首先排查进程运行情况,因为进程所在 Pod 已经重启</p>
 <p>通过 K8s Pod 监控可以看到服务在 12：40 后，CPU 飙升, CPU 飙升往往是持续 GC 导致的</p>
 <p><img src="/img/oom/img_v2_da5cd96f-7139-46c4-bfe4-f6ef57c02cag.jpg" alt="图片"></p>
@@ -643,16 +637,16 @@
                         <span class="chip bg-color">总结</span>
                     </a>
                     
+                    <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">架构</span>
+                    </a>
+                    
                     <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
                         <span class="chip bg-color">微服务</span>
                     </a>
                     
                     <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/">
                         <span class="chip bg-color">服务拆分</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%9E%B6%E6%9E%84/">
-                        <span class="chip bg-color">架构</span>
                     </a>
                     
                 </div>
@@ -704,16 +698,16 @@
                         <span class="chip bg-color">总结</span>
                     </a>
                     
+                    <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">架构</span>
+                    </a>
+                    
                     <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
                         <span class="chip bg-color">微服务</span>
                     </a>
                     
                     <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/">
                         <span class="chip bg-color">服务拆分</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%9E%B6%E6%9E%84/">
-                        <span class="chip bg-color">架构</span>
                     </a>
                     
                 </div>

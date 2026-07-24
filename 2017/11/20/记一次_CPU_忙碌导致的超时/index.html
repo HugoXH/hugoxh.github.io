@@ -5,11 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="记一次 CPU 忙碌导致的超时, 后端,Java,架构,分布式">
-    <meta name="description" content="记一次 CPU 忙碌导致的超时    [
-	**2017-11-20
-
-](&amp;#x2F;2017&amp;#x2F;11&amp;#x2F;20&amp;#x2F;fix_timeout_due_to_cpu_busy&amp;#x2F;)
-    通过业务日志发现客户端">
+    <meta name="description" content="通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程
+首先收集 thrift 代理日志,统计该服务超时情况,结果如下:
+[表格见原文]
+左右端详,可以发现以下特点:具有周期性,而且集中在 152">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -421,12 +420,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="记一次-CPU-忙碌导致的超时"><a href="#记一次-CPU-忙碌导致的超时" class="headerlink" title="记一次 CPU 忙碌导致的超时"></a>记一次 CPU 忙碌导致的超时</h1><pre><code>    [
-	**2017-11-20
-</code></pre>
-<p>](&#x2F;2017&#x2F;11&#x2F;20&#x2F;fix_timeout_due_to_cpu_busy&#x2F;)</p>
-<pre><code>    通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程
-</code></pre>
+                <p>通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程</p>
 <p>首先收集 thrift 代理日志,统计该服务超时情况,结果如下:</p>
 <p>[表格见原文]</p>
 <p>左右端详,可以发现以下特点:具有周期性,而且集中在 152 机器上,都是每个小时的10分钟左右出现</p>

@@ -514,11 +514,10 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    记一次 CPU 忙碌导致的超时    [
-	**2017-11-20
-
-](&#x2F;2017&#x2F;11&#x2F;20&#x2F;fix_timeout_due_to_cpu_busy&#x2F;)
-    通过业务日志发现客户端
+                                    通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程
+首先收集 thrift 代理日志,统计该服务超时情况,结果如下:
+[表格见原文]
+左右端详,可以发现以下特点:具有周期性,而且集中在 152
                                 
                             </div>
                             <div class="publish-info">

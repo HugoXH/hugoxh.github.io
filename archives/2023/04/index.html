@@ -514,12 +514,11 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    记录一次 Java 程序异常重启排查过程    [
-	**2023-04-28
+                                    压测过程中,程序内存溢出并重启,原因排查
+首先排查进程运行情况,因为进程所在 Pod 已经重启
+通过 K8s Pod 监控可以看到服务在 12：40 后，CPU 飙升, CPU 飙升往往是持续 GC 导致的
 
-](&#x2F;2023&#x2F;04&#x2F;28&#x2F;20230428_oom&#x2F;)
-    压测过程中,程序内存溢出并重启,原因排查
-
+下一步排查数据库情况,虽然数据
                                 
                             </div>
                             <div class="publish-info">

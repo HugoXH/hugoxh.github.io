@@ -5,13 +5,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="记录一次接口优化过程, 后端,Java,架构,分布式">
-    <meta name="description" content="记录一次接口优化过程    [
-	**2024-01-12
+    <meta name="description" content="记录线上一次慢接口的优化过程
+优化前 Trace 情况:可以看到耗时部分是在 RPC 接口查询之后产生的
 
-](&amp;#x2F;2024&amp;#x2F;01&amp;#x2F;12&amp;#x2F;20240112_optimize_api&amp;#x2F;)
-    记录线上一次慢接口的优化过程
+原代码:
 
-优化前 Tr">
+怀疑 BeanCopy 工具有问题,调整代码,去除 BeanCopy:
+
+优化后 Trace 情况:
+
+优化分析初步猜测">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -419,12 +422,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="记录一次接口优化过程"><a href="#记录一次接口优化过程" class="headerlink" title="记录一次接口优化过程"></a>记录一次接口优化过程</h1><pre><code>    [
-	**2024-01-12
-</code></pre>
-<p>](&#x2F;2024&#x2F;01&#x2F;12&#x2F;20240112_optimize_api&#x2F;)</p>
-<pre><code>    记录线上一次慢接口的优化过程
-</code></pre>
+                <p>记录线上一次慢接口的优化过程</p>
 <p>优化前 Trace 情况:可以看到耗时部分是在 RPC 接口查询之后产生的</p>
 <p><img src="/img/optimize_api/image.png" alt="图片"></p>
 <p>原代码:</p>
@@ -711,16 +709,16 @@
                         <span class="chip bg-color">总结</span>
                     </a>
                     
+                    <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">架构</span>
+                    </a>
+                    
                     <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
                         <span class="chip bg-color">微服务</span>
                     </a>
                     
                     <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/">
                         <span class="chip bg-color">服务拆分</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%9E%B6%E6%9E%84/">
-                        <span class="chip bg-color">架构</span>
                     </a>
                     
                 </div>

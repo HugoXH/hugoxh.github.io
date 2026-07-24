@@ -587,13 +587,16 @@
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    记录一次接口优化过程    [
-	**2024-01-12
+                                    记录线上一次慢接口的优化过程
+优化前 Trace 情况:可以看到耗时部分是在 RPC 接口查询之后产生的
 
-](&#x2F;2024&#x2F;01&#x2F;12&#x2F;20240112_optimize_api&#x2F;)
-    记录线上一次慢接口的优化过程
+原代码:
 
-优化前 Tr
+怀疑 BeanCopy 工具有问题,调整代码,去除 BeanCopy:
+
+优化后 Trace 情况:
+
+优化分析初步猜测
                                 
                             </div>
                             <div class="publish-info">

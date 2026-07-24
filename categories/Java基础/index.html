@@ -451,11 +451,8 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Java 中的基本数据类型    [
-	**2016-12-10
-
-](&#x2F;2016&#x2F;12&#x2F;10&#x2F;java_byte&#x2F;)
-    Java 中数值类型的表示，byte 占用 8 个 bit ，
+                                Java 中数值类型的表示，byte 占用 8 个 bit ，每个 bit 只有 0 和 1 两个值，byte 的值在 bit 中表示就是二进制，所以值为 4 的 byte ，在计算机中表示为二进制的原码：
+00000100,如果是负数，则
                             
                         </div>
                         <div class="publish-info">
@@ -556,11 +553,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Java IO 编码解码    [
-	**2016-12-01
-
-](&#x2F;2016&#x2F;12&#x2F;01&#x2F;20161201_java_io&#x2F;)
-    ASCII 数字 0-9 对应的 byte 值为 
+                                ASCII 数字 0-9 对应的 byte 值为 48-57
+Unicode 与 Java
+char 是字符数据类型，是无符号的，占2字节，大小范围是 0-65535，是 16 位二进制的 Unicode 字符，Java 用 char 来表
                             
                         </div>
                         <div class="publish-info">
@@ -606,11 +601,11 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                程序员修炼之道    [
-	**2016-11-26
-
-](&#x2F;2016&#x2F;11&#x2F;26&#x2F;the_pragmatic_programmer&#x2F;)
-    Don&#39;t Live with Br
+                                Don’t Live with Broken Windows
+Be a Catalyst for Change
+Remember the Big Picture
+Make Quality a Requirements Issue
+Inves
                             
                         </div>
                         <div class="publish-info">
@@ -656,11 +651,16 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                在 Linux 下配置 Redis 开机启动    [
-	**2016-08-28
+                                在 Linux 下配置 Redis 开机启动，主要步骤如下：
+设置 Redis redis.conf 文件，使之能够以后台模式运行
 
-](&#x2F;2016&#x2F;08&#x2F;28&#x2F;redis_auto-start_on_linux&#x2F;)
-在 Linux 下配
+编写 shell 启动 Redis 脚本
+
+配置 Linux 开机启动配置
+
+
+实际操作：
+打开 redi
                             
                         </div>
                         <div class="publish-info">
@@ -773,11 +773,10 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Java 中的无穷和非数    [
-	**2016-05-02
+                                Java 中的正无穷（POSITIVE_INFINITY）负无穷（NEGATIVE_INFINITY）和非数（NaN）
+[表格见原文]
+来源于 java.lang.Float 的源码
 
-](&#x2F;2016&#x2F;05&#x2F;02&#x2F;infinity_and_nan&#x2F;)
-    Java 中的正无穷（POSITIVE_INFIN
                             
                         </div>
                         <div class="publish-info">
@@ -823,11 +822,10 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                用 Cronolog 切割 Tomcat 的 catalina.out 日志    [
-	**2016-04-07
-
-](&#x2F;2016&#x2F;04&#x2F;07&#x2F;cronolog&#x2F;)
-用 Cronolog 
+                                用 Cronolog 切割 Tomcat 的 catalina.out 日志Cronolog 是一个小巧高效的日志文件处理工具，可以实现自动的按规则生成周期性的日志文件
+安装 cronolog 命令如下：
+[表格见原文]
+也可使用 yum 
                             
                         </div>
                         <div class="publish-info">
@@ -881,11 +879,9 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                log4j2 日志配置    [
-	**2016-04-04
-
-](&#x2F;2016&#x2F;04&#x2F;04&#x2F;log4j2_conf&#x2F;)
-log4j2 日志配置目前用到 log4j2 的配置，如果想使用 As
+                                log4j2 日志配置目前用到 log4j2 的配置，如果想使用 Asynchronous Loggers 的话需要导入 disruptor-3.0.0 或者更高版本
+&#96;
+%d{yyyy-MM-dd HH:mm:ss z} %-5l
                             
                         </div>
                         <div class="publish-info">
@@ -931,11 +927,7 @@ log4j2 日志配置目前用到 log4j2 的配置，如果想使用 As
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                shell脚本定时监控日志报警    [
-	**2016-04-04
-
-](&#x2F;2016&#x2F;04&#x2F;04&#x2F;server_monitor&#x2F;)
-shell脚本定时监控日志报警最近遇到一个需求，需要监控
+                                shell脚本定时监控日志报警最近遇到一个需求，需要监控服务器错误日志的情况，以便及时发现服务器异常，在网上找了一圈后发现了这一篇文章，shell脚本定时监控日志报警，经过修改后符合我们项目的要求，主要修改了获取日志文件列表的方式，使它支持
                             
                         </div>
                         <div class="publish-info">
