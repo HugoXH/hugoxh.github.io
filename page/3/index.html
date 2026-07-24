@@ -71,6 +71,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-用_Cronolog_切割_Tomcat_的_catalina_out_日志" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/04/07/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/" class="article-date">
+  <time class="dt-published" datetime="2016-04-07T06:45:28.000Z" itemprop="datePublished">2016-04-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/04/07/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/">用 Cronolog 切割 Tomcat 的 catalina.out 日志</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="用-Cronolog-切割-Tomcat-的-catalina-out-日志"><a href="#用-Cronolog-切割-Tomcat-的-catalina-out-日志" class="headerlink" title="用 Cronolog 切割 Tomcat 的 catalina.out 日志"></a>用 Cronolog 切割 Tomcat 的 catalina.out 日志</h1><pre><code>    [
+	**2016-04-07
+</code></pre>
+<p>](&#x2F;2016&#x2F;04&#x2F;07&#x2F;cronolog&#x2F;)</p>
+<h1 id="用-Cronolog-切割-Tomcat-的-catalina-out-日志-1"><a href="#用-Cronolog-切割-Tomcat-的-catalina-out-日志-1" class="headerlink" title="用 Cronolog 切割 Tomcat 的 catalina.out 日志"></a>用 Cronolog 切割 Tomcat 的 catalina.out 日志</h1><p>Cronolog 是一个小巧高效的日志文件处理工具，可以实现自动的按规则生成周期性的日志文件</p>
+<p>安装 cronolog 命令如下：</p>
+<p>[表格见原文]</p>
+<p>也可使用 yum 进行安装</p>
+<p>设置 catalina.out 位置,修改 catalina.sh：</p>
+<p>[表格见原文]</p>
+<p>为：</p>
+<p>[表格见原文]</p>
+<p>配置 cronolog 切割日志，修改 catalina.sh</p>
+<p>[表格见原文]</p>
+<p>为：</p>
+<p>[表格见原文]</p>
+<p>（有两处地方需要修改），此处的 &#x2F;usr&#x2F;sbin&#x2F;cronolog 可以通过<code>which cronolog</code>查看，配置完毕启动 Tomcat 生效</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hugoxh.github.io/2016/04/07/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/" data-id="cuid4hVYhzR1KLwCWhnCycUjv" data-title="用 Cronolog 切割 Tomcat 的 catalina.out 日志" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cronolog/" rel="tag">Cronolog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-log4j2_日志配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2016/04/04/log4j2_%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/" class="article-date">
@@ -97,8 +158,11 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-04-04<br>](&#x2F;2016&#x2F;04&#x2F;04&#x2F;log4j2_conf&#x2F;)</p>
-<h1 id="log4j2-日志配置"><a href="#log4j2-日志配置" class="headerlink" title="log4j2 日志配置"></a>log4j2 日志配置</h1><p>目前用到 log4j2 的配置，如果想使用 Asynchronous Loggers 的话需要导入 disruptor-3.0.0 或者更高版本</p>
+        <h1 id="log4j2-日志配置"><a href="#log4j2-日志配置" class="headerlink" title="log4j2 日志配置"></a>log4j2 日志配置</h1><pre><code>    [
+	**2016-04-04
+</code></pre>
+<p>](&#x2F;2016&#x2F;04&#x2F;04&#x2F;log4j2_conf&#x2F;)</p>
+<h1 id="log4j2-日志配置-1"><a href="#log4j2-日志配置-1" class="headerlink" title="log4j2 日志配置"></a>log4j2 日志配置</h1><p>目前用到 log4j2 的配置，如果想使用 Asynchronous Loggers 的话需要导入 disruptor-3.0.0 或者更高版本</p>
 <p>&#96;</p>
 <pre><code>%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36}%L%M - %msg%xEx%n
 /logs/app
@@ -169,7 +233,7 @@ debug
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/04/04/log4j2_%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/" data-id="cuidNepT4hn0lHW1LHUNvumxw" data-title="log4j2 日志配置" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/04/04/log4j2_%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/" data-id="cuidOCDtxKBz3g10ZdYJpTqxn" data-title="log4j2 日志配置" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -209,8 +273,11 @@ debug
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-04-04<br>](&#x2F;2016&#x2F;04&#x2F;04&#x2F;server_monitor&#x2F;)</p>
-<h1 id="shell脚本定时监控日志报警"><a href="#shell脚本定时监控日志报警" class="headerlink" title="shell脚本定时监控日志报警"></a>shell脚本定时监控日志报警</h1><p>最近遇到一个需求，需要监控服务器错误日志的情况，以便及时发现服务器异常，在网上找了一圈后发现了这一篇文章，<a target="_blank" rel="noopener" href="http://www.wiggins.top/wordpress/?p=277">shell脚本定时监控日志报警</a><br>，经过修改后符合我们项目的要求，主要修改了获取日志文件列表的方式，使它支持多目录监控，使用时需要配置好 &#x2F;etc&#x2F;mail.rc 使之可发送邮件，再结合 Crontab 即可实现定时监控：</p>
+        <h1 id="shell脚本定时监控日志报警"><a href="#shell脚本定时监控日志报警" class="headerlink" title="shell脚本定时监控日志报警"></a>shell脚本定时监控日志报警</h1><pre><code>    [
+	**2016-04-04
+</code></pre>
+<p>](&#x2F;2016&#x2F;04&#x2F;04&#x2F;server_monitor&#x2F;)</p>
+<h1 id="shell脚本定时监控日志报警-1"><a href="#shell脚本定时监控日志报警-1" class="headerlink" title="shell脚本定时监控日志报警"></a>shell脚本定时监控日志报警</h1><p>最近遇到一个需求，需要监控服务器错误日志的情况，以便及时发现服务器异常，在网上找了一圈后发现了这一篇文章，<a target="_blank" rel="noopener" href="http://www.wiggins.top/wordpress/?p=277">shell脚本定时监控日志报警</a><br>，经过修改后符合我们项目的要求，主要修改了获取日志文件列表的方式，使它支持多目录监控，使用时需要配置好 &#x2F;etc&#x2F;mail.rc 使之可发送邮件，再结合 Crontab 即可实现定时监控：</p>
 <p>原程序：<a target="_blank" rel="noopener" href="https://github.com/Acvrock/shell/blob/master/monitor.sh">monitor.sh</a></p>
 <p>[表格见原文]</p>
 <p>修改后：<a target="_blank" rel="noopener" href="https://github.com/Acvrock/shell/blob/master/monitor_md.sh">monitor_md.sh</a></p>
@@ -219,7 +286,7 @@ debug
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/04/03/shell%E8%84%9A%E6%9C%AC%E5%AE%9A%E6%97%B6%E7%9B%91%E6%8E%A7%E6%97%A5%E5%BF%97%E6%8A%A5%E8%AD%A6/" data-id="cuidWsAWtYw9rdOZJnMFXFdgA" data-title="shell脚本定时监控日志报警" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/04/03/shell%E8%84%9A%E6%9C%AC%E5%AE%9A%E6%97%B6%E7%9B%91%E6%8E%A7%E6%97%A5%E5%BF%97%E6%8A%A5%E8%AD%A6/" data-id="cuidlBMmA3pWLFzXyCtK3MYhL" data-title="shell脚本定时监控日志报警" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -277,7 +344,7 @@ debug
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
     </div>
   </div>
 
@@ -288,6 +355,10 @@ debug
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/07/24/hello-world/">Hello World</a>
+          </li>
         
           <li>
             <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">信令系统的架构实践</a>
@@ -303,10 +374,6 @@ debug
         
           <li>
             <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">记录一次 Java 程序异常重启排查过程</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/">微服务拆分之道</a>
           </li>
         
       </ul>

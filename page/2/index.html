@@ -71,6 +71,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-定位_Guava_EventBus_重复消费" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/" class="article-date">
+  <time class="dt-published" datetime="2018-08-10T22:54:38.000Z" itemprop="datePublished">2018-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/">定位 Guava EventBus 重复消费</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="定位-Guava-EventBus-重复消费"><a href="#定位-Guava-EventBus-重复消费" class="headerlink" title="定位 Guava EventBus 重复消费"></a>定位 Guava EventBus 重复消费</h1><pre><code>    [
+	**2018-08-11
+</code></pre>
+<p>](&#x2F;2018&#x2F;08&#x2F;11&#x2F;fix_guava_eventBus_reprocessing&#x2F;)</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>我们在系统中使用 Guava 的 EventBus 进行代码解耦，一直运行良好，但是在某一次发版后，出现了消息重复消费的情况，示例代码如下:</p>
+<p>[表格见原文]</p>
+<p>[表格见原文]</p>
+<p>[表格见原文]</p>
+<p>预期执行情况：<br>[表格见原文]</p>
+<p>实际执行情况：<br>[表格见原文]</p>
+<p>可以看到消费者对事件消费了两次，但是通过检查代码发现并没有相关的改动，机器环境也没有变动。</p>
+<p>经过一番定位后发现是编译机器 JDK 版本升级到 JDK 8，新版 javac 编译后字节码有变动。</p>
+<p>导致相同代码和环境下出现了不同的行为。</p>
+<h3 id="定位过程："><a href="#定位过程：" class="headerlink" title="定位过程："></a>定位过程：</h3><p>对代码调用进行跟踪，先从 EventBus.post 方法看起</p>
+<p>[表格见原文]</p>
+<p>debug 时发现在 JDK 7 环境下，subscribersByType.get(eventType) 只能获取到一个 EventSubscriber 对象，即：onEvent(CallBack event)。</p>
+<p>而在 JDK 8 环境下，subscribersByType.get(eventType) 的确能够获取到两个 EventSubscriber 对象，分别是：onEvent(CallBack event)和onEvent(Object o)，<br>导致 enqueueEvent 了两次</p>
+<p>subscribersByType 对象是一个类似 Map 结构，用于存储 EventSubscriber 对象，初始化数据的位置在 EventBus.register中：</p>
+<p>[表格见原文]</p>
+<p>这里 findAllSubscribers 的实现是在 AnnotatedSubscriberFinder 类中，逻辑比较简单，先调用  getAnnotatedMethods(clazz) 获取类中有 @Subscribe 注解的方法列表，然后实例化成 EventSubscriber 对象，存进 methodsInListener 并返回。</p>
+<p>JDK 7 环境下 getAnnotatedMethods(clazz) 返回了 onEvent(CallBack event) 方法</p>
+<p>JDK 8 环境下 getAnnotatedMethods(clazz) 返回了 onEvent(CallBack event) 方法和 onEvent(Object o) 方法，但是 onEvent(Object o) 不是我们定义的方法，而是 JDK 实现泛型时生成的桥方法，可以看成是在父类中定义的 onEvent(T t) 擦除泛型转换而来，并没有带 @Subscribe</p>
+<p>[表格见原文]</p>
+<p>getAnnotatedMethods(clazz) 方法中使用了 LoadingCache 缓存，最后获取注解的方法是：getAnnotatedMethodsInternal</p>
+<p>[表格见原文]</p>
+<p>这里关键的一句判断是 superClazzMethod.isAnnotationPresent(Subscribe.class)，isAnnotationPresent是 JDK reflect 包中的方法，经过调试，发现在 JDK 7 中，</p>
+<p>[表格见原文]</p>
+<p>而在 JDK 8 中，</p>
+<p>[表格见原文]</p>
+<p>导致返回了 onEvent(CallBack event) 和 onEvent(Object o)，并初始化出两个 EventSubscriber。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>对比两个版本 javac 编译出来的字节码</p>
+<p>JDK 7 版本</p>
+<p>[表格见原文]</p>
+<p>第一个方法 onEvent(com.acvrock.guavatest.CallBack) 有一个 <code>#27</code> Subscribe 运行时注解<br>第二个方法 onEvent(java.lang.Object) 没有带 RuntimeVisibleAnnotations</p>
+<p>JDK 8 版本</p>
+<p>[表格见原文]</p>
+<p>两个方法都有 运行时注解  <code>#27()</code>，也就是 <code>Subscribe</code></p>
+<p>在网上 <a target="_blank" rel="noopener" href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8029563">JDK-8029563 : Method.getAnnotations() changed its return value in JDK 8.</a> 这个描述和我们发现的问题是一致的</p>
+<p>导致这一变动的是这个调整<br><a target="_blank" rel="noopener" href="https://bugs.java.com/view_bug.do?bug_id=JDK-6695379">JDK-6695379 : Copy method annotations and parameter annotations to synthetic bridge methods</a>，<br>javac 实现了在编译时，拷贝方法和参数上的注解到桥方法上，也就是 onEvent(java.lang.Object)上，在 JDK 7u80 和 JDK 8b94 后生效</p>
+<h3 id="guava-如何解决"><a href="#guava-如何解决" class="headerlink" title="guava 如何解决"></a>guava 如何解决</h3><p>在 guava 18 中就已经解决了这个问题，代码如下：</p>
+<p>[表格见原文]</p>
+<p>判断了方法有 Subscribe 注解并且不是桥方法才认为是 subscribe 方法,对应的代码提交记录：<br><a target="_blank" rel="noopener" href="https://github.com/google/guava/commit/32d7dc732dfee93c82942e2d776adbbc02bd85ba#diff-e3fca3176dda68793f07e756ca2f412c">Fix EventBus to not include bridge methods when registering subscribe</a></p>
+<p>真是一个摸不着头脑的 bug</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>关于桥方法可以参考<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html">Effects of Type Erasure and Bridge Methods</a></p>
+<p>示例代码<a target="_blank" rel="noopener" href="https://github.com/Acvrock/Exercise-code/tree/master/eventbusTest">Exercise-code&#x2F;eventbusTest</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hugoxh.github.io/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/" data-id="cuidSOQXqV4iEk9yiGQCpP2ur" data-title="定位 Guava EventBus 重复消费" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK-8/" rel="tag">JDK 8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Method-getAnnotations/" rel="tag">Method.getAnnotations()</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-记一次_CPU_忙碌导致的超时" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/" class="article-date">
@@ -97,7 +186,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2017-11-20<br>](&#x2F;2017&#x2F;11&#x2F;20&#x2F;fix_timeout_due_to_cpu_busy&#x2F;)</p>
+        <h1 id="记一次-CPU-忙碌导致的超时"><a href="#记一次-CPU-忙碌导致的超时" class="headerlink" title="记一次 CPU 忙碌导致的超时"></a>记一次 CPU 忙碌导致的超时</h1><pre><code>    [
+	**2017-11-20
+</code></pre>
+<p>](&#x2F;2017&#x2F;11&#x2F;20&#x2F;fix_timeout_due_to_cpu_busy&#x2F;)</p>
 <pre><code>    通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程
 </code></pre>
 <p>首先收集 thrift 代理日志,统计该服务超时情况,结果如下:</p>
@@ -121,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/" data-id="cuidRMWOI5rNurmleI84IPdFC" data-title="记一次 CPU 忙碌导致的超时" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/" data-id="cuid3ywVxsX2BvsJ84xztcquz" data-title="记一次 CPU 忙碌导致的超时" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -161,7 +253,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-12-10<br>](&#x2F;2016&#x2F;12&#x2F;10&#x2F;java_byte&#x2F;)</p>
+        <h1 id="Java-中的基本数据类型"><a href="#Java-中的基本数据类型" class="headerlink" title="Java 中的基本数据类型"></a>Java 中的基本数据类型</h1><pre><code>    [
+	**2016-12-10
+</code></pre>
+<p>](&#x2F;2016&#x2F;12&#x2F;10&#x2F;java_byte&#x2F;)</p>
 <pre><code>    Java 中数值类型的表示，byte 占用 8 个 bit ，每个 bit 只有 0 和 1 两个值，byte 的值在 bit 中表示就是二进制，所以值为 4 的 byte ，在计算机中表示为二进制的原码：
 </code></pre>
 <p>00000100,如果是负数，则表示为负数正值的补码，如： -4 表示为：11111100，可以看出，如果首位为 1 时，表示负数，首位为 0 时，表示正数。所以 byte 的最大值和最小值分别是 127 、-127</p>
@@ -233,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/12/10/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cuidNDcoVqrRPSSpuLa7FWHMc" data-title="Java 中的基本数据类型" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/12/10/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cuidUaS4CUObW4uRZoqs8GR2I" data-title="Java 中的基本数据类型" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -459,7 +554,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/12/02/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" data-id="cuidCh0PQRsC0eMvmKgb4oKwJ" data-title="Java 集合框架" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/12/02/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" data-id="cuidd3kPKmN1158_sjvSGcUMu" data-title="Java 集合框架" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -499,7 +594,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-12-01<br>](&#x2F;2016&#x2F;12&#x2F;01&#x2F;20161201_java_io&#x2F;)</p>
+        <h1 id="Java-IO-编码解码"><a href="#Java-IO-编码解码" class="headerlink" title="Java IO 编码解码"></a>Java IO 编码解码</h1><pre><code>    [
+	**2016-12-01
+</code></pre>
+<p>](&#x2F;2016&#x2F;12&#x2F;01&#x2F;20161201_java_io&#x2F;)</p>
 <pre><code>    ASCII 数字 0-9 对应的 byte 值为 48-57
 </code></pre>
 <p>Unicode 与 Java</p>
@@ -564,7 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/" data-id="cuidXaK_rbPY0NmQCB4fb9d_U" data-title="Java IO 编码解码" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/" data-id="cuidbUHiRV2dc-SvRmSf0EAsz" data-title="Java IO 编码解码" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -604,7 +702,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-11-26<br>](&#x2F;2016&#x2F;11&#x2F;26&#x2F;the_pragmatic_programmer&#x2F;)</p>
+        <h1 id="程序员修炼之道"><a href="#程序员修炼之道" class="headerlink" title="程序员修炼之道"></a>程序员修炼之道</h1><pre><code>    [
+	**2016-11-26
+</code></pre>
+<p>](&#x2F;2016&#x2F;11&#x2F;26&#x2F;the_pragmatic_programmer&#x2F;)</p>
 <pre><code>    Don&#39;t Live with Broken Windows
 </code></pre>
 <p>Be a Catalyst for Change</p>
@@ -750,7 +851,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/" data-id="cuidyvqcywgbu9WKpXpqEVtO7" data-title="程序员修炼之道" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/" data-id="cuidznJnm72fxZ50VcyaF510G" data-title="程序员修炼之道" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -790,7 +891,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-10-16<br>](&#x2F;2016&#x2F;10&#x2F;16&#x2F;fix_springaop_nosuchmethoderror&#x2F;)</p>
+        <h1 id="记一次-java-lang-NoSuchMethodError-错误"><a href="#记一次-java-lang-NoSuchMethodError-错误" class="headerlink" title="记一次 java.lang.NoSuchMethodError 错误"></a>记一次 java.lang.NoSuchMethodError 错误</h1><pre><code>    [
+	**2016-10-16
+</code></pre>
+<p>](&#x2F;2016&#x2F;10&#x2F;16&#x2F;fix_springaop_nosuchmethoderror&#x2F;)</p>
 <pre><code>    今天在使用 EnableScheduling 测试计划任务时，出现了以下错误：
 </code></pre>
 <p>[表格见原文]</p>
@@ -802,7 +906,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/10/16/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/" data-id="cuid2g6WwvBc40KndQxXgB-I_" data-title="记一次 java.lang.NoSuchMethodError 错误" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/10/16/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/" data-id="cuiderRVeiDDOZZh2uJ5NcrwU" data-title="记一次 java.lang.NoSuchMethodError 错误" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -842,7 +946,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-08-28<br>](&#x2F;2016&#x2F;08&#x2F;28&#x2F;redis_auto-start_on_linux&#x2F;)</p>
+        <h1 id="在-Linux-下配置-Redis-开机启动"><a href="#在-Linux-下配置-Redis-开机启动" class="headerlink" title="在 Linux 下配置 Redis 开机启动"></a>在 Linux 下配置 Redis 开机启动</h1><pre><code>    [
+	**2016-08-28
+</code></pre>
+<p>](&#x2F;2016&#x2F;08&#x2F;28&#x2F;redis_auto-start_on_linux&#x2F;)</p>
 <h3 id="在-Linux-下配置-Redis-开机启动，主要步骤如下："><a href="#在-Linux-下配置-Redis-开机启动，主要步骤如下：" class="headerlink" title="在 Linux 下配置 Redis 开机启动，主要步骤如下："></a>在 Linux 下配置 Redis 开机启动，主要步骤如下：</h3><ul>
 <li><p>设置 Redis redis.conf 文件，使之能够以后台模式运行</p>
 </li>
@@ -880,7 +987,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/08/28/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" data-id="cuid3URw8ncRjB-pAK58m93k-" data-title="在 Linux 下配置 Redis 开机启动" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/08/28/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" data-id="cuidyOSIkfisSy6MHXLxQCb7A" data-title="在 Linux 下配置 Redis 开机启动" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -967,7 +1074,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/" data-id="cuidD7v4aGRNGpRgp7i4xRxk7" data-title="HotSpot VM 相关参数" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/" data-id="cuid_e1cEWFVXFpqRs_crGWif" data-title="HotSpot VM 相关参数" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1007,7 +1114,10 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>**2016-05-02<br>](&#x2F;2016&#x2F;05&#x2F;02&#x2F;infinity_and_nan&#x2F;)</p>
+        <h1 id="Java-中的无穷和非数"><a href="#Java-中的无穷和非数" class="headerlink" title="Java 中的无穷和非数"></a>Java 中的无穷和非数</h1><pre><code>    [
+	**2016-05-02
+</code></pre>
+<p>](&#x2F;2016&#x2F;05&#x2F;02&#x2F;infinity_and_nan&#x2F;)</p>
 <pre><code>    Java 中的正无穷（POSITIVE_INFINITY）负无穷（NEGATIVE_INFINITY）和非数（NaN）
 </code></pre>
 <p>[表格见原文]</p>
@@ -1016,69 +1126,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/05/02/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/" data-id="cuid97lKpXzsFDMUBOk3LJ2O4" data-title="Java 中的无穷和非数" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://hugoxh.github.io/2016/05/02/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/" data-id="cuidycNwA-d3msLl_dPk6pNz7" data-title="Java 中的无穷和非数" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-用_Cronolog_切割_Tomcat_的_catalina_out_日志" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/04/07/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/" class="article-date">
-  <time class="dt-published" datetime="2016-04-07T06:45:28.000Z" itemprop="datePublished">2016-04-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/04/07/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/">用 Cronolog 切割 Tomcat 的 catalina.out 日志</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>**2016-04-07<br>](&#x2F;2016&#x2F;04&#x2F;07&#x2F;cronolog&#x2F;)</p>
-<h1 id="用-Cronolog-切割-Tomcat-的-catalina-out-日志"><a href="#用-Cronolog-切割-Tomcat-的-catalina-out-日志" class="headerlink" title="用 Cronolog 切割 Tomcat 的 catalina.out 日志"></a>用 Cronolog 切割 Tomcat 的 catalina.out 日志</h1><p>Cronolog 是一个小巧高效的日志文件处理工具，可以实现自动的按规则生成周期性的日志文件</p>
-<p>安装 cronolog 命令如下：</p>
-<p>[表格见原文]</p>
-<p>也可使用 yum 进行安装</p>
-<p>设置 catalina.out 位置,修改 catalina.sh：</p>
-<p>[表格见原文]</p>
-<p>为：</p>
-<p>[表格见原文]</p>
-<p>配置 cronolog 切割日志，修改 catalina.sh</p>
-<p>[表格见原文]</p>
-<p>为：</p>
-<p>[表格见原文]</p>
-<p>（有两处地方需要修改），此处的 &#x2F;usr&#x2F;sbin&#x2F;cronolog 可以通过<code>which cronolog</code>查看，配置完毕启动 Tomcat 生效</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hugoxh.github.io/2016/04/07/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/" data-id="cuidStzCCt1hw8i8kj8IwkktF" data-title="用 Cronolog 切割 Tomcat 的 catalina.out 日志" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cronolog/" rel="tag">Cronolog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li></ul>
 
     </footer>
   </div>
@@ -1132,7 +1184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/07/">七月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
     </div>
   </div>
 
@@ -1143,6 +1195,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/07/24/hello-world/">Hello World</a>
+          </li>
         
           <li>
             <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">信令系统的架构实践</a>
@@ -1158,10 +1214,6 @@
         
           <li>
             <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">记录一次 Java 程序异常重启排查过程</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/">微服务拆分之道</a>
           </li>
         
       </ul>
