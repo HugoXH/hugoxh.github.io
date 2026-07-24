@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>信令系统的架构实践 | Hugo&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="系统架构的介绍我会按照信令的系统架构上的分布或子系统的层级关系来展开 首先，信令是一个通用的消息系统，主要是为了解决实时场景下信令的低延迟和高并发问题 我们目前的业务形态是不同大区数据隔离，所以我们是分国家大区部署的，没做跨国数据传输 每个大区都有两个子系统分别是：h3p 系统，他代表了用户侧的接入，还有频道系统，他代表了频道房间管理 h3p 系统首先是 h3p，他有两个服务，ap 和 h3pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信令系统的架构实践">
+<meta property="og:url" content="https://hugoxh.github.io/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="Hugo&#39;s Blog">
+<meta property="og:description" content="系统架构的介绍我会按照信令的系统架构上的分布或子系统的层级关系来展开 首先，信令是一个通用的消息系统，主要是为了解决实时场景下信令的低延迟和高并发问题 我们目前的业务形态是不同大区数据隔离，所以我们是分国家大区部署的，没做跨国数据传输 每个大区都有两个子系统分别是：h3p 系统，他代表了用户侧的接入，还有频道系统，他代表了频道房间管理 h3p 系统首先是 h3p，他有两个服务，ap 和 h3pro">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hugoxh.github.io/img/h3p/diagram-0.png">
+<meta property="og:image" content="https://hugoxh.github.io/img/h3p/diagram.png">
+<meta property="og:image" content="https://hugoxh.github.io/img/h3p/diagram-1.png">
+<meta property="og:image" content="https://hugoxh.github.io/img/h3p/diagram-2.png">
+<meta property="og:image" content="https://hugoxh.github.io/img/h3p/diagram-3.png">
+<meta property="article:published_time" content="2024-11-02T00:57:58.000Z">
+<meta property="article:modified_time" content="2026-07-24T09:36:31.491Z">
+<meta property="article:author" content="HugoXH">
+<meta property="article:tag" content="总结">
+<meta property="article:tag" content="架构">
+<meta property="article:tag" content="长连接">
+<meta property="article:tag" content="高并发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hugoxh.github.io/img/h3p/diagram-0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hugo's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hugo&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hugoxh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-信令系统的架构实践" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time class="dt-published" datetime="2024-11-02T00:57:58.000Z" itemprop="datePublished">2024-11-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      信令系统的架构实践
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="系统架构的介绍"><a href="#系统架构的介绍" class="headerlink" title="系统架构的介绍"></a>系统架构的介绍</h2><p>我会按照信令的系统架构上的分布或子系统的层级关系来展开</p>
+<p>首先，信令是一个通用的消息系统，主要是为了解决实时场景下信令的低延迟和高并发问题</p>
+<p>我们目前的业务形态是不同大区数据隔离，所以我们是分国家大区部署的，没做跨国数据传输</p>
+<p>每个大区都有两个子系统分别是：h3p 系统，他代表了用户侧的接入，还有频道系统，他代表了频道房间管理</p>
+<h4 id="h3p-系统"><a href="#h3p-系统" class="headerlink" title="h3p 系统"></a>h3p 系统</h4><p>首先是 h3p，他有两个服务，ap 和 h3proxy</p>
+<p><strong>ap</strong> 负责用户的接入点就近选择，也用来实现灰度和灾备切换</p>
+<p><strong>h3proxy</strong> 负责用户长链接保持和用户房间关系维护，并基于序列号的补偿机制来保证消息不重不丢，h3proxy 基于serverless 部署，同一个房间可以分布在 N 多个 h3proxy 节点中，具有非常大的扩展性</p>
+<p>这些的服务都是无状态分布式的，没有一个单点或者中心式的情况，因此可以保证高可用，并且性能方面可以支持高吞吐量和低延迟，只支持基本核心的功能，剩下的都要放在其它子系统</p>
+<p>对外提供以下核心功能： 单播消息、频道广播消息，一般消息和可靠消息，进出频道以及事件</p>
+<p>他有几个优势特性：</p>
+<ul>
+<li><p>消息可靠，不丢失，不乱序</p>
+</li>
+<li><p>消息低延时节点</p>
+</li>
+<li><p>可水平扩展</p>
+</li>
+<li><p>万人同频道</p>
+</li>
+</ul>
+<p>以频道广播消息为例，和大家分享一下消息下发的流程。</p>
+<p>首先用户登录时，会先访问 ap 服务，携带业务信息，如事先分配好的频道号和 uid</p>
+<p>ap 知道所有的 h3proxy 地址，会根据当前的客户端的地理分布，包括节点的负载&#x2F;灰度情况来给用户返回一组地址，我们经常在这里控制用户路由到不同的 h3proxy 部署，如 k8s 集群或者 serverless 集群，用户在拿到地址之后，可以连接 h3proxy 节点</p>
+<p>h3proxy 和用户保持长链接后，会在实例内维护用户和频道的关系，维护用户的最近可靠消息列表</p>
+<p>当有频道广播消息下行时，消息会先进入频道消息发送队列，然后根据用户频道关系找出所有的用户列表，如果消息是不可丢失的可靠消息，则维护用户级的可靠消息列表</p>
+<p>当用户接收消息的过程中，根据消息序号发现存在消息丢失时，则会主动过来服务端拉取补偿，从而保证不丢失</p>
+<p>可拓展设计是我们基于 serverless 部署，每个部署我们设置了链接上限，当函数超过连接上限时会主动拉起新实例，从而能做到数万人同频道</p>
+<h4 id="频道系统"><a href="#频道系统" class="headerlink" title="频道系统"></a>频道系统</h4><p>频道系统有四个服务: channel&#x2F;gateway&#x2F;online 和 stat</p>
+<p>channel 第一个功能是频道流量转发，第二个功能是负责频道状态属性和用户属性的维护，并且产生对应的同步事件下发到各端</p>
+<p>gateway 负责 channel 实例的发现和路由维护，对外提供 http 接口</p>
+<p>online 负责频道在线用户维护，并且产生事件</p>
+<p>stat 则是统计相关，并且负责事件的持久化</p>
+<p>这里除了 channel 是有状态服务，其他都是可弹性拓展</p>
+<h4 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h4><p><img src="/img/h3p/diagram-0.png" alt="图片"></p>
+<h2 id="架构的难点"><a href="#架构的难点" class="headerlink" title="架构的难点"></a>架构的难点</h2><p>架构的难点: 流量路由如何设计</p>
+<blockquote>
+<p>信令系统运行时，channel 和 h3proxy 都是多实例部署，当一个频道消息下发时，究竟是走哪一个channel，去到哪个 h3proxy 呢，我们设计了两个方案：</p>
+</blockquote>
+<p>静态路由</p>
+<ul>
+<li><p>channel 每一个实例都拥有自己的 Headless Service</p>
+</li>
+<li><p>频道一定会根据算法固定到某一个 channel 实例上</p>
+</li>
+<li><p>h3proxy 和 bizSrv 程序启动时，会预热对所有 channel 实例的长连接</p>
+</li>
+<li><p>当有 用户进入频道时，h3proxy 和 bizSrv 会把根据算法把本实例注册到某一个 channel 的路由表上</p>
+</li>
+<li><p>channel 在做消息的上下行投递时，就会根据路由表进行投递</p>
+</li>
+<li><p>优点是实现简单，缺点是 channel 伸缩时有配置工作量，房间算法需要检查</p>
+</li>
+</ul>
+<p>集群路由</p>
+<ul>
+<li><p>所有 channel 实例组成集群，对外提供一个 Headless Service</p>
+</li>
+<li><p>channel 集群节点之间互相感知，并且共同维护一个路由表</p>
+</li>
+<li><p>h3proxy 和 bizsrv 程序启动时，预热的长连接会随机到 channel 的某几个实例上，分散压力</p>
+</li>
+<li><p>当有 用户进入频道时，h3proxy 和 bizSrv 直接把本实例注册到某一个 channel 实例上，会同步到路由表</p>
+</li>
+<li><p>channel 在做消息的上下行投递时，就会根据路由表进行投递，会在 channel 节点之间进行转发</p>
+</li>
+<li><p>优点是简化接入端的步骤，提高集群的性能和拓展能力，缺点是 channel 实现复杂</p>
+</li>
+</ul>
+<p>集群版转发流量路由<br><img src="/img/h3p/diagram.png" alt="图片"></p>
+<p>房间管理逻辑路由<br><img src="/img/h3p/diagram-1.png" alt="图片"></p>
+<h4 id="架构的难点-直播间属性抽象，并且保证保证多端状态一致"><a href="#架构的难点-直播间属性抽象，并且保证保证多端状态一致" class="headerlink" title="架构的难点: 直播间属性抽象，并且保证保证多端状态一致"></a>架构的难点: 直播间属性抽象，并且保证保证多端状态一致</h4><blockquote>
+<p>直播间会有不同的配置&#x2F;状态&#x2F;挂件&#x2F;互动应用，如何保证在老师端切换状态，发起互动时，所有的端都能实时准确的同步这些变更，有以下的情况</p>
+</blockquote>
+<ul>
+<li><p>如何保证准确的同步这些变更</p>
+</li>
+<li><p>直播间功能根据重要程度进行分级，如何直播间核心状态能够正常</p>
+</li>
+<li><p>某一些互动消息允许丢失，某一些互动状态不允许出错</p>
+</li>
+<li><p>某一些互动只需要通知到老师</p>
+</li>
+</ul>
+<p>我们的方案是：</p>
+<ul>
+<li><p>channel 维护房间属性快照，每一次变更时比较比较出差异，形成属性变更消息同步给各个端，用户端进入房间时，全量同步房间属性快照，课中变更，采用增量消息下发</p>
+</li>
+<li><p>房间属性进行分级，分为核心属性和互动属性，核心属性消息每次都全量更新，保证只要接收到最后的消息就能做到房间最终状态</p>
+</li>
+<li><p>和 h3proxy 设计联动，允许丢失属性变更使用一般消息，不允许出错互动采用可靠消息</p>
+</li>
+<li><p>和 h3proxy 设计联动，使用频道广播和频道单播</p>
+</li>
+</ul>
+<p>直播间属性结构<br><img src="/img/h3p/diagram-2.png" alt="图片"></p>
+<p>事件结构</p>
+<p><img src="/img/h3p/diagram-3.png" alt="图片"></p>
+<h2 id="实践过程中遇到的问题"><a href="#实践过程中遇到的问题" class="headerlink" title="实践过程中遇到的问题"></a>实践过程中遇到的问题</h2><ul>
+<li>grpc 长链接，在 K8s 环境中，1分钟会断链一次，需要在 ingress nginx 开启<a target="_blank" rel="noopener" href="https://i4t.com/22417.html">超时配置</a></li>
+</ul>
+<p>[表格见原文]</p>
+<ul>
+<li><p>压测时，channel 到 h3proxy 的消息大批量丢失，原因是 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/75001424/grpc-streaming-and-thread-safety">streamObserver 非线程安全</a>。导致发送的消息错乱，h3proxy 读取失败会报 failed to unmarshal the received message proto: cannot parse invalid wire-format data，streamObserver 使用时需要加锁串行</p>
+</li>
+<li><p>channel grpc stream 双向流，转发数据时直接左手倒右手，上下游的发送速率会互相影响，导致吞吐性能不高，需要先进发送队列，再送出去，屏蔽两端的速度差</p>
+</li>
+<li><p>长时间运行后 channel 线程泄漏</p>
+</li>
+</ul>
+<p>[表格见原文]</p>
+<ul>
+<li><p>h3proxy 性能上不去，CPU 异常高，pprof 发现是协程泄漏，原因是第三方消费队列实现有问题，某一些客户端慢连接，送不出去消息时会阻塞住，需替换为无锁队列</p>
+</li>
+<li><p>h3proxy 和 channel 上下行包体过大时，吞吐性能上不去，解决方案：预热连接池，上行时根据路由分组，用多个连接发送数据</p>
+</li>
+<li><p>压测时 nginx 网关带宽过高，高负载影响吞吐，方案：不同模块隔离网关，条件允许时直连，去除不必要中间组件</p>
+</li>
+<li><p>h3proxy 全局锁优化，链接资源提前初始化，用户登录逻辑异步化</p>
+</li>
+</ul>
+<h2 id="如何解决的"><a href="#如何解决的" class="headerlink" title="如何解决的"></a>如何解决的</h2><ul>
+<li><p>消息投递链路埋点，分析消息数量和时延，快速诊断问题点在哪个环节</p>
+</li>
+<li><p>压测平台建设，业务数据模拟，客户端加压，流量复制，通过压测暴露高并发情况下的架构问题和细节问题</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hugoxh.github.io/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/" data-id="cuidAT7AVqfkQ9qZtyyYOavt-" data-title="信令系统的架构实践" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" rel="tag">长连接</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="tag">高并发</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">记录一次接口优化过程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CPU/" rel="tag">CPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cronolog/" rel="tag">Cronolog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dubbo/" rel="tag">Dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/" rel="tag">Exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK-8/" rel="tag">JDK 8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Method-getAnnotations/" rel="tag">Method.getAnnotations()</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/" rel="tag">RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SRE/" rel="tag">SRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/" rel="tag">gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gzip/" rel="tag">gzip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j2/" rel="tag">log4j2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/" rel="tag">logrotate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" rel="tag">工程师学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" rel="tag">故障响应流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" rel="tag">故障管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" rel="tag">服务拆分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" rel="tag">长连接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="tag">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cronolog/" style="font-size: 10px;">Cronolog</a> <a href="/tags/Dubbo/" style="font-size: 10px;">Dubbo</a> <a href="/tags/Error/" style="font-size: 12.5px;">Error</a> <a href="/tags/EventBus/" style="font-size: 10px;">EventBus</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/JDK-8/" style="font-size: 10px;">JDK 8</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Method-getAnnotations/" style="font-size: 10px;">Method.getAnnotations()</a> <a href="/tags/RPC/" style="font-size: 10px;">RPC</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SRE/" style="font-size: 10px;">SRE</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/gRPC/" style="font-size: 10px;">gRPC</a> <a href="/tags/gzip/" style="font-size: 10px;">gzip</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">工程师学习</a> <a href="/tags/%E5%BC%82%E5%B8%B8/" style="font-size: 12.5px;">异常</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 12.5px;">微服务</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 15px;">总结</a> <a href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">故障响应流程</a> <a href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" style="font-size: 12.5px;">故障管理</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" style="font-size: 12.5px;">服务拆分</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 17.5px;">架构</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a> <a href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" style="font-size: 10px;">长连接</a> <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">信令系统的架构实践</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/">记录一次接口优化过程</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/">微服务拆分之道-2024新赛季</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">记录一次 Java 程序异常重启排查过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/">微服务拆分之道</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 HugoXH<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

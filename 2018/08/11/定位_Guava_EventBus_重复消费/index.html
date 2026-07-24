@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>定位 Guava EventBus 重复消费 | Hugo&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="**2018-08-11](&#x2F;2018&#x2F;08&#x2F;11&#x2F;fix_guava_eventBus_reprocessing&#x2F;) 问题描述我们在系统中使用 Guava 的 EventBus 进行代码解耦，一直运行良好，但是在某一次发版后，出现了消息重复消费的情况，示例代码如下: [表格见原文] [表格见原文] [表格见原文] 预期执行情况：[表格见原文] 实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="定位 Guava EventBus 重复消费">
+<meta property="og:url" content="https://hugoxh.github.io/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/index.html">
+<meta property="og:site_name" content="Hugo&#39;s Blog">
+<meta property="og:description" content="**2018-08-11](&#x2F;2018&#x2F;08&#x2F;11&#x2F;fix_guava_eventBus_reprocessing&#x2F;) 问题描述我们在系统中使用 Guava 的 EventBus 进行代码解耦，一直运行良好，但是在某一次发版后，出现了消息重复消费的情况，示例代码如下: [表格见原文] [表格见原文] [表格见原文] 预期执行情况：[表格见原文] 实">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-08-10T22:54:38.000Z">
+<meta property="article:modified_time" content="2026-07-24T09:36:31.491Z">
+<meta property="article:author" content="HugoXH">
+<meta property="article:tag" content="EventBus">
+<meta property="article:tag" content="JDK 8">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Method.getAnnotations()">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hugo's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hugo&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hugoxh.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-定位_Guava_EventBus_重复消费" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/" class="article-date">
+  <time class="dt-published" datetime="2018-08-10T22:54:38.000Z" itemprop="datePublished">2018-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      定位 Guava EventBus 重复消费
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>**2018-08-11<br>](&#x2F;2018&#x2F;08&#x2F;11&#x2F;fix_guava_eventBus_reprocessing&#x2F;)</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>我们在系统中使用 Guava 的 EventBus 进行代码解耦，一直运行良好，但是在某一次发版后，出现了消息重复消费的情况，示例代码如下:</p>
+<p>[表格见原文]</p>
+<p>[表格见原文]</p>
+<p>[表格见原文]</p>
+<p>预期执行情况：<br>[表格见原文]</p>
+<p>实际执行情况：<br>[表格见原文]</p>
+<p>可以看到消费者对事件消费了两次，但是通过检查代码发现并没有相关的改动，机器环境也没有变动。</p>
+<p>经过一番定位后发现是编译机器 JDK 版本升级到 JDK 8，新版 javac 编译后字节码有变动。</p>
+<p>导致相同代码和环境下出现了不同的行为。</p>
+<h3 id="定位过程："><a href="#定位过程：" class="headerlink" title="定位过程："></a>定位过程：</h3><p>对代码调用进行跟踪，先从 EventBus.post 方法看起</p>
+<p>[表格见原文]</p>
+<p>debug 时发现在 JDK 7 环境下，subscribersByType.get(eventType) 只能获取到一个 EventSubscriber 对象，即：onEvent(CallBack event)。</p>
+<p>而在 JDK 8 环境下，subscribersByType.get(eventType) 的确能够获取到两个 EventSubscriber 对象，分别是：onEvent(CallBack event)和onEvent(Object o)，<br>导致 enqueueEvent 了两次</p>
+<p>subscribersByType 对象是一个类似 Map 结构，用于存储 EventSubscriber 对象，初始化数据的位置在 EventBus.register中：</p>
+<p>[表格见原文]</p>
+<p>这里 findAllSubscribers 的实现是在 AnnotatedSubscriberFinder 类中，逻辑比较简单，先调用  getAnnotatedMethods(clazz) 获取类中有 @Subscribe 注解的方法列表，然后实例化成 EventSubscriber 对象，存进 methodsInListener 并返回。</p>
+<p>JDK 7 环境下 getAnnotatedMethods(clazz) 返回了 onEvent(CallBack event) 方法</p>
+<p>JDK 8 环境下 getAnnotatedMethods(clazz) 返回了 onEvent(CallBack event) 方法和 onEvent(Object o) 方法，但是 onEvent(Object o) 不是我们定义的方法，而是 JDK 实现泛型时生成的桥方法，可以看成是在父类中定义的 onEvent(T t) 擦除泛型转换而来，并没有带 @Subscribe</p>
+<p>[表格见原文]</p>
+<p>getAnnotatedMethods(clazz) 方法中使用了 LoadingCache 缓存，最后获取注解的方法是：getAnnotatedMethodsInternal</p>
+<p>[表格见原文]</p>
+<p>这里关键的一句判断是 superClazzMethod.isAnnotationPresent(Subscribe.class)，isAnnotationPresent是 JDK reflect 包中的方法，经过调试，发现在 JDK 7 中，</p>
+<p>[表格见原文]</p>
+<p>而在 JDK 8 中，</p>
+<p>[表格见原文]</p>
+<p>导致返回了 onEvent(CallBack event) 和 onEvent(Object o)，并初始化出两个 EventSubscriber。</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>对比两个版本 javac 编译出来的字节码</p>
+<p>JDK 7 版本</p>
+<p>[表格见原文]</p>
+<p>第一个方法 onEvent(com.acvrock.guavatest.CallBack) 有一个 <code>#27</code> Subscribe 运行时注解<br>第二个方法 onEvent(java.lang.Object) 没有带 RuntimeVisibleAnnotations</p>
+<p>JDK 8 版本</p>
+<p>[表格见原文]</p>
+<p>两个方法都有 运行时注解  <code>#27()</code>，也就是 <code>Subscribe</code></p>
+<p>在网上 <a target="_blank" rel="noopener" href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8029563">JDK-8029563 : Method.getAnnotations() changed its return value in JDK 8.</a> 这个描述和我们发现的问题是一致的</p>
+<p>导致这一变动的是这个调整<br><a target="_blank" rel="noopener" href="https://bugs.java.com/view_bug.do?bug_id=JDK-6695379">JDK-6695379 : Copy method annotations and parameter annotations to synthetic bridge methods</a>，<br>javac 实现了在编译时，拷贝方法和参数上的注解到桥方法上，也就是 onEvent(java.lang.Object)上，在 JDK 7u80 和 JDK 8b94 后生效</p>
+<h3 id="guava-如何解决"><a href="#guava-如何解决" class="headerlink" title="guava 如何解决"></a>guava 如何解决</h3><p>在 guava 18 中就已经解决了这个问题，代码如下：</p>
+<p>[表格见原文]</p>
+<p>判断了方法有 Subscribe 注解并且不是桥方法才认为是 subscribe 方法,对应的代码提交记录：<br><a target="_blank" rel="noopener" href="https://github.com/google/guava/commit/32d7dc732dfee93c82942e2d776adbbc02bd85ba#diff-e3fca3176dda68793f07e756ca2f412c">Fix EventBus to not include bridge methods when registering subscribe</a></p>
+<p>真是一个摸不着头脑的 bug</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>关于桥方法可以参考<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html">Effects of Type Erasure and Bridge Methods</a></p>
+<p>示例代码<a target="_blank" rel="noopener" href="https://github.com/Acvrock/Exercise-code/tree/master/eventbusTest">Exercise-code&#x2F;eventbusTest</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hugoxh.github.io/2018/08/11/%E5%AE%9A%E4%BD%8D_Guava_EventBus_%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9/" data-id="cuid0tU165u_IXOQUGyxnf2Ku" data-title="定位 Guava EventBus 重复消费" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK-8/" rel="tag">JDK 8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Method-getAnnotations/" rel="tag">Method.getAnnotations()</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/09/10/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E7%9A%84%E4%B8%80%E7%82%B9%E4%B8%AA%E4%BA%BA%E6%80%9D%E8%80%83/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          技术选型的一点个人思考
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">记一次 CPU 忙碌导致的超时</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%92%E6%9F%A5%E5%AE%9E%E6%88%98/">排查实战</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CPU/" rel="tag">CPU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/" rel="tag">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cronolog/" rel="tag">Cronolog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dubbo/" rel="tag">Dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/" rel="tag">Exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK-8/" rel="tag">JDK 8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Log/" rel="tag">Log</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Method-getAnnotations/" rel="tag">Method.getAnnotations()</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RPC/" rel="tag">RPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SRE/" rel="tag">SRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gRPC/" rel="tag">gRPC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gzip/" rel="tag">gzip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j2/" rel="tag">log4j2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logrotate/" rel="tag">logrotate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" rel="tag">工程师学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E5%B8%B8/" rel="tag">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" rel="tag">故障响应流程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" rel="tag">故障管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" rel="tag">服务拆分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" rel="tag">长连接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" rel="tag">高并发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CPU/" style="font-size: 10px;">CPU</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/Cronolog/" style="font-size: 10px;">Cronolog</a> <a href="/tags/Dubbo/" style="font-size: 10px;">Dubbo</a> <a href="/tags/Error/" style="font-size: 12.5px;">Error</a> <a href="/tags/EventBus/" style="font-size: 10px;">EventBus</a> <a href="/tags/Exception/" style="font-size: 10px;">Exception</a> <a href="/tags/JDK-8/" style="font-size: 10px;">JDK 8</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/Log/" style="font-size: 10px;">Log</a> <a href="/tags/Method-getAnnotations/" style="font-size: 10px;">Method.getAnnotations()</a> <a href="/tags/RPC/" style="font-size: 10px;">RPC</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SRE/" style="font-size: 10px;">SRE</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/gRPC/" style="font-size: 10px;">gRPC</a> <a href="/tags/gzip/" style="font-size: 10px;">gzip</a> <a href="/tags/log4j2/" style="font-size: 10px;">log4j2</a> <a href="/tags/logrotate/" style="font-size: 10px;">logrotate</a> <a href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">工程师学习</a> <a href="/tags/%E5%BC%82%E5%B8%B8/" style="font-size: 12.5px;">异常</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 12.5px;">微服务</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 15px;">总结</a> <a href="/tags/%E6%95%85%E9%9A%9C%E5%93%8D%E5%BA%94%E6%B5%81%E7%A8%8B/" style="font-size: 10px;">故障响应流程</a> <a href="/tags/%E6%95%85%E9%9A%9C%E7%AE%A1%E7%90%86/" style="font-size: 12.5px;">故障管理</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86/" style="font-size: 12.5px;">服务拆分</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 17.5px;">架构</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 20px;">读书笔记</a> <a href="/tags/%E9%95%BF%E8%BF%9E%E6%8E%A5/" style="font-size: 10px;">长连接</a> <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">高并发</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/">信令系统的架构实践</a>
+          </li>
+        
+          <li>
+            <a href="/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/">记录一次接口优化过程</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/01/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93-2024%E6%96%B0%E8%B5%9B%E5%AD%A3/">微服务拆分之道-2024新赛季</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/27/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1_Java_%E7%A8%8B%E5%BA%8F%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">记录一次 Java 程序异常重启排查过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/11/07/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/">微服务拆分之道</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 HugoXH<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
