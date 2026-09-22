@@ -1,6 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>HotSpot VM 相关参数</title>
+    <url>/2022/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/</url>
+    <content><![CDATA[HotSpot VM 相关参数
+
+##HotSpot VM 关于GC日志相关的命令行选项
+-XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&lt;filename&gt;
+
+生成文件格式：
+2.660: [GC [PSYoungGen: 142835K-&gt;10734K(142848K)] 144991K-&gt;26629K(317440K), 0.0203930 secs] [Times: user=0.05 sys=0.02, real=0.02 secs]86.592: [Full GC [PSYoungGen: 3456K-&gt;0K(1329664K)] [ParOldGen: 153539K-&gt;90508K(212480K)] 156995K-&gt;90508K(1542144K) [PSPermGen: 67518K-&gt;67135K(220160K)], 0.4519800 secs] [Times: user=1.54 sys=0.03, real=0.45 secs]
+
+
+2.660是从 JVM 启动直到垃圾收集发生所经历的时间
+GC代表是一次 Minor GC
+Full GC代表一次 Full GC
+**[PSYoungGen: 142835K-&gt;10734K(142848K)]**的 PSYoungGen 表示使用了多线程垃圾收集器 Parallel Scavenge，其它的收集器还有：多线程 ParNew 、单线程 ParNew、G1。 箭头（-&gt;）左边是回收前新生代占用空间，右边代表回收后占用的空间，Ps：Minor GC 回收后 Eden 空间为空，所以回收后的空间可以视为 Surivor 占用空间，括号里代表新生代的总大小
+**144991K-&gt;26629K(317440K)**代表垃圾收集后 Java 堆堆使用情况（包括新生代和老年代），箭头（-&gt;）左边是回收前 Java 堆占用空间，右边代表回收后占用的空间，括号里代表 Java 堆的总大小 ,Ps:根据 Java 堆总大小和新生代总大小，可以推算出老年代占用空间
+0.0203930 secs代表垃圾收集过程所消耗的时长
+**[Times: user&#x3D;0.05 sys&#x3D;0.02, real&#x3D;0.02 secs]**提供了 CPU和时间消耗情况。user 是用户态的消耗时间，即运行于 JVM 中的时间。
+
+如果想使用日历时间打印时间戳，可以使用**-XX:PrintGCDateStamps替换-XX:+PrintGCTimeStamps&#96;**生成文件格式将会变成：
+2016-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]
+
+设置内存空间
+-Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值
+-Xms 指定了新生代和老年代空间（Java 堆）大小的初始值和最小值
+关注吞吐量及延迟的 Java 应用应该将 -Xmx 和 －Xms 设置为同一值，避免 Java 堆伸缩带来的 Full GC
+-XX:NewSize&#x3D;[g|m|k] 新生代空间大小的初始值和最小值，必须和-XX:MaxNewSize配合使用
+-XX:MaxNewSize&#x3D;[g|m|k] 新生代空间大小的最大值，必须和-XX:NewSize配合使用
+-Xmn[g|m|k] 一次性设置新生代空间的初始值、最小值、最大值，如果设置了该值，新生代大小会恒定，所以只有 -Xmx 和 －Xms 设置为同一值时才使用 -Xmn 选项
+老年代空间会根据 Java 堆空间和新生代空间隐性设定，最大为：-Xmx 减去 -XX:NewSize，最小为-Xmx 减去 -XX:MaxNewSize
+-XX:PermSize&#x3D;[g|m|k] 永久代空间初始值和最小值
+-XX:MaxPermSize&#x3D;[g|m|k] 永久代空间的最大值
+关注性能的 Java 应用应该将 -XX:PermSize 和 -XX:MaxPermSize 设置为同一值，避免永久堆大小调整带来的 Full GC
+如果不显式设置 Java 堆大小，JVM 会根据系统自动选择合适的值
+JVM 内存调节的计算法则：
+
+
+
+
+空间
+命令行选项
+占用倍数
+
+
+
+Java 堆
+-Xms 和 -Xmx
+3～4 倍 Full GC 后的老年代空间占用量
+
+
+永久代
+-XX:PermSize 和 -XX:MaxPermSize
+1.2～1.5 倍 Full GC 后的永久代空间占用量
+
+
+新生代
+-Xmn
+1～1.5 倍 Full GC 后的老年代空间占用量
+
+
+老年代
+Java 堆大小减新生代大小
+2～3 倍 Full GC 后老年代空间占用量
+
+
+
+调节新生代空间准则:
+老年代空间大小不应该小于活跃数据大小的 1.5 倍
+新生代空间至少应为 Java 堆 大小的 10％
+增大 Java 堆大小时，不能超过 JVM 可用的物理内存数
+
+
+
+设置收集器
+-XX:+UseParallelOldGC 指定使用 Throughput 收集器
+
+-XX:+UseConcM 来源于 Java 性能优化权威指南 第七章
+
+读书笔记
+
+Java
+
+JVM
+
+
+]]></content>
+      <categories>
+        <category>Java基础</category>
+      </categories>
+      <tags>
+        <tag>读书笔记</tag>
+        <tag>Java</tag>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java IO 编码解码</title>
     <url>/2022/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/</url>
     <content><![CDATA[ASCII 数字 0-9 对应的 byte 值为 48-57
@@ -145,102 +241,6 @@ Java 数组高级技巧
       </categories>
       <tags>
         <tag>读书笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HotSpot VM 相关参数</title>
-    <url>/2022/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/</url>
-    <content><![CDATA[HotSpot VM 相关参数
-
-##HotSpot VM 关于GC日志相关的命令行选项
--XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&lt;filename&gt;
-
-生成文件格式：
-2.660: [GC [PSYoungGen: 142835K-&gt;10734K(142848K)] 144991K-&gt;26629K(317440K), 0.0203930 secs] [Times: user=0.05 sys=0.02, real=0.02 secs]86.592: [Full GC [PSYoungGen: 3456K-&gt;0K(1329664K)] [ParOldGen: 153539K-&gt;90508K(212480K)] 156995K-&gt;90508K(1542144K) [PSPermGen: 67518K-&gt;67135K(220160K)], 0.4519800 secs] [Times: user=1.54 sys=0.03, real=0.45 secs]
-
-
-2.660是从 JVM 启动直到垃圾收集发生所经历的时间
-GC代表是一次 Minor GC
-Full GC代表一次 Full GC
-**[PSYoungGen: 142835K-&gt;10734K(142848K)]**的 PSYoungGen 表示使用了多线程垃圾收集器 Parallel Scavenge，其它的收集器还有：多线程 ParNew 、单线程 ParNew、G1。 箭头（-&gt;）左边是回收前新生代占用空间，右边代表回收后占用的空间，Ps：Minor GC 回收后 Eden 空间为空，所以回收后的空间可以视为 Surivor 占用空间，括号里代表新生代的总大小
-**144991K-&gt;26629K(317440K)**代表垃圾收集后 Java 堆堆使用情况（包括新生代和老年代），箭头（-&gt;）左边是回收前 Java 堆占用空间，右边代表回收后占用的空间，括号里代表 Java 堆的总大小 ,Ps:根据 Java 堆总大小和新生代总大小，可以推算出老年代占用空间
-0.0203930 secs代表垃圾收集过程所消耗的时长
-**[Times: user&#x3D;0.05 sys&#x3D;0.02, real&#x3D;0.02 secs]**提供了 CPU和时间消耗情况。user 是用户态的消耗时间，即运行于 JVM 中的时间。
-
-如果想使用日历时间打印时间戳，可以使用**-XX:PrintGCDateStamps替换-XX:+PrintGCTimeStamps&#96;**生成文件格式将会变成：
-2016-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]
-
-设置内存空间
--Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值
--Xms 指定了新生代和老年代空间（Java 堆）大小的初始值和最小值
-关注吞吐量及延迟的 Java 应用应该将 -Xmx 和 －Xms 设置为同一值，避免 Java 堆伸缩带来的 Full GC
--XX:NewSize&#x3D;[g|m|k] 新生代空间大小的初始值和最小值，必须和-XX:MaxNewSize配合使用
--XX:MaxNewSize&#x3D;[g|m|k] 新生代空间大小的最大值，必须和-XX:NewSize配合使用
--Xmn[g|m|k] 一次性设置新生代空间的初始值、最小值、最大值，如果设置了该值，新生代大小会恒定，所以只有 -Xmx 和 －Xms 设置为同一值时才使用 -Xmn 选项
-老年代空间会根据 Java 堆空间和新生代空间隐性设定，最大为：-Xmx 减去 -XX:NewSize，最小为-Xmx 减去 -XX:MaxNewSize
--XX:PermSize&#x3D;[g|m|k] 永久代空间初始值和最小值
--XX:MaxPermSize&#x3D;[g|m|k] 永久代空间的最大值
-关注性能的 Java 应用应该将 -XX:PermSize 和 -XX:MaxPermSize 设置为同一值，避免永久堆大小调整带来的 Full GC
-如果不显式设置 Java 堆大小，JVM 会根据系统自动选择合适的值
-JVM 内存调节的计算法则：
-
-
-
-
-空间
-命令行选项
-占用倍数
-
-
-
-Java 堆
--Xms 和 -Xmx
-3～4 倍 Full GC 后的老年代空间占用量
-
-
-永久代
--XX:PermSize 和 -XX:MaxPermSize
-1.2～1.5 倍 Full GC 后的永久代空间占用量
-
-
-新生代
--Xmn
-1～1.5 倍 Full GC 后的老年代空间占用量
-
-
-老年代
-Java 堆大小减新生代大小
-2～3 倍 Full GC 后老年代空间占用量
-
-
-
-调节新生代空间准则:
-老年代空间大小不应该小于活跃数据大小的 1.5 倍
-新生代空间至少应为 Java 堆 大小的 10％
-增大 Java 堆大小时，不能超过 JVM 可用的物理内存数
-
-
-
-设置收集器
--XX:+UseParallelOldGC 指定使用 Throughput 收集器
-
--XX:+UseConcM 来源于 Java 性能优化权威指南 第七章
-
-读书笔记
-
-Java
-
-JVM
-
-
-]]></content>
-      <categories>
-        <category>Java基础</category>
-      </categories>
-      <tags>
-        <tag>读书笔记</tag>
-        <tag>Java</tag>
-        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
