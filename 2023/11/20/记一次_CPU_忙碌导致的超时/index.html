@@ -425,11 +425,11 @@
 
 <p>左右端详,可以发现以下特点:具有周期性,而且集中在 152 机器上,都是每个小时的10分钟左右出现</p>
 <p>接下来查看机器运行情况:</p>
-<p><img src="/img/20171020201157.jpg" alt="图片"></p>
+<p><img src="/img/cpu-timeout-1.jpg" alt="图片"></p>
 <p>可看到 CPU 也是有规律的升高.</p>
 <p>通过应用部署架构已知该主机上有定时任务 task 类型的应用,所以初步怀疑是某些 task 进程有问题</p>
-<p>接下来进入该 152 机器,使用 <strong>top</strong> 命令观察 CPU,等待下一个周期,等到 11 分钟时,得到以下截图:<br><img src="/img/20171020201826.jpg" alt="图片"><br>得知占用最大的程序为 gzip ,但是查不到 gzip 进行什么操作,无解</p>
-<p>另辟蹊径,咨询运维得知:每小时的第 10 分钟,logrotate 会对日志进行压缩轮转,如下图:<br><img src="/img/20171020202253.jpg" alt="图片"></p>
+<p>接下来进入该 152 机器,使用 <strong>top</strong> 命令观察 CPU,等待下一个周期,等到 11 分钟时,得到以下截图:<br><img src="/img/cpu-timeout-2.jpg" alt="图片"><br>得知占用最大的程序为 gzip ,但是查不到 gzip 进行什么操作,无解</p>
+<p>另辟蹊径,咨询运维得知:每小时的第 10 分钟,logrotate 会对日志进行压缩轮转,如下图:<br><img src="/img/cpu-timeout-3.jpg" alt="图片"></p>
 <p>所以定位的重点就变成:是否是某些日志设置不当,导致 logrotate 异常</p>
 <p>检查 logrotate 运行状态:</p>
 <p><code>grep 10-20 /var/lib/logrotate/status</code></p>
