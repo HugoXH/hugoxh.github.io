@@ -1,104 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HotSpot VM 相关参数</title>
-    <url>/2022/06/09/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/</url>
-    <content><![CDATA[HotSpot VM 相关参数
-
-##HotSpot VM 关于GC日志相关的命令行选项
--XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&lt;filename&gt;
-
-生成文件格式：
-2.660: [GC [PSYoungGen: 142835K-&gt;10734K(142848K)] 144991K-&gt;26629K(317440K), 0.0203930 secs] [Times: user=0.05 sys=0.02, real=0.02 secs]86.592: [Full GC [PSYoungGen: 3456K-&gt;0K(1329664K)] [ParOldGen: 153539K-&gt;90508K(212480K)] 156995K-&gt;90508K(1542144K) [PSPermGen: 67518K-&gt;67135K(220160K)], 0.4519800 secs] [Times: user=1.54 sys=0.03, real=0.45 secs]
-
-
-2.660是从 JVM 启动直到垃圾收集发生所经历的时间
-GC代表是一次 Minor GC
-Full GC代表一次 Full GC
-**[PSYoungGen: 142835K-&gt;10734K(142848K)]**的 PSYoungGen 表示使用了多线程垃圾收集器 Parallel Scavenge，其它的收集器还有：多线程 ParNew 、单线程 ParNew、G1。 箭头（-&gt;）左边是回收前新生代占用空间，右边代表回收后占用的空间，Ps：Minor GC 回收后 Eden 空间为空，所以回收后的空间可以视为 Surivor 占用空间，括号里代表新生代的总大小
-**144991K-&gt;26629K(317440K)**代表垃圾收集后 Java 堆堆使用情况（包括新生代和老年代），箭头（-&gt;）左边是回收前 Java 堆占用空间，右边代表回收后占用的空间，括号里代表 Java 堆的总大小 ,Ps:根据 Java 堆总大小和新生代总大小，可以推算出老年代占用空间
-0.0203930 secs代表垃圾收集过程所消耗的时长
-**[Times: user&#x3D;0.05 sys&#x3D;0.02, real&#x3D;0.02 secs]**提供了 CPU和时间消耗情况。user 是用户态的消耗时间，即运行于 JVM 中的时间。
-
-如果想使用日历时间打印时间戳，可以使用**-XX:PrintGCDateStamps替换-XX:+PrintGCTimeStamps&#96;**生成文件格式将会变成：
-2016-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]
-
-设置内存空间
--Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值
--Xms 指定了新生代和老年代空间（Java 堆）大小的初始值和最小值
-关注吞吐量及延迟的 Java 应用应该将 -Xmx 和 －Xms 设置为同一值，避免 Java 堆伸缩带来的 Full GC
--XX:NewSize&#x3D;[g|m|k] 新生代空间大小的初始值和最小值，必须和-XX:MaxNewSize配合使用
--XX:MaxNewSize&#x3D;[g|m|k] 新生代空间大小的最大值，必须和-XX:NewSize配合使用
--Xmn[g|m|k] 一次性设置新生代空间的初始值、最小值、最大值，如果设置了该值，新生代大小会恒定，所以只有 -Xmx 和 －Xms 设置为同一值时才使用 -Xmn 选项
-老年代空间会根据 Java 堆空间和新生代空间隐性设定，最大为：-Xmx 减去 -XX:NewSize，最小为-Xmx 减去 -XX:MaxNewSize
--XX:PermSize&#x3D;[g|m|k] 永久代空间初始值和最小值
--XX:MaxPermSize&#x3D;[g|m|k] 永久代空间的最大值
-关注性能的 Java 应用应该将 -XX:PermSize 和 -XX:MaxPermSize 设置为同一值，避免永久堆大小调整带来的 Full GC
-如果不显式设置 Java 堆大小，JVM 会根据系统自动选择合适的值
-JVM 内存调节的计算法则：
-
-
-
-
-空间
-命令行选项
-占用倍数
-
-
-
-Java 堆
--Xms 和 -Xmx
-3～4 倍 Full GC 后的老年代空间占用量
-
-
-永久代
--XX:PermSize 和 -XX:MaxPermSize
-1.2～1.5 倍 Full GC 后的永久代空间占用量
-
-
-新生代
--Xmn
-1～1.5 倍 Full GC 后的老年代空间占用量
-
-
-老年代
-Java 堆大小减新生代大小
-2～3 倍 Full GC 后老年代空间占用量
-
-
-
-调节新生代空间准则:
-老年代空间大小不应该小于活跃数据大小的 1.5 倍
-新生代空间至少应为 Java 堆 大小的 10％
-增大 Java 堆大小时，不能超过 JVM 可用的物理内存数
-
-
-
-设置收集器
--XX:+UseParallelOldGC 指定使用 Throughput 收集器
-
--XX:+UseConcM 来源于 Java 性能优化权威指南 第七章
-
-读书笔记
-
-Java
-
-JVM
-
-
-]]></content>
-      <categories>
-        <category>Java基础</category>
-      </categories>
-      <tags>
-        <tag>读书笔记</tag>
-        <tag>Java</tag>
-        <tag>JVM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java IO 编码解码</title>
-    <url>/2022/11/30/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/</url>
+    <url>/2022/12/01/Java_IO_%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/</url>
     <content><![CDATA[ASCII 数字 0-9 对应的 byte 值为 48-57
 Unicode 与 Java
 char 是字符数据类型，是无符号的，占2字节，大小范围是 0-65535，是 16 位二进制的 Unicode 字符，Java 用 char 来表示一个字符
@@ -168,7 +72,7 @@ Java IO 中应用到了装饰者模式
   </entry>
   <entry>
     <title>Java 中的基本数据类型</title>
-    <url>/2022/12/09/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <url>/2022/12/10/Java_%E4%B8%AD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[Java 中数值类型的表示，byte 占用 8 个 bit ，每个 bit 只有 0 和 1 两个值，byte 的值在 bit 中表示就是二进制，所以值为 4 的 byte ，在计算机中表示为二进制的原码：
 00000100,如果是负数，则表示为负数正值的补码，如： -4 表示为：11111100，可以看出，如果首位为 1 时，表示负数，首位为 0 时，表示正数。所以 byte 的最大值和最小值分别是 127 、-127
 
@@ -245,7 +149,7 @@ Java 数组高级技巧
   </entry>
   <entry>
     <title>Java 中的无穷和非数</title>
-    <url>/2022/05/01/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/</url>
+    <url>/2022/05/02/Java_%E4%B8%AD%E7%9A%84%E6%97%A0%E7%A9%B7%E5%92%8C%E9%9D%9E%E6%95%B0/</url>
     <content><![CDATA[Java 中的正无穷（POSITIVE_INFINITY）负无穷（NEGATIVE_INFINITY）和非数（NaN）
 1.0f / 0.0f = Infinity-1.0f / 0.0f = -Infinity0.0f / 0.0f = NaN
 
@@ -260,7 +164,7 @@ Java 数组高级技巧
   </entry>
   <entry>
     <title>Java 集合框架</title>
-    <url>/2022/12/01/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/</url>
+    <url>/2022/12/02/Java_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[实践
 定义时使用接口
 
@@ -488,7 +392,7 @@ Java 性能调优指南之 Java 集合概览
   </entry>
   <entry>
     <title>log4j2 日志配置</title>
-    <url>/2022/04/03/log4j2_%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/</url>
+    <url>/2022/04/04/log4j2_%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[log4j2 日志配置目前用到 log4j2 的配置，如果想使用 Asynchronous Loggers 的话需要导入 disruptor-3.0.0 或者更高版本
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;GBK&quot;?&gt;&lt;!-- status=&quot;OFF&quot;，可以去掉，它的含义为是否记录 log4j2 本身的 event 信息，默认是 OFF --&gt;&lt;configuration status=&quot;OFF&quot;&gt;&lt;!-- 定义下面的引用名 --&gt;&lt;Properties&gt;    &lt;property name=&quot;log_pattern&quot;&gt;%d&#123;yyyy-MM-dd HH:mm:ss z&#125; %-5level %class&#123;36&#125;%L%M - %msg%xEx%n&lt;/property&gt;    &lt;property name=&quot;log-path&quot;&gt;/logs/app&lt;/property&gt;&lt;!--$&#123;sys:user.home&#125; 是 home 目录、 $&#123;web:rootDir&#125; 是项目根目录 --&gt;    &lt;property name=&quot;every_file_size&quot;&gt;50M&lt;/property&gt;&lt;!-- 日志切割的最小单位 --&gt;    &lt;property name=&quot;output_log_level&quot;&gt;debug&lt;/property&gt;&lt;!-- 日志输出级别 --&gt;&lt;/Properties&gt;&lt;!--先定义所有的 appender --&gt;&lt;appenders&gt;    &lt;!--这个输出控制台的配置 --&gt;    &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;        &lt;!--控制台只输出 level 及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） --&gt;        &lt;ThresholdFilter level=&quot;trace&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot; /&gt;        &lt;!--输出日志的格式 --&gt;        &lt;PatternLayout pattern=&quot;$&#123;log_pattern&#125;&quot; /&gt;    &lt;/Console&gt;    &lt;!-- debug 级别日志文件 --&gt;    &lt;!--每次大小超过 size，则这 size 大小的日志会自动进行压缩，作为存档 --&gt;    &lt;RollingRandomAccessFile name=&quot;app_debug&quot; fileName=&quot;$&#123;log-path&#125;/debug/debug.log&quot; filePattern=&quot;$&#123;log-path&#125;/debug/debug-%d&#123;yyyy-MM-dd&#125;-%i.log.gz&quot; immediateFlush=&quot;false&quot;&gt;        &lt;Filters&gt;            &lt;ThresholdFilter level=&quot;info&quot; onMatch=&quot;DENY&quot; onMismatch=&quot;NEUTRAL&quot; /&gt;            &lt;ThresholdFilter level=&quot;debug&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;NEUTRAL&quot; /&gt;        &lt;/Filters&gt;        &lt;PatternLayout pattern=&quot;$&#123;log_pattern&#125;&quot; /&gt;        &lt;SizeBasedTriggeringPolicy size=&quot;$&#123;every_file_size&#125;&quot;/&gt;    &lt;/RollingRandomAccessFile&gt;    &lt;!-- info 级别日志文件 --&gt;    &lt;RollingRandomAccessFile name=&quot;app_info&quot; fileName=&quot;$&#123;log-path&#125;/info/info.log&quot; filePattern=&quot;$&#123;log-path&#125;/info/info-%d&#123;yyyy-MM-dd&#125;-%i.log.gz&quot; immediateFlush=&quot;false&quot;&gt;        &lt;Filters&gt;            &lt;ThresholdFilter level=&quot;warn&quot; onMatch=&quot;DENY&quot; onMismatch=&quot;NEUTRAL&quot; /&gt;            &lt;ThresholdFilter level=&quot;info&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot; /&gt;        &lt;/Filters&gt;        &lt;PatternLayout pattern=&quot;$&#123;log_pattern&#125;&quot; /&gt;        &lt;SizeBasedTriggeringPolicy size=&quot;$&#123;every_file_size&#125;&quot;/&gt;    &lt;/RollingRandomAccessFile&gt;    &lt;!-- error 级别日志文件 --&gt;    &lt;RollingRandomAccessFile name=&quot;app_error&quot; fileName=&quot;$&#123;log-path&#125;/error/error.log&quot; filePattern=&quot;$&#123;log-path&#125;/error/error-%d&#123;yyyy-MM-dd&#125;-%i.log.gz&quot; immediateFlush=&quot;false&quot;&gt;        &lt;Filters&gt;            &lt;ThresholdFilter level=&quot;warn&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot; /&gt;        &lt;/Filters&gt;        &lt;PatternLayout pattern=&quot;$&#123;log_pattern&#125;&quot; /&gt;        &lt;SizeBasedTriggeringPolicy size=&quot;$&#123;every_file_size&#125;&quot;/&gt;    &lt;/RollingRandomAccessFile&gt;&lt;/appenders&gt;&lt;Loggers&gt;    &lt;!--&lt;AsyncLogger name=&quot;org.springframework&quot; level=&quot;error&quot; additivity=&quot;false&quot; includeLocation=&quot;true&quot;&gt;--&gt;        &lt;!--&lt;appender-ref ref=&quot;Console&quot; /&gt;--&gt;        &lt;!--&lt;appender-ref ref=&quot;app_debug&quot;/&gt;--&gt;        &lt;!--&lt;appender-ref ref=&quot;app_info&quot;/&gt;--&gt;        &lt;!--&lt;appender-ref ref=&quot;app_error&quot;/&gt;--&gt;    &lt;!--&lt;/AsyncLogger&gt;--&gt;    &lt;!--打印程序自身的日志--&gt;    &lt;AsyncLogger name=&quot;com.abc&quot; level=&quot;trace&quot; additivity=&quot;false&quot; includeLocation=&quot;true&quot;&gt;        &lt;appender-ref ref=&quot;Console&quot; /&gt;        &lt;appender-ref ref=&quot;app_debug&quot;/&gt;        &lt;appender-ref ref=&quot;app_info&quot;/&gt;        &lt;appender-ref ref=&quot;app_error&quot;/&gt;    &lt;/AsyncLogger&gt;    &lt;!--上面过滤完毕后,接下来的 log 就由 ROOT 进行管理--&gt;    &lt;Root level=&quot;error&quot;&gt;        &lt;appender-ref ref=&quot;Console&quot; /&gt;        &lt;appender-ref ref=&quot;app_debug&quot;/&gt;        &lt;appender-ref ref=&quot;app_info&quot;/&gt;        &lt;appender-ref ref=&quot;app_error&quot;/&gt;    &lt;/Root&gt;&lt;/Loggers&gt;
 
@@ -595,7 +499,7 @@ Shell
   </entry>
   <entry>
     <title>一个简单的异常层次</title>
-    <url>/2023/09/25/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%BC%82%E5%B8%B8%E5%B1%82%E6%AC%A1/</url>
+    <url>/2023/09/26/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%BC%82%E5%B8%B8%E5%B1%82%E6%AC%A1/</url>
     <content><![CDATA[异常的定义主要考虑以下几个方面
 
 通过异常,能快速知道是哪一个部分出现问题
@@ -677,7 +581,7 @@ ResourceException定义: 依赖资源异常
   </entry>
   <entry>
     <title>信令系统的架构实践</title>
-    <url>/2024/11/01/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/</url>
+    <url>/2024/11/02/%E4%BF%A1%E4%BB%A4%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5/</url>
     <content><![CDATA[系统架构的介绍我会按照信令的系统架构上的分布或子系统的层级关系来展开
 首先，信令是一个通用的消息系统，主要是为了解决实时场景下信令的低延迟和高并发问题
 我们目前的业务形态是不同大区数据隔离，所以我们是分国家大区部署的，没做跨国数据传输
@@ -819,7 +723,7 @@ h3proxy 全局锁优化，链接资源提前初始化，用户登录逻辑异步
   </entry>
   <entry>
     <title>后端服务团队的 SRE 运维制度</title>
-    <url>/2022/07/18/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%9B%A2%E9%98%9F%E7%9A%84_SRE_%E8%BF%90%E7%BB%B4%E5%88%B6%E5%BA%A6/</url>
+    <url>/2022/07/19/%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%9B%A2%E9%98%9F%E7%9A%84_SRE_%E8%BF%90%E7%BB%B4%E5%88%B6%E5%BA%A6/</url>
     <content><![CDATA[职责：
 发现问题
 
@@ -980,7 +884,7 @@ https://sre.google/workbook/how-sre-relates/
   </entry>
   <entry>
     <title>在 Linux 下配置 Redis 开机启动</title>
-    <url>/2022/08/27/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/</url>
+    <url>/2022/08/28/%E5%9C%A8_Linux_%E4%B8%8B%E9%85%8D%E7%BD%AE_Redis_%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/</url>
     <content><![CDATA[在 Linux 下配置 Redis 开机启动，主要步骤如下：
 设置 Redis redis.conf 文件，使之能够以后台模式运行
 编写 shell 启动 Redis 脚本
@@ -1191,7 +1095,7 @@ https://insights.thoughtworks.cn/ddd-architecture-design/
   </entry>
   <entry>
     <title>微服务拆分之道</title>
-    <url>/2022/11/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/</url>
+    <url>//2022/11/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/</url>
     <content><![CDATA[记一次服务拆分流程,这里只是记录思路,不讨论细节
 一、拆分理论基础
 二、核心业务流程-服务划分
@@ -1247,7 +1151,7 @@ admin和api如何隔离
   </entry>
   <entry>
     <title>微服务架构整合-RPC</title>
-    <url>/2022/09/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%95%B4%E5%90%88-RPC/</url>
+    <url>//2022/09/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%95%B4%E5%90%88-RPC/</url>
     <content><![CDATA[背景后端团队技术栈为 Go 和 JavaGo 服务为微服务架构,使用 gRPC 和 gRPC-Gateway 对 APP 和 H5 提供服务Java 服务目前没有统一后端协议栈, HTTP 和 gRPC 混用,没有统一的微服务框架
 现状
 
@@ -1355,8 +1259,104 @@ gRPC
       </tags>
   </entry>
   <entry>
+    <title>HotSpot VM 相关参数</title>
+    <url>/2022/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/</url>
+    <content><![CDATA[HotSpot VM 相关参数
+
+##HotSpot VM 关于GC日志相关的命令行选项
+-XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&lt;filename&gt;
+
+生成文件格式：
+2.660: [GC [PSYoungGen: 142835K-&gt;10734K(142848K)] 144991K-&gt;26629K(317440K), 0.0203930 secs] [Times: user=0.05 sys=0.02, real=0.02 secs]86.592: [Full GC [PSYoungGen: 3456K-&gt;0K(1329664K)] [ParOldGen: 153539K-&gt;90508K(212480K)] 156995K-&gt;90508K(1542144K) [PSPermGen: 67518K-&gt;67135K(220160K)], 0.4519800 secs] [Times: user=1.54 sys=0.03, real=0.45 secs]
+
+
+2.660是从 JVM 启动直到垃圾收集发生所经历的时间
+GC代表是一次 Minor GC
+Full GC代表一次 Full GC
+**[PSYoungGen: 142835K-&gt;10734K(142848K)]**的 PSYoungGen 表示使用了多线程垃圾收集器 Parallel Scavenge，其它的收集器还有：多线程 ParNew 、单线程 ParNew、G1。 箭头（-&gt;）左边是回收前新生代占用空间，右边代表回收后占用的空间，Ps：Minor GC 回收后 Eden 空间为空，所以回收后的空间可以视为 Surivor 占用空间，括号里代表新生代的总大小
+**144991K-&gt;26629K(317440K)**代表垃圾收集后 Java 堆堆使用情况（包括新生代和老年代），箭头（-&gt;）左边是回收前 Java 堆占用空间，右边代表回收后占用的空间，括号里代表 Java 堆的总大小 ,Ps:根据 Java 堆总大小和新生代总大小，可以推算出老年代占用空间
+0.0203930 secs代表垃圾收集过程所消耗的时长
+**[Times: user&#x3D;0.05 sys&#x3D;0.02, real&#x3D;0.02 secs]**提供了 CPU和时间消耗情况。user 是用户态的消耗时间，即运行于 JVM 中的时间。
+
+如果想使用日历时间打印时间戳，可以使用**-XX:PrintGCDateStamps替换-XX:+PrintGCTimeStamps&#96;**生成文件格式将会变成：
+2016-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]
+
+设置内存空间
+-Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值
+-Xms 指定了新生代和老年代空间（Java 堆）大小的初始值和最小值
+关注吞吐量及延迟的 Java 应用应该将 -Xmx 和 －Xms 设置为同一值，避免 Java 堆伸缩带来的 Full GC
+-XX:NewSize&#x3D;[g|m|k] 新生代空间大小的初始值和最小值，必须和-XX:MaxNewSize配合使用
+-XX:MaxNewSize&#x3D;[g|m|k] 新生代空间大小的最大值，必须和-XX:NewSize配合使用
+-Xmn[g|m|k] 一次性设置新生代空间的初始值、最小值、最大值，如果设置了该值，新生代大小会恒定，所以只有 -Xmx 和 －Xms 设置为同一值时才使用 -Xmn 选项
+老年代空间会根据 Java 堆空间和新生代空间隐性设定，最大为：-Xmx 减去 -XX:NewSize，最小为-Xmx 减去 -XX:MaxNewSize
+-XX:PermSize&#x3D;[g|m|k] 永久代空间初始值和最小值
+-XX:MaxPermSize&#x3D;[g|m|k] 永久代空间的最大值
+关注性能的 Java 应用应该将 -XX:PermSize 和 -XX:MaxPermSize 设置为同一值，避免永久堆大小调整带来的 Full GC
+如果不显式设置 Java 堆大小，JVM 会根据系统自动选择合适的值
+JVM 内存调节的计算法则：
+
+
+
+
+空间
+命令行选项
+占用倍数
+
+
+
+Java 堆
+-Xms 和 -Xmx
+3～4 倍 Full GC 后的老年代空间占用量
+
+
+永久代
+-XX:PermSize 和 -XX:MaxPermSize
+1.2～1.5 倍 Full GC 后的永久代空间占用量
+
+
+新生代
+-Xmn
+1～1.5 倍 Full GC 后的老年代空间占用量
+
+
+老年代
+Java 堆大小减新生代大小
+2～3 倍 Full GC 后老年代空间占用量
+
+
+
+调节新生代空间准则:
+老年代空间大小不应该小于活跃数据大小的 1.5 倍
+新生代空间至少应为 Java 堆 大小的 10％
+增大 Java 堆大小时，不能超过 JVM 可用的物理内存数
+
+
+
+设置收集器
+-XX:+UseParallelOldGC 指定使用 Throughput 收集器
+
+-XX:+UseConcM 来源于 Java 性能优化权威指南 第七章
+
+读书笔记
+
+Java
+
+JVM
+
+
+]]></content>
+      <categories>
+        <category>Java基础</category>
+      </categories>
+      <tags>
+        <tag>读书笔记</tag>
+        <tag>Java</tag>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>用 Cronolog 切割 Tomcat 的 catalina.out 日志</title>
-    <url>/2022/04/06/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/</url>
+    <url>/2022/04/07/%E7%94%A8_Cronolog_%E5%88%87%E5%89%B2_Tomcat_%E7%9A%84_catalina_out_%E6%97%A5%E5%BF%97/</url>
     <content><![CDATA[用 Cronolog 切割 Tomcat 的 catalina.out 日志Cronolog 是一个小巧高效的日志文件处理工具，可以实现自动的按规则生成周期性的日志文件安装 cronolog 命令如下：
 wget ftp://de.aminet.net/macports/distfiles/cronolog-devel/cronolog-1.7.0-beta.tar.gztar zxvf cronolog-1.7.0-beta.tar.gzcd cronolog-1.7.0./configuremake installwhich cronolog
 
@@ -1389,8 +1389,40 @@ Log
       </tags>
   </entry>
   <entry>
+    <title>记一次 CPU 忙碌导致的超时</title>
+    <url>/2023/11/20/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/</url>
+    <content><![CDATA[通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程
+首先收集 thrift 代理日志,统计该服务超时情况,结果如下:
+**@ubuntu:/data/log/ServiceAgent_d$ zgrep &#x27;time out&#x27; ServiceAgent_d.log.*.gz |awk &#x27;&#123;print $3,$7,$12&#125;&#x27;|grep od11:11:20 od_getById ***.***.112.152_6000814:11:25 od_listByParam ***.***.112.152_6000819:11:25 od_getById ***.***.112.152_6000819:11:27 od_getById ***.***.112.152_6000800:12:02 od_ping ***.***.112.152_6000805:10:30 od_ping ***.***.112.152_6000805:11:37 od_ping ***.***.112.152_6000821:11:37 od_getById ***.***.112.152_6000821:11:49 od_listByParam ***.***.112.152_6000810:10:11 od_listByParam ***.***.112.152_6000811:11:31 od_listByParam ***.***.112.152_6000814:10:24 od_listByParam ***.***.112.152_6000814:11:34 od_getById ***.***.112.152_6000811:11:39 od_listByParam ***.***.112.152_6000813:11:39 od_listByParam ***.***.112.152_6000820:11:26 od_listByParam ***.***.112.152_6000821:11:33 od_listByPage ***.***.112.152_6000821:11:38 od_listByParam ***.***.112.152_6000810:11:43 od_listByParam ***.***.112.152_6000811:11:26 od_getById ***.***.112.152_6000814:11:36 od_getById ***.***.112.152_6000817:11:42 od_getById ***.***.112.152_6000811:10:10 od_listByParam ***.***.112.152_6000815:10:13 od_listByParam ***.***.112.152_6000819:11:26 od_listByParam ***.***.112.152_6000814:10:30 od_listByPage ***.***.112.152_6000816:10:18 od_listByPage ***.***.112.152_6000820:10:30 od_listByParam ***.***.112.152_60008**@ubuntu:/data/log/ServiceAgent_d$
+
+左右端详,可以发现以下特点:具有周期性,而且集中在 152 机器上,都是每个小时的10分钟左右出现
+接下来查看机器运行情况:
+
+可看到 CPU 也是有规律的升高.
+通过应用部署架构已知该主机上有定时任务 task 类型的应用,所以初步怀疑是某些 task 进程有问题
+接下来进入该 152 机器,使用 top 命令观察 CPU,等待下一个周期,等到 11 分钟时,得到以下截图:得知占用最大的程序为 gzip ,但是查不到 gzip 进行什么操作,无解
+另辟蹊径,咨询运维得知:每小时的第 10 分钟,logrotate 会对日志进行压缩轮转,如下图:
+所以定位的重点就变成:是否是某些日志设置不当,导致 logrotate 异常
+检查 logrotate 运行状态:
+grep 10-20 /var/lib/logrotate/status
+检查 logrotate 操作的文件大小
+grep 10-20 /var/lib/logrotate/status |awk -F &#39;&quot;&#39; &#39;{print $2}&#39;|xargs ls -alh
+倒数第二行,发现文件大小异常,检查日志文件所属程序,发现是遗留的 kafka 程序
+解决方案:关闭它
+观察日志,没有发现超时,问题解决
+]]></content>
+      <categories>
+        <category>排查实战</category>
+      </categories>
+      <tags>
+        <tag>CPU</tag>
+        <tag>logrotate</tag>
+        <tag>gzip</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>程序员修炼之道</title>
-    <url>/2022/11/25/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/</url>
+    <url>/2022/11/26/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93/</url>
     <content><![CDATA[Don’t Live with Broken Windows
 Be a Catalyst for Change
 Remember the Big Picture
@@ -1564,40 +1596,8 @@ Sign Your Work
       </tags>
   </entry>
   <entry>
-    <title>记一次 CPU 忙碌导致的超时</title>
-    <url>/2023/11/19/%E8%AE%B0%E4%B8%80%E6%AC%A1_CPU_%E5%BF%99%E7%A2%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E8%B6%85%E6%97%B6/</url>
-    <content><![CDATA[通过业务日志发现客户端调用某一远程服务时不时连接超时,导致部分业务请求受影响,以下记录了定位的过程
-首先收集 thrift 代理日志,统计该服务超时情况,结果如下:
-**@ubuntu:/data/log/ServiceAgent_d$ zgrep &#x27;time out&#x27; ServiceAgent_d.log.*.gz |awk &#x27;&#123;print $3,$7,$12&#125;&#x27;|grep od11:11:20 od_getById ***.***.112.152_6000814:11:25 od_listByParam ***.***.112.152_6000819:11:25 od_getById ***.***.112.152_6000819:11:27 od_getById ***.***.112.152_6000800:12:02 od_ping ***.***.112.152_6000805:10:30 od_ping ***.***.112.152_6000805:11:37 od_ping ***.***.112.152_6000821:11:37 od_getById ***.***.112.152_6000821:11:49 od_listByParam ***.***.112.152_6000810:10:11 od_listByParam ***.***.112.152_6000811:11:31 od_listByParam ***.***.112.152_6000814:10:24 od_listByParam ***.***.112.152_6000814:11:34 od_getById ***.***.112.152_6000811:11:39 od_listByParam ***.***.112.152_6000813:11:39 od_listByParam ***.***.112.152_6000820:11:26 od_listByParam ***.***.112.152_6000821:11:33 od_listByPage ***.***.112.152_6000821:11:38 od_listByParam ***.***.112.152_6000810:11:43 od_listByParam ***.***.112.152_6000811:11:26 od_getById ***.***.112.152_6000814:11:36 od_getById ***.***.112.152_6000817:11:42 od_getById ***.***.112.152_6000811:10:10 od_listByParam ***.***.112.152_6000815:10:13 od_listByParam ***.***.112.152_6000819:11:26 od_listByParam ***.***.112.152_6000814:10:30 od_listByPage ***.***.112.152_6000816:10:18 od_listByPage ***.***.112.152_6000820:10:30 od_listByParam ***.***.112.152_60008**@ubuntu:/data/log/ServiceAgent_d$
-
-左右端详,可以发现以下特点:具有周期性,而且集中在 152 机器上,都是每个小时的10分钟左右出现
-接下来查看机器运行情况:
-
-可看到 CPU 也是有规律的升高.
-通过应用部署架构已知该主机上有定时任务 task 类型的应用,所以初步怀疑是某些 task 进程有问题
-接下来进入该 152 机器,使用 top 命令观察 CPU,等待下一个周期,等到 11 分钟时,得到以下截图:得知占用最大的程序为 gzip ,但是查不到 gzip 进行什么操作,无解
-另辟蹊径,咨询运维得知:每小时的第 10 分钟,logrotate 会对日志进行压缩轮转,如下图:
-所以定位的重点就变成:是否是某些日志设置不当,导致 logrotate 异常
-检查 logrotate 运行状态:
-grep 10-20 /var/lib/logrotate/status
-检查 logrotate 操作的文件大小
-grep 10-20 /var/lib/logrotate/status |awk -F &#39;&quot;&#39; &#39;{print $2}&#39;|xargs ls -alh
-倒数第二行,发现文件大小异常,检查日志文件所属程序,发现是遗留的 kafka 程序
-解决方案:关闭它
-观察日志,没有发现超时,问题解决
-]]></content>
-      <categories>
-        <category>排查实战</category>
-      </categories>
-      <tags>
-        <tag>CPU</tag>
-        <tag>logrotate</tag>
-        <tag>gzip</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>记一次 java.lang.NoSuchMethodError 错误</title>
-    <url>/2022/10/15/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/</url>
+    <url>//2022/10/15/%E8%AE%B0%E4%B8%80%E6%AC%A1_java_lang_NoSuchMethodError_%E9%94%99%E8%AF%AF/</url>
     <content><![CDATA[今天在使用 EnableScheduling 测试计划任务时，出现了以下错误：
 WARNING: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;scheduledTaskService&#x27; defined in file [/Users/moon/spring/target/classes/taskscheduler/ScheduledTaskService.class]: Initialization of bean failed; nested exception is java.lang.NoSuchMethodError: org.springframework.aop.support.AopUtils.selectInvocableMethod(Ljava/lang/reflect/Method;Ljava/lang/Class;)Ljava/lang/reflect/Method;Exception in thread &quot;main&quot; org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#x27;scheduledTaskService&#x27; defined in file [/Users/moon/spring/target/classes/taskscheduler/ScheduledTaskService.class]: Initialization of bean failed; nested exception is java.lang.NoSuchMethodError: org.springframework.aop.support.AopUtils.selectInvocableMethod(Ljava/lang/reflect/Method;Ljava/lang/Class;)Ljava/lang/reflect/Method;    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)    at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)    at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)    at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)    at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)    at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:751)    at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:861)    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:541)    at org.springframework.context.annotation.AnnotationConfigApplicationContext.&lt;init&gt;(AnnotationConfigApplicationContext.java:84)    at taskscheduler.Main.main(Main.java:12)    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)    at java.lang.reflect.Method.invoke(Method.java:497)    at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)Caused by: java.lang.NoSuchMethodError: org.springframework.aop.support.AopUtils.selectInvocableMethod(Ljava/lang/reflect/Method;Ljava/lang/Class;)Ljava/lang/reflect/Method;    at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.processScheduled(ScheduledAnnotationBeanPostProcessor.java:300)    at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.postProcessAfterInitialization(ScheduledAnnotationBeanPostProcessor.java:283)    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:422)    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1588)    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)    ... 15 more
 
@@ -1653,13 +1653,13 @@ Brilliant GC graphs, metrics and KPIs.pdf
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
         <tag>故障管理</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
     <title>记录一次接口优化过程</title>
-    <url>/2024/01/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/</url>
+    <url>/2024/01/12/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%8E%A5%E5%8F%A3%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[记录线上一次慢接口的优化过程
 优化前 Trace 情况:可以看到耗时部分是在 RPC 接口查询之后产生的
 
