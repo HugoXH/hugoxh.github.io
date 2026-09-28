@@ -181,6 +181,11 @@ code {
     height: 0;
 }
 
+/* 收缩后保留一条细栏, 避免圆点/复制/折叠图标塌陷重叠 */
+.code-area.code-closed {
+    min-height: 2.6rem;
+}
+
 pre code {
     padding: 0;
     color: #e8eaf6;

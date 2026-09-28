@@ -45,9 +45,16 @@ $(function () {
     }
     // 复制
     $('.code-area .fa-copy').on('click', function () {
+        // hexo 自带 highlight 时取代码列的 pre；prismjs 时退回 pre>code / pre
+        var codeEl = $(this).closest('.code-area').find('td.code pre')[0]
+                  || $(this).siblings('pre').find('code')[0]
+                  || $(this).siblings('pre')[0];
+        if (!codeEl) {
+            return false;
+        }
         var selection = window.getSelection()
         var range = document.createRange()
-        range.selectNodeContents($(this).siblings('pre').find('code')[0])
+        range.selectNodeContents(codeEl)
         selection.removeAllRanges()
         selection.addRange(range)
         var text = selection.toString()

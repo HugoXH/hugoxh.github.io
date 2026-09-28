@@ -5,12 +5,13 @@ $(function () {
 
   $('.code-area').prepend($code_expand);
   $('.code-expand').on('click', function () {
-    if ($(this).parent().hasClass('code-closed')) {
-      $(this).siblings('pre').find('code').show();
-      $(this).parent().removeClass('code-closed');
+    var $area = $(this).closest('.code-area');
+    if ($area.hasClass('code-closed')) {
+      $area.find('figure.highlight, pre').show();
+      $area.removeClass('code-closed');
     } else {
-      $(this).siblings('pre').find('code').hide();
-      $(this).parent().addClass('code-closed');
+      $area.find('figure.highlight, pre').hide();
+      $area.addClass('code-closed');
     }
   });
 });
