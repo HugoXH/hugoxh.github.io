@@ -5,12 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="HotSpot VM 相关参数, 后端,Java,架构,分布式">
-    <meta name="description" content="HotSpot VM 相关参数
-
-##HotSpot VM 关于GC日志相关的命令行选项
+    <meta name="description" content="HotSpot VM 相关参数##HotSpot VM 关于GC日志相关的命令行选项
 1-XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&amp;lt;filename&amp;gt;
 
-生成文件格">
+生成文件格式：">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -57,7 +55,8 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="Hugo's Blog" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -139,17 +138,6 @@
       <i class="fas fa-comments" style="zoom: 0.6;"></i>
       
       <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -245,17 +233,6 @@
 			    <i class="fa-fw fas fa-comments"></i>
 			
 			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -431,11 +408,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HotSpot-VM-相关参数"><a href="#HotSpot-VM-相关参数" class="headerlink" title="HotSpot VM 相关参数"></a>HotSpot VM 相关参数</h1><!-- create time: 2016-06-10 13:46:04 Author: <TODO: 请写上你的名字>
-
-This file is created by Marboo[http://marboo.io](http://marboo.io)template file $MARBOO_HOME/.media/starts/default.md 本文件由 Marboo[http://marboo.io](http://marboo.io)模板文件 $MARBOO_HOME/.media/starts/default.md 创建 -->
-
-<p>##HotSpot VM 关于GC日志相关的命令行选项</p>
+                <h1 id="HotSpot-VM-相关参数"><a href="#HotSpot-VM-相关参数" class="headerlink" title="HotSpot VM 相关参数"></a>HotSpot VM 相关参数</h1><p>##HotSpot VM 关于GC日志相关的命令行选项</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&lt;filename&gt;</span><br></pre></td></tr></table></figure>
 
 <p>生成文件格式：</p>
@@ -451,7 +424,7 @@ This file is created by Marboo[http://marboo.io](http://marboo.io)template file 
 <li>**[Times: user&#x3D;0.05 sys&#x3D;0.02, real&#x3D;0.02 secs]**提供了 CPU和时间消耗情况。user 是用户态的消耗时间，即运行于 JVM 中的时间。</li>
 </ul>
 <p>如果想使用日历时间打印时间戳，可以使用**-XX:PrintGCDateStamps<strong>替换</strong>-XX:+PrintGCTimeStamps&#96;**生成文件格式将会变成：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2016-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2022-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]</span><br></pre></td></tr></table></figure>
 
 <h2 id="设置内存空间"><a href="#设置内存空间" class="headerlink" title="设置内存空间"></a>设置内存空间</h2><ul>
 <li>-Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值</li>
@@ -950,7 +923,7 @@ This file is created by Marboo[http://marboo.io](http://marboo.io)template file 
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2026</span>
+                <span id="year">2022-2026</span>
             
             <a href="/about" target="_blank">HugoXH</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>

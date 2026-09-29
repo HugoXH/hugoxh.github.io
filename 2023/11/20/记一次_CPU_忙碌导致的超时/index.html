@@ -54,7 +54,8 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/atom.xml" title="Hugo's Blog" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -136,17 +137,6 @@
       <i class="fas fa-comments" style="zoom: 0.6;"></i>
       
       <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -242,17 +232,6 @@
 			    <i class="fa-fw fas fa-comments"></i>
 			
 			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -441,9 +420,9 @@
 <p>另辟蹊径,咨询运维得知:每小时的第 10 分钟,logrotate 会对日志进行压缩轮转,如下图:<br><img src="/img/cpu-timeout-3.jpg" alt="图片"></p>
 <p>所以定位的重点就变成:是否是某些日志设置不当,导致 logrotate 异常</p>
 <p>检查 logrotate 运行状态:</p>
-<p><code>grep 10-20 /var/lib/logrotate/status</code></p>
+<p><code>grep 11-20 /var/lib/logrotate/status</code></p>
 <p><img src="/img/logrotatestatus.png" alt="图片"><br>检查 logrotate 操作的文件大小</p>
-<p><code>grep 10-20 /var/lib/logrotate/status |awk -F &#39;&quot;&#39; &#39;{print $2}&#39;|xargs ls -alh</code></p>
+<p><code>grep 11-20 /var/lib/logrotate/status |awk -F &#39;&quot;&#39; &#39;{print $2}&#39;|xargs ls -alh</code></p>
 <p><img src="/img/logrotatesfilesize.png" alt="图片"><br>倒数第二行,发现文件大小异常,检查日志文件所属程序,发现是遗留的 kafka 程序</p>
 <p>解决方案:<br>关闭它</p>
 <p>观察日志,没有发现超时,问题解决</p>
@@ -893,7 +872,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2026</span>
+                <span id="year">2022-2026</span>
             
             <a href="/about" target="_blank">HugoXH</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>

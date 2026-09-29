@@ -3,9 +3,7 @@
   <entry>
     <title>HotSpot VM 相关参数</title>
     <url>/2022/06/10/HotSpot_VM_%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0/</url>
-    <content><![CDATA[HotSpot VM 相关参数
-
-##HotSpot VM 关于GC日志相关的命令行选项
+    <content><![CDATA[HotSpot VM 相关参数##HotSpot VM 关于GC日志相关的命令行选项
 -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:&lt;filename&gt;
 
 生成文件格式：
@@ -21,7 +19,7 @@ Full GC代表一次 Full GC
 **[Times: user&#x3D;0.05 sys&#x3D;0.02, real&#x3D;0.02 secs]**提供了 CPU和时间消耗情况。user 是用户态的消耗时间，即运行于 JVM 中的时间。
 
 如果想使用日历时间打印时间戳，可以使用**-XX:PrintGCDateStamps替换-XX:+PrintGCTimeStamps&#96;**生成文件格式将会变成：
-2016-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]
+2022-06-10T15:29:34.899-0800: 19.409: [GC [PSYoungGen: 1291624K-&gt;16960K(1337344K)] 1396481K-&gt;131948K(1511936K), 0.0174330 secs] [Times: user=0.09 sys=0.02, real=0.02 secs]
 
 设置内存空间
 -Xmx 指定了新生代和老年代空间（Java 堆）大小的最大值
@@ -1032,10 +1030,10 @@ CallNotifyListener.java //具体业务类，对事件进行消费@Component@Lazy
 ScheduledTasks.java //事件生产者@Componentpublic class ScheduledTasks &#123;    Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);    @Scheduled(fixedRate = 2000)    public void scheduleTaskWithFixedRate() &#123;        logger.info(&quot;send msg - &#123;&#125;&quot;,new Date());        CallBack callBack = new CallBack(1,System.currentTimeMillis());        GuavaEventBusFactory.getDefault().eventBus().post(callBack);    &#125;&#125;
 
 预期执行情况：
-2023-08-11 20:49:22.728  INFO 27619 --- [           main] c.a.eventbus.EventBusTestApplication     : Started EventBusTestApplication in 1.476 seconds (JVM running for 1.848)2023-08-11 20:49:24.724  INFO 27619 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:49:24 CST 20232023-08-11 20:49:24.725  INFO 27619 --- [pool-1-thread-2] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1533991764724,CallBack&#123;chid=1, appid=1533991764724&#125;2023-08-11 20:49:26.726  INFO 27619 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:49:26 CST 20232023-08-11 20:49:26.727  INFO 27619 --- [pool-1-thread-3] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1533991766727,CallBack&#123;chid=1, appid=1533991766727&#125;
+2023-08-11 20:49:22.728  INFO 27619 --- [           main] c.a.eventbus.EventBusTestApplication     : Started EventBusTestApplication in 1.476 seconds (JVM running for 1.848)2023-08-11 20:49:24.724  INFO 27619 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:49:24 CST 20232023-08-11 20:49:24.725  INFO 27619 --- [pool-1-thread-2] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1691758164724,CallBack&#123;chid=1, appid=1691758164724&#125;2023-08-11 20:49:26.726  INFO 27619 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:49:26 CST 20232023-08-11 20:49:26.727  INFO 27619 --- [pool-1-thread-3] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1691758166727,CallBack&#123;chid=1, appid=1691758166727&#125;
 
 实际执行情况：
-2023-08-11 20:51:20.279  INFO 27674 --- [           main] c.a.eventbus.EventBusTestApplication     : Started EventBusTestApplication in 1.062 seconds (JVM running for 1.442)2023-08-11 20:51:22.271  INFO 27674 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:51:22 CST 20232023-08-11 20:51:22.272  INFO 27674 --- [pool-1-thread-3] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1533991882271,CallBack&#123;chid=1, appid=1533991882271&#125;2023-08-11 20:51:22.272  INFO 27674 --- [pool-1-thread-4] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1533991882271,CallBack&#123;chid=1, appid=1533991882271&#125;2023-08-11 20:51:24.275  INFO 27674 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:51:24 CST 20232023-08-11 20:51:24.275  INFO 27674 --- [pool-1-thread-2] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1533991884275,CallBack&#123;chid=1, appid=1533991884275&#125;2023-08-11 20:51:24.275  INFO 27674 --- [pool-1-thread-5] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1533991884275,CallBack&#123;chid=1, appid=1533991884275&#125;
+2023-08-11 20:51:20.279  INFO 27674 --- [           main] c.a.eventbus.EventBusTestApplication     : Started EventBusTestApplication in 1.062 seconds (JVM running for 1.442)2023-08-11 20:51:22.271  INFO 27674 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:51:22 CST 20232023-08-11 20:51:22.272  INFO 27674 --- [pool-1-thread-3] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1691758282271,CallBack&#123;chid=1, appid=1691758282271&#125;2023-08-11 20:51:22.272  INFO 27674 --- [pool-1-thread-4] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1691758282271,CallBack&#123;chid=1, appid=1691758282271&#125;2023-08-11 20:51:24.275  INFO 27674 --- [pool-2-thread-1] com.acvrock.eventbus.ScheduledTasks      : send msg - Sat Aug 11 20:51:24 CST 20232023-08-11 20:51:24.275  INFO 27674 --- [pool-1-thread-2] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1691758284275,CallBack&#123;chid=1, appid=1691758284275&#125;2023-08-11 20:51:24.275  INFO 27674 --- [pool-1-thread-5] com.acvrock.eventbus.CallNotifyListener  : CallNotifyListener onEvent :1691758284275,CallBack&#123;chid=1, appid=1691758284275&#125;
 
 可以看到消费者对事件消费了两次，但是通过检查代码发现并没有相关的改动，机器环境也没有变动。经过一番定位后发现是编译机器 JDK 版本升级到 JDK 8，新版 javac 编译后字节码有变动。导致相同代码和环境下出现了不同的行为。
 定位过程：对代码调用进行跟踪，先从 EventBus.post 方法看起
@@ -1190,62 +1188,6 @@ https://insights.thoughtworks.cn/ddd-architecture-design/
       </tags>
   </entry>
   <entry>
-    <title>微服务拆分之道</title>
-    <url>//2022/11/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/</url>
-    <content><![CDATA[记一次服务拆分流程,这里只是记录思路,不讨论细节
-一、拆分理论基础
-二、核心业务流程-服务划分
-问题点：
-
-如何鉴权：所有服务都集成鉴权 sdk，需要的时候添加注解
-
-所有服务可以对外提供服务吗？所有服务都可以对外提供接口，提供admin&#x2F;api&#x2F;rest&#x2F;rpc接口
-
-上课端单独一个上课服务，保证上课链路不受其他模块影响
-
-admin和api如何隔离
-
-
-安全方面用登录态隔离
-
-可用性要求高的服务通过域名路由到不同部署实例隔离
-
-暂时不要聚合查询服务，页面查询分散到招生和教务模块
-
-面向渠道&#x2F;官网&#x2F;通用配置&#x2F;落地页不需要单独划分系统，如果请求量高的情况下，对应服务进行横向扩容
-
-课节状态的维护，由哪个服务负责，课节状态由课程服务维护
-
-如何合理隔离声网的接口（依赖）
-
-课堂答题&#x2F;互动的相关依赖接口，是否需要单独拆分，单独拆分
-
-跨服务的数据信息填充,究竟在哪里填充?填充逻辑和聚合逻辑在一起,在哪里聚合就在哪里填充
-
-
-三、拆分步骤
-独立的服务可以单独拆分
-
-先定好服务边界，同一个进程内，按定好服务划分，把服务调用关系规范起来，把进程间接口定义清楚
-
-梳理出服务依赖关系，确定服务改造顺序
-
-制定：战略决心
-
-
-四、部署架构&#x2F;新旧架构兼容&#x2F;流量路由
-]]></content>
-      <categories>
-        <category>架构</category>
-      </categories>
-      <tags>
-        <tag>总结</tag>
-        <tag>架构</tag>
-        <tag>微服务</tag>
-        <tag>服务拆分</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>微服务架构整合-RPC</title>
     <url>//2022/09/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%95%B4%E5%90%88-RPC/</url>
     <content><![CDATA[背景后端团队技术栈为 Go 和 JavaGo 服务为微服务架构,使用 gRPC 和 gRPC-Gateway 对 APP 和 H5 提供服务Java 服务目前没有统一后端协议栈, HTTP 和 gRPC 混用,没有统一的微服务框架
@@ -1352,6 +1294,62 @@ gRPC
         <tag>Dubbo</tag>
         <tag>Spring Cloud</tag>
         <tag>gRPC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微服务拆分之道</title>
+    <url>//2022/11/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%8B%86%E5%88%86%E4%B9%8B%E9%81%93/</url>
+    <content><![CDATA[记一次服务拆分流程,这里只是记录思路,不讨论细节
+一、拆分理论基础
+二、核心业务流程-服务划分
+问题点：
+
+如何鉴权：所有服务都集成鉴权 sdk，需要的时候添加注解
+
+所有服务可以对外提供服务吗？所有服务都可以对外提供接口，提供admin&#x2F;api&#x2F;rest&#x2F;rpc接口
+
+上课端单独一个上课服务，保证上课链路不受其他模块影响
+
+admin和api如何隔离
+
+
+安全方面用登录态隔离
+
+可用性要求高的服务通过域名路由到不同部署实例隔离
+
+暂时不要聚合查询服务，页面查询分散到招生和教务模块
+
+面向渠道&#x2F;官网&#x2F;通用配置&#x2F;落地页不需要单独划分系统，如果请求量高的情况下，对应服务进行横向扩容
+
+课节状态的维护，由哪个服务负责，课节状态由课程服务维护
+
+如何合理隔离声网的接口（依赖）
+
+课堂答题&#x2F;互动的相关依赖接口，是否需要单独拆分，单独拆分
+
+跨服务的数据信息填充,究竟在哪里填充?填充逻辑和聚合逻辑在一起,在哪里聚合就在哪里填充
+
+
+三、拆分步骤
+独立的服务可以单独拆分
+
+先定好服务边界，同一个进程内，按定好服务划分，把服务调用关系规范起来，把进程间接口定义清楚
+
+梳理出服务依赖关系，确定服务改造顺序
+
+制定：战略决心
+
+
+四、部署架构&#x2F;新旧架构兼容&#x2F;流量路由
+]]></content>
+      <categories>
+        <category>架构</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>架构</tag>
+        <tag>微服务</tag>
+        <tag>服务拆分</tag>
       </tags>
   </entry>
   <entry>
@@ -1579,9 +1577,9 @@ Sign Your Work
 另辟蹊径,咨询运维得知:每小时的第 10 分钟,logrotate 会对日志进行压缩轮转,如下图:
 所以定位的重点就变成:是否是某些日志设置不当,导致 logrotate 异常
 检查 logrotate 运行状态:
-grep 10-20 /var/lib/logrotate/status
+grep 11-20 /var/lib/logrotate/status
 检查 logrotate 操作的文件大小
-grep 10-20 /var/lib/logrotate/status |awk -F &#39;&quot;&#39; &#39;{print $2}&#39;|xargs ls -alh
+grep 11-20 /var/lib/logrotate/status |awk -F &#39;&quot;&#39; &#39;{print $2}&#39;|xargs ls -alh
 倒数第二行,发现文件大小异常,检查日志文件所属程序,发现是遗留的 kafka 程序
 解决方案:关闭它
 观察日志,没有发现超时,问题解决
