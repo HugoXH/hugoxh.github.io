@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, HugoXH</rights>
   <subtitle>从来没有真正的绝境,只有绝望的人</subtitle>
   <title>Hugo's Blog</title>
-  <updated>2026-09-29T08:31:00.505Z</updated>
+  <updated>2026-09-29T08:37:15.754Z</updated>
   <entry>
     <author>
       <name>HugoXH</name>
@@ -31,7 +31,7 @@
 <p>首先，信令是一个通用的消息系统]]>
     </summary>
     <title>信令系统的架构实践</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -54,7 +54,7 @@
 <p><i]]>
     </summary>
     <title>记录一次接口优化过程</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -77,7 +77,7 @@
 <li><p>顶层的业务服务之间依赖严重,互相依赖,需]]>
     </summary>
     <title>微服务拆分之道-2024新赛季</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -99,7 +99,7 @@
 <figure class="highlight plaintext"><table>]]>
     </summary>
     <title>记一次 CPU 忙碌导致的超时</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -126,7 +126,7 @@
 </li>]]>
     </summary>
     <title>一个简单的异常层次</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -168,7 +168,7 @@
       <![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>我们在系统中使用 Guava 的 EventBus 进行代码解耦，一直运行良好，但是在某一次发版后，出现了消息重复消费的情况]]>
     </summary>
     <title>定位 Guava EventBus 重复消费</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -191,7 +191,7 @@
 <p><img src="/i]]>
     </summary>
     <title>记录一次 Java 程序异常重启排查过程</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -210,7 +210,7 @@
 <p>00000100,如果是负数，则表示为负数正值的补码]]>
     </summary>
     <title>Java 中的基本数据类型</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -231,7 +231,7 @@
 <li><p>底层返回集合为空时，返回长度为 0 的集合或者数组，不要返回 null<]]>
     </summary>
     <title>Java 集合框架</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -251,7 +251,7 @@
 <p>char 是字符数据类型，是无符号的，占2字节，大小范围是 0-65535，是 16 位二进制的 Unicode 字符，Java 用 char 来表示一个]]>
     </summary>
     <title>Java IO 编码解码</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -272,7 +272,7 @@
 <p>Make Quality a Requirements Issue</]]>
     </summary>
     <title>程序员修炼之道</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -294,7 +294,7 @@
 <h1 id="一、拆分理论基础"><a href="#一、拆分理论基础" class="headerlink" title="一、拆分理论基础"></a>一、拆分理论基础</h1><p><img src="/img]]>
     </summary>
     <title>微服务拆分之道</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -315,7 +315,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</]]>
     </summary>
     <title>记一次 java.lang.NoSuchMethodError 错误</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -336,7 +336,7 @@
       <![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>后端团队技术栈为 Go 和 Java<br>Go 服务为微服务架构,使用 gRPC 和 gRPC-Gateway 对 APP 和 H5 提供]]>
     </summary>
     <title>微服务架构整合-RPC</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -356,7 +356,7 @@
       <![CDATA[<h3 id="在-Linux-下配置-Redis-开机启动，主要步骤如下："><a href="#在-Linux-下配置-Redis-开机启动，主要步骤如下：" class="headerlink" title="在 Linux 下配置 Redis 开机启动，主要步骤如下：">]]>
     </summary>
     <title>在 Linux 下配置 Redis 开机启动</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -381,7 +381,7 @@
 <li><p>关注后端技术]]>
     </summary>
     <title>后端服务团队的 SRE 运维制度</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -401,7 +401,7 @@
       <![CDATA[<h1 id="HotSpot-VM-相关参数"><a href="#HotSpot-VM-相关参数" class="headerlink" title="HotSpot VM 相关参数"></a>HotSpot VM 相关参数</h1><p>##HotSpot VM 关于GC日]]>
     </summary>
     <title>HotSpot VM 相关参数</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.753Z</updated>
   </entry>
   <entry>
     <author>
@@ -420,7 +420,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><s]]>
     </summary>
     <title>Java 中的无穷和非数</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
   <entry>
     <author>
@@ -440,6 +440,6 @@
       <![CDATA[<h1 id="用-Cronolog-切割-Tomcat-的-catalina-out-日志"><a href="#用-Cronolog-切割-Tomcat-的-catalina-out-日志" class="headerlink" title="用 Cronolog 切割 To]]>
     </summary>
     <title>用 Cronolog 切割 Tomcat 的 catalina.out 日志</title>
-    <updated>2026-09-29T08:31:00.505Z</updated>
+    <updated>2026-09-29T08:37:15.754Z</updated>
   </entry>
 </feed>

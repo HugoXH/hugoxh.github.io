@@ -87,3 +87,90 @@
     line-height: 48px;
     font-size: 1.4rem;
 }
+
+/* Hexo highlight.js renders a table with separate gutter/code pre elements. */
+#articleContent figure.highlight {
+    margin: 1.25rem 0;
+    padding: 2.6rem 0 0.75rem;
+    overflow-x: auto;
+    background: #f6f8fa;
+    border-radius: 0.35rem;
+    color: #34495e;
+}
+
+#articleContent figure.highlight table {
+    display: table;
+    width: max-content;
+    min-width: 100%;
+    table-layout: auto;
+    border: 0;
+    margin: 0;
+    overflow: visible;
+}
+
+#articleContent figure.highlight tr,
+#articleContent figure.highlight td {
+    border: 0;
+    padding: 0;
+    min-width: 0;
+    vertical-align: top;
+    background: transparent;
+}
+
+#articleContent figure.highlight pre {
+    margin: 0;
+    padding: 0 1rem !important;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-family: Monaco, Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+/* Prevent theme classes such as .title from changing syntax-token layout. */
+#articleContent figure.highlight pre span {
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+
+#articleContent figure.highlight td.gutter {
+    width: 1%;
+    color: #6a737d;
+    border-right: 1px solid #dfe2e5;
+    text-align: right;
+    user-select: none;
+}
+
+#articleContent figure.highlight .comment,
+#articleContent figure.highlight .quote { color: #6a737d; }
+#articleContent figure.highlight .keyword,
+#articleContent figure.highlight .selector-tag { color: #a626a4; }
+#articleContent figure.highlight .string,
+#articleContent figure.highlight .attr { color: #237a38; }
+#articleContent figure.highlight .number,
+#articleContent figure.highlight .literal { color: #986801; }
+#articleContent figure.highlight .title { color: #005cc5; }
+
+#articleContent figure.highlight td.code { color: inherit; }
+body.DarkMode #articleContent figure.highlight {
+    background: #252b33;
+    color: #d8dee9;
+}
+body.DarkMode #articleContent figure.highlight td.gutter {
+    color: #a0aab8;
+    border-right-color: #46505d;
+}
+body.DarkMode #articleContent figure.highlight .comment,
+body.DarkMode #articleContent figure.highlight .quote { color: #a0aab8; }
+body.DarkMode #articleContent figure.highlight .keyword,
+body.DarkMode #articleContent figure.highlight .selector-tag { color: #c792ea; }
+body.DarkMode #articleContent figure.highlight .string,
+body.DarkMode #articleContent figure.highlight .attr { color: #a5d6a7; }
+body.DarkMode #articleContent figure.highlight .number,
+body.DarkMode #articleContent figure.highlight .literal { color: #f2c078; }
+body.DarkMode #articleContent figure.highlight .title { color: #82aaff; }

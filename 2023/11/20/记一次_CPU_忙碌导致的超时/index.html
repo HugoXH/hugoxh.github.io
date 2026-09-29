@@ -397,8 +397,8 @@
         
         <!-- 代码块折行 -->
         <style type="text/css">
-            code[class*="language-"], pre[class*="language-"],
-            figure.highlight td.code pre, .code-area pre {
+            /* Highlight uses a separate line-number column: keep its lines unwrapped. */
+            code[class*="language-"], pre[class*="language-"] {
                 white-space: pre-wrap !important;
                 word-break: break-all;
             }
